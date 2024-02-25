@@ -7,7 +7,7 @@ const contentStyle = {
   textAlign: 'center',
   lineHeight: '120px',
   color: '#fff',
-  backgroundImage: 'url(./src/assets/images/map.png)',
+  backgroundImage: 'url(/images/map.png)',
   backgroundSize: 'cover',
 };
 const siderStyle = {
