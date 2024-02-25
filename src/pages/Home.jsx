@@ -2,13 +2,12 @@ import { Layout } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
 const { Sider, Content } = Layout;
 import './Home.scss';
+import imgUrl from '../assets/images/map2.png';
 
 const contentStyle = {
   textAlign: 'center',
   lineHeight: '120px',
   color: '#fff',
-  backgroundImage: 'url(/images/map.png)',
-  backgroundSize: 'cover',
 };
 const siderStyle = {
   padding: 15,
@@ -27,10 +26,16 @@ const filterBtnStyle = {
   marginRight: 10,
 };
 
+function getImageUrl(name) {
+  return new URL(`/src/assets/images/${name}.png`, import.meta.url).href;
+}
+
 function Home() {
   return (
     <>
-      <Content style={contentStyle}></Content>
+      <Content style={contentStyle}>
+        <img src={getImageUrl('map2')} alt="" width="100%" />
+      </Content>
       <Sider width="32%" style={siderStyle}>
         <div>
           <div
