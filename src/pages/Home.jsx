@@ -2,7 +2,7 @@ import { Layout } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
 const { Sider, Content } = Layout;
 import './Home.scss';
-import imgUrl from '../assets/images/map2.png';
+import { getAssetUrl } from '../utils/common';
 
 const contentStyle = {
   textAlign: 'center',
@@ -26,15 +26,11 @@ const filterBtnStyle = {
   marginRight: 10,
 };
 
-function getImageUrl(name) {
-  return new URL(`/src/assets/images/${name}.png`, import.meta.url).href;
-}
-
 function Home() {
   return (
     <>
       <Content style={contentStyle}>
-        <img src={getImageUrl('map2')} alt="" width="100%" />
+        <img src={getAssetUrl('images/kakao_map.png')} alt="" width="100%" />
       </Content>
       <Sider width="32%" style={siderStyle}>
         <div>
