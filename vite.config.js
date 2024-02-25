@@ -5,7 +5,6 @@ export default ({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd()));
   return defineConfig({
     plugins: [react()],
-    base: process.env.VITE_BASENAME,
     resolve: {
       alias: [
         { find: '@pages', replacement: '/src/pages' },

@@ -29,7 +29,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: import.meta.env.PUBLIC_URL,
+    basename: import.meta.env.VITE_BASE_URL,
   },
 );
 
