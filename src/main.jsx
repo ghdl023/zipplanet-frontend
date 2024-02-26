@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import Root from './Root';
 import ErrorPage from './pages/ErrorPage';
-import Home from './pages/Home/Home';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
