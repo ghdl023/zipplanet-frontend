@@ -53,8 +53,3 @@ html, body {
     width: 100vw;
     height: 100vh;
 }
-
-html, body, #root, #root-wrapper {
-    margin: 0;
-    height: 100%;
-}

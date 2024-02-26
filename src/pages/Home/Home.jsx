@@ -1,8 +1,10 @@
 import { Layout } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
-const { Sider, Content } = Layout;
+import { getAssetUrl } from '../../utils/common';
+import ReviewListWrapper from '../../components/ReviewListWrapper/ReviewListWrapper';
 import './Home.scss';
-import { getAssetUrl } from '../utils/common';
+
+const { Sider, Content } = Layout;
 
 const contentStyle = {
   textAlign: 'center',
@@ -68,23 +70,7 @@ function Home() {
             overflowY: 'scroll',
           }}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-            <div
-              key={i}
-              style={{
-                width: '100%',
-                height: '300px',
-                background: 'white',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderBottom: '1px solid grey',
-              }}
-            >
-              {i}
-            </div>
-          ))}
+          <ReviewListWrapper />
         </div>
       </Sider>
     </>
