@@ -9,13 +9,13 @@ function Root() {
   return(
     <>
       <Routes>
-      <Route path="/" element={<PageLayout />}>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Route>
-    </Routes>
+        <Route path="/" element={<PageLayout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Routes>
     </>
   )
 }

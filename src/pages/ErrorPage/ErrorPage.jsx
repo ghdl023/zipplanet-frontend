@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { getAssetUrl } from '../../utils/common';
+import Error404Image from '@assets/images/404.png';
 import './ErrorPage.scss';
 
 function ErrorPage() {
@@ -10,7 +10,7 @@ function ErrorPage() {
 
   return (
     <div id="error-page">
-      <img src={getAssetUrl('images/404.png')} alt="404" />
+      <img src={Error404Image} alt="404" />
       <div>
         <h1>죄송합니다. 현재 찾을 수 없는 페이지를 요청 하셨습니다.</h1>
         <p>

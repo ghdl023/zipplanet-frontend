@@ -1,8 +1,8 @@
 import { Layout } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
-import { getAssetUrl } from '../../utils/common';
 import ReviewListWrapper from '../../components/ReviewListWrapper/ReviewListWrapper';
 import './Home.scss';
+import MapImage from '@assets/images/kakao_map.png';
 
 const { Sider, Content } = Layout;
 
@@ -32,7 +32,7 @@ function Home() {
   return (
     <>
       <Content style={contentStyle}>
-        <img src={getAssetUrl('images/kakao_map.png')} alt="" width="100%" />
+        <img src={MapImage} alt="" width="100%" />
       </Content>
       <Sider width="32%" style={siderStyle}>
         <div>
