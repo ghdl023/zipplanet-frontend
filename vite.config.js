@@ -5,7 +5,7 @@ export default ({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd()));
   return defineConfig({
     plugins: [react()],
-    // base: process.env.VITE_BASE_URL,
+    base: '/zipplanet-frontend/',
     resolve: {
       alias: [
         { find: '@pages', replacement: '/src/pages' },
