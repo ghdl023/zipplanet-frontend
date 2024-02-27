@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <header style={headerStyle}>
       <div style={logoContainerStyle}>
-        <NavLink to="/">
+        <NavLink to="/zipplanet-frontend/">
           {/* <img
             src="/src/assets/images/logo/zip_logo_orange.png"
             alt="logo"
