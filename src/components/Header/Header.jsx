@@ -1,39 +1,22 @@
+import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import LogoImage from '@assets/images/logo/logo_kr.png';
+import { Layout } from 'antd';
 import './Header.scss';
 
-const headerStyle = {
-  textAlign: 'center',
-  lineHeight: '64px',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  height: 80,
-  padding: '0 30px',
-  color: '#000 !important',
-  background: 'white',
-  borderBottom: '1px solid rgb(237, 237, 237)',
-};
-
-const logoContainerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-};
-
 const Header = () => {
+  const navigate = useNavigate();
+  const logoClick = () => {
+    navigate('/zipplanet-frontend/');
+  };
+
   return (
-    <header style={headerStyle}>
-      <div style={logoContainerStyle}>
-        <NavLink to="/zipplanet-frontend/">
-          {/* <img
-            src="/src/assets/images/logo/zip_logo_orange.png"
-            alt="logo"
-            style={{ width: '85px' }}
-          /> */}
-          <h2 style={{ fontSize: 16, fontWeight: 600 }}>집플래닛</h2>
-        </NavLink>
+    <Layout.Header>
+      <div className="logo">
+        <img src={LogoImage} alt="logo" onClick={logoClick} />
       </div>
       <nav>
-        <ul style={{ display: 'flex' }}>
+        <ul>
           <li>
             <NavLink to="register">회원가입</NavLink>
           </li>
@@ -42,7 +25,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-    </header>
+    </Layout.Header>
   );
 };
 export default Header;

@@ -1,16 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import Error404Image from '@assets/images/404.png';
+import LogoImage from '@assets/images/logo/logo_kr.png';
 import './ErrorPage.scss';
 
 function ErrorPage() {
-  // const error = useRouteError();
-  // console.error(error);
-
   const navigate = useNavigate();
 
   return (
     <div id="error-page">
-      <img src={Error404Image} alt="404" />
+      <img src={LogoImage} alt="404" />
       <div>
         <h1>죄송합니다. 현재 찾을 수 없는 페이지를 요청 하셨습니다.</h1>
         <p>
@@ -22,7 +19,7 @@ function ErrorPage() {
       <div
         id="error-btn-home"
         onClick={() => {
-          navigate('/');
+          navigate('/zipplanet-frontend/');
         }}
       >
         홈으로
