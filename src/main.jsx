@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import PageLayout from '@components/PageLayout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -10,7 +10,7 @@ import '@styles/reset.css';
 const router = createBrowserRouter([
   {
     path: '/zipplanet-frontend/',
-    element: <App />,
+    element: <PageLayout />,
     errorElement: <ErrorPage />,
     children: [
       {

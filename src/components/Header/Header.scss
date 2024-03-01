@@ -2,7 +2,7 @@ header {
     display:flex !important;
     justify-content: space-between !important;
     background: white !important;
-    padding: 0 15% !important;
+    padding: 0 2% !important;
     border-bottom: 1px solid #c4c4c4 !important;
 
     .logo {
@@ -23,7 +23,8 @@ header {
         ul {
             display: flex;
             li{
-                margin-right:40px;
+                margin-left:40px;
+                font-weight: bold;
             }
         }
     }
