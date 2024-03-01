@@ -1,5 +1,3 @@
-// src/api.js
-
 export async function getReviews({
   order = 'createdAt',
   offset = 0,

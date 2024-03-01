@@ -1,7 +1,31 @@
 import axios from 'axios';
 
-//create an axios instance
+const BASE_URL = 'http://localhost:8080';
+const TIMEOUT = 2500;
 
+// 인증이 필요없는 API인 경우 사용 (ex 로그인)
+const axiosApi = (url, options) => {
+  const instance = axios.create({ baseURL: url, ...options });
+  instance.defaults.timeout = TIMEOUT;
+  return instance;
+};
+
+// 인증이 필요한 API인 경우 사용 (ex 로그인 후 사용되는 api -> 마이페이지 조회..)
+const axiosAuthApi = (url, options) => {
+  const token = window.sessionStorage.getItem('userInformation');
+  const instance = axios.create({
+    baseURL: url,
+    headers: { Authorization: 'Bearer ' + token },
+    ...options,
+  });
+  instance.defaults.timeout = TIMEOUT;
+  return instance;
+};
+
+export const defaultInstance = axiosApi(BASE_URL);
+export const authInstance = axiosAuthApi(BASE_URL);
+
+/*
 const request = axios.create({
   baseURL: 'http://localhost:8080',
 });
@@ -37,3 +61,4 @@ request.interceptors.response.use(
 );
 
 export default request; //axios 인스턴스를 내보낸다.
+*/

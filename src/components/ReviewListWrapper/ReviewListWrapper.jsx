@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ReviewList from '../ReviewList';
-import { getReviews } from '../../api';
+import { getReviews } from '@api/review';
 import './ReviewListWrapper.scss';
 const LIMIT = 6;
 

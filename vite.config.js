@@ -13,6 +13,7 @@ export default ({ mode }) => {
         { find: '@lib', replacement: '/src/lib' },
         { find: '@assets', replacement: '/src/assets' },
         { find: '@styles', replacement: '/src/styles' },
+        { find: '@api', replacement: '/src/apis/api' },
       ],
     },
   });
