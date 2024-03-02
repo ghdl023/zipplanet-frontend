@@ -1,0 +1,62 @@
+.review__searchbar {
+    width: 100%;
+    height:60px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background: #fff;
+    color:#9CA3AF;
+    font-size: 1rem;
+
+
+    .review__searchbar__search {
+        width: 10%;
+        height:100%;
+
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .review__searchbar__input {
+        width: 70%;
+        height:100%;
+
+        display:flex;
+        justify-content: center;
+        align-items: center;
+
+        input {
+            width: 100%;
+            height: 100%;
+            font-size: 1rem;
+            border: none;
+            outline: none;
+        }
+    }
+
+    .review__searchbar__filter{
+        width:20%;
+        height:100%;
+        padding: 0 15px;
+
+        display:flex;
+        justify-content: center;
+        align-items: center;
+
+        color: #000;
+
+        border-radius:5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #F7F7F7;
+        }
+
+        button {
+            display: flex;
+            align-items: center;;
+        }
+    }
+}

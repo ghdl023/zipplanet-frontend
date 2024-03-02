@@ -1,0 +1,16 @@
+.review__sort__button {
+    padding: 10px 13px;
+    display: inline-block;
+    margin-right: 4px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: rgba(0,0,0, 0.2)
+    }
+
+    &.active {
+        background-color: rgba(0,0,0, 0.2)
+    }
+}

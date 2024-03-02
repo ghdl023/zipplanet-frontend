@@ -48,22 +48,36 @@ table {
 	border-spacing: 0;
 }
 
+/* custom 직접 추가*/
 html, body {
     margin: 0;
     width: 100vw;
     height: 100vh;
 }
 
-a {color: #222; text-decoration: none;}
-a:hover {color: #777;}
-
 html {
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica
 		Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji !important;
+	
+	font-size: 16px;
 
-	font-size: 14px;
   
 	@media (min-width: 768px) {
 	  font-size: 16px;
 	}
 }
+
+body {
+    font-size: 1rem; /* 1rem = 16px */
+}
+h1 {
+    font-size: 2rem; /* 2rem = 32px */
+}
+
+a {color: #000000; text-decoration: none; outline: none; } 
+a:link { text-decoration: none; }
+a:active { color:#000000; }
+a:hover { color:#000000; }
+
+button{ all:unset; }
+button:hover { cursor:pointer;}

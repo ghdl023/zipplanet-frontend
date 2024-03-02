@@ -14,6 +14,7 @@ export default ({ mode }) => {
         { find: '@assets', replacement: '/src/assets' },
         { find: '@styles', replacement: '/src/styles' },
         { find: '@api', replacement: '/src/apis/api' },
+        { find: '@contexts', replacement: '/src/contexts' },
       ],
     },
   });
