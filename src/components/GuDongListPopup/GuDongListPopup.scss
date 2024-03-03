@@ -1,0 +1,24 @@
+.gudong__list__popup__container {
+    width:100%;
+    position: relative;
+    top: -27px;
+    background:#fff;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 0;
+
+    .gudong__list__popup__item {
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #F3F4F6;
+        cursor: pointer;
+        &:hover {
+            background-color: #000;
+            color: #fff;
+            font-weight: 600;
+        }
+    }
+}

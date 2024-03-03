@@ -10,7 +10,15 @@ import { useEffect, useState } from 'react';
 const { Sider } = Layout;
 
 function Sidebar() {
-  const [reviewDetail, setReviewDetail] = useState(null);
+  const [reviewDetail, setReviewDetail] = useState(null); // 리뷰상세
+  const [searchFilterObj, setSearchFilterObj] = useState({
+    // 검색창 필터설정하기 관련 변수
+    gu: '', // 선택 '구'
+    dong: '', // 선택 '동'
+    guDongListPopupType: '', // '구/동 목록 팝어 노출여부'  => '' : 숨김 /  'gu' or 'dong' : 노출
+    contractType: '', // 거래 유형 => 전체: '' / 월세: 1 / 전세: 2
+    rate: 5, // 평점
+  });
 
   useEffect(() => {}, []);
 
@@ -19,7 +27,14 @@ function Sidebar() {
   }, [reviewDetail]);
 
   return (
-    <SidebarContext.Provider value={{ reviewDetail, setReviewDetail }}>
+    <SidebarContext.Provider
+      value={{
+        reviewDetail,
+        setReviewDetail,
+        searchFilterObj,
+        setSearchFilterObj,
+      }}
+    >
       <Sider className="sidebar__container">
         {!reviewDetail ? (
           <>
