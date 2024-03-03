@@ -2,26 +2,19 @@ import { StarFill } from 'react-bootstrap-icons';
 
 import './ReviewListItem.scss';
 
-function ReviewListItem() {
+function ReviewListItem({ review, onClick }) {
   return (
-    <div className="review__list__item">
+    <div className="review__list__item" onClick={() => onClick(review)}>
       <div className="review__list__item__thumb">
-        <img
-          src="https://www.zipdeco.co.kr/upload/2018/04/24/IMAGE_201804240306006060_V6N7I"
-          alt=""
-        />
+        <img src={review.thumbnail[0]} alt="" />
       </div>
       <div className="review__list__item__content">
         <h5>
-          서울시 강남구 논현동 33-168
+          {review.address}
           {/* ddddddddddddddddddddddddddddddddddddddddhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh */}
         </h5>
-        <h3>
-          제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
-        </h3>
-        <p>
-          내용내용내용내용내용내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내
-        </p>
+        <h3>{review.title}</h3>
+        <p>{review.detail}</p>
       </div>
       <div className="review__list__item__footer">
         <div className="review__list__item__footer__like">
