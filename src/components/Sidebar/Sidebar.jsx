@@ -6,17 +6,9 @@ import './Sidebar.scss';
 
 const { Sider } = Layout;
 
-const siderStyle = {
-  padding: 15,
-  textAlign: 'center',
-  backgroundColor: '#F7F7F7',
-  display: 'flex',
-  flexDirection: 'column',
-};
-
 function Sidebar() {
   return (
-    <Sider width="35%" style={siderStyle}>
+    <Sider className="sidebar__container">
       <SidebarHeader />
       <SidebarMain />
     </Sider>

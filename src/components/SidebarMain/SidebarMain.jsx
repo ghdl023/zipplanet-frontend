@@ -1,15 +1,13 @@
 import ReviewListWrapper from '@components/ReviewListWrapper';
+import ReviewList from '@components/ReviewList';
+
+import './SidebarMain.scss';
 
 function SidebarMain() {
   return (
-    <div
-      className="sider-list-container"
-      style={{
-        height: '100%',
-        overflowY: 'scroll',
-      }}
-    >
-      <ReviewListWrapper />
+    <div className="sidebar__main">
+      {/* <ReviewListWrapper /> */}
+      <ReviewList />
     </div>
   );
 }

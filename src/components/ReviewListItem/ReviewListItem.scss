@@ -1,0 +1,121 @@
+.review__list__item {
+    min-height: 310px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #F3F4F6;
+    padding: 7px;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #F3F4F6;
+    }
+
+    .review__list__item__thumb {
+        width:100%;
+        height: 155px;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .review__list__item__content {
+        width:100%;
+        // background-color: tomato;
+        text-align: left;
+        padding-top: 5px;
+        h5 {
+            // background-color: red;
+            font-size: 0.85rem;
+
+            // 적용이안됨..
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 5px 0 10px 0;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* 여러 줄 자르기 추가 스타일 */
+            white-space: normal;
+            line-height: 1.2;
+            height: 1.5em;
+            text-align: left;
+            word-wrap: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+        
+        p {
+            margin-top: 4px;
+            font-size: 0.83rem;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* 여러 줄 자르기 추가 스타일 */
+            white-space: normal;
+            line-height: 1.2;
+            height: 4.9em;
+            text-align: left;
+            word-wrap: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    .review__list__item__footer {
+        width: 100%;
+        // background-color: aquamarine;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 3px;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+
+        .review__list__item__footer__like {
+            border-radius: 10px;
+            background-color: #F3F4F6;
+            color: #3B82F6;
+            padding: 6px 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+                font-size: 0.8rem;
+            }
+        }
+
+        .review__list__item__footer__rate {
+            margin-left: 5px;
+            border-radius: 10px;
+            border: 1px solid #F3F4F6;
+            padding: 6px 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+                font-size: 0.8rem;
+            }
+
+            .star-icon {
+                color: #FFC70F;
+            }
+        }
+
+        
+    }
+}

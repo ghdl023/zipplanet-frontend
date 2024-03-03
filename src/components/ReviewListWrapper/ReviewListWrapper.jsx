@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ReviewList from '../ReviewList';
+import ReviewListTest from '../ReviewListTest';
 import { getReviews } from '@api/review';
 import './ReviewListWrapper.scss';
 const LIMIT = 6;
@@ -74,7 +74,7 @@ function ReviewListWrapper() {
         <button onClick={handleNewestClick}>최신순</button>
         <button onClick={handleBestClick}>베스트순</button>
       </div>
-      <ReviewList
+      <ReviewListTest
         items={sortedItems}
         onDelete={handleDelete}
         setTarget={setTarget}

@@ -2,22 +2,23 @@
     width: 100%;
     height: 550px;
     padding: 20px 15px;
-    position: relative;
-    top: 5px;
+    position: absolute;
+    top: 65px;
     border: 1px solid #F3F4F6;
     background-color: #fff;
     overflow-y: scroll;
     overflow-x: hidden;
     // letter-spacing: -1px;
+    z-index: 9999;
 
 
     /* 스크롤바의 폭 너비 */
     &::-webkit-scrollbar {
-        width: 10px;  
+        width: 8px;  
     }
 
     &::-webkit-scrollbar-thumb {
-        background: grey; /* 스크롤바 색상 */
+        background: #A8A8A8; /* 스크롤바 색상 */
         border-radius: 10px; /* 스크롤바 둥근 테두리 */
     }
 

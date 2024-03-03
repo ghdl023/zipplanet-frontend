@@ -22,7 +22,7 @@ function ReviewSearchBar() {
       </div>
       <div className="review__searchbar__filter" onClick={handleClickFilter}>
         <button>
-          {openSearchFilter ? (
+          {!openSearchFilter ? (
             <>
               <FilterSquare />
               &nbsp;

@@ -14,7 +14,7 @@ function SidebarHeader() {
     <SidebarHeaderContext.Provider
       value={{ openSearchFilter, setOpenSearchFilter, sort, setSort }}
     >
-      <div className="review__search__header">
+      <div className="sidebar__header">
         <ReviewSearchBar />
         {openSearchFilter && <ReviewSearchFilter />}
         <ReviewSortBar />
