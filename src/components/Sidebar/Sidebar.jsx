@@ -2,6 +2,7 @@ import { Layout } from 'antd';
 import SidebarHeader from '@components/SidebarHeader';
 import SidebarMain from '@components/SidebarMain';
 import ReviewDetail from '@components/ReviewDetail';
+import CreateReviewPopup from '@components/CreateReviewPopup';
 import { SidebarContext } from '@contexts/SidebarContext';
 
 import './Sidebar.scss';
@@ -19,6 +20,9 @@ function Sidebar() {
     contractType: '', // 거래 유형 => 전체: '' / 월세: 1 / 전세: 2
     rate: 5, // 평점
   });
+  const [createReviewObj, setCreateReviewObj] = useState({
+    modalOpen: true,
+  })
 
   useEffect(() => {}, []);
 
@@ -33,6 +37,8 @@ function Sidebar() {
         setReviewDetail,
         searchFilterObj,
         setSearchFilterObj,
+        createReviewObj,
+        setCreateReviewObj,
       }}
     >
       <Sider className="sidebar__container">
@@ -47,6 +53,7 @@ function Sidebar() {
           </>
         )}
       </Sider>
+      { createReviewObj.modalOpen && <CreateReviewPopup /> }
     </SidebarContext.Provider>
   );
 }
