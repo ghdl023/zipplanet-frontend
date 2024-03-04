@@ -1,0 +1,23 @@
+.account__container {
+    border: 1px solid rgb(243, 244, 246);
+    width: 438px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.account__item {
+    display: flex;
+    margin: 20px;
+    div {
+        width: 100px;
+    }
+    :not(.account__item__label) {
+        text-align: right;
+    }
+}
+.account__item__label {
+    text-align: left;
+    font-weight: 700;
+}

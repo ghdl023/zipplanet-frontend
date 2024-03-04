@@ -1,0 +1,49 @@
+.mypage__table__container {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+
+    h1 {
+        font-weight: 700;
+        margin: 30px;
+    }
+
+    table {
+        border-collapse: collapse;
+        height: 65px;
+        width: 1000px;
+
+        tr,
+        td {
+            width: 200px;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid rgb(243, 244, 246);
+            vertical-align: middle;
+            font-size: 16px;
+            transition-duration: 0.4s;
+        }
+
+        td:hover {
+            background-color: black;
+            color: white;
+            font-weight: 700;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+    }
+}
+
+.mypage__view__container {
+    margin-top: 30px;
+}
+
+.mypage__btn__active {
+    background-color: black !important;
+    color: white !important;
+    font-weight: 700 !important;
+}

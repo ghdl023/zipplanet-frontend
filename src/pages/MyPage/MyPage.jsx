@@ -1,8 +1,10 @@
+import MyPageNavTabs from "../../components/MyPageNavTabs";
+
 function MyPage() {
     return (
-        <>
-            마이페이지
-        </>
+        <div>
+            <MyPageNavTabs/>
+        </div>
     );
 }
 export default MyPage;
