@@ -132,6 +132,42 @@
     }
   }
 
+
+  .picture__container {
+    #input-file {
+      display: none;
+    }
+
+    .add__btn {
+      padding: 10px 15px;
+      border: 1px solid #F3F4F6;
+      cursor: pointer;
+    }
+
+    .preview__image__container {
+      margin-top:10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      column-gap: 5px;
+
+      .preview__image {
+        position: relative;
+        img {
+          width: 100%;
+          height: 110px;
+          object-fit: cover;
+        }
+  
+        svg {
+          position: absolute;
+          right: 2px;
+        }
+      }
+    
+    }
+   
+  }
+
   // 동의체크박스, 생성버튼 영역
   .create__review__container__footer {
     text-align: center;
@@ -151,6 +187,11 @@
       padding: 18px 55px;
       background: #FF5F05;
       color: #fff;
+
+      transition: all 0.2s;
+      &.disabled {
+        background-color: grey;
+      }
     }
   }
 }
