@@ -1,0 +1,156 @@
+.create__review__container {
+
+  h3 {
+    font-size:1.2rem;
+    font-weight: 600;
+  }
+
+  h4 {
+    font-size:0.8rem;
+    font-weight: 600;
+  }
+
+  .notice__container {
+    font-size: 0.8rem;
+    line-height: 1.1rem;
+    color:grey;
+    margin-bottom: 20px;
+  }
+  
+  .required {
+    color: red;
+  }
+
+  // 항목 컨테이너 공통 스타일
+  .category__container {
+    margin-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #F3F4F6;
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom:3px solid black;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .body {
+      .category__grid__row {
+        display: grid;
+        grid-template-columns: 0.18fr 1fr;
+        margin-bottom: 10px;
+
+        h4 {
+          font-size: 0.85rem;
+          text-align: center;
+          align-self: center;
+        }
+
+        input { 
+          border: 1px solid #F3F4F6;
+          padding: 10px;
+          &.full__width {
+            width:100%;
+          }
+
+          &.short__width {
+            width: 13%;
+            text-align: center;
+          }
+
+          &.long__width {
+            width: 16%;
+          }
+        }
+
+        textarea {
+          border: 1px solid #F3F4F6;
+          padding: 10px;
+          width:100%;
+          height: 400px;
+          resize: none;
+        }
+
+        button {
+          padding: 10px 25px;
+          border: 1px solid #F3F4F6;
+
+          &.active {
+            background: #000;
+            color: #fff;
+          }
+        }
+
+        
+      }
+    }
+  }
+
+  // 평점 컨테이너 스타일링
+  .rate__container {
+    .body {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      column-gap: 10px;
+      .category__box {
+        border:1px solid #F3F4F6;
+        border-radius: 10px;
+        height: 220px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 0 45px 0;
+        .category__box__icon { 
+          font-size: 2rem;
+        }
+
+        .category__box__title {
+          font-size: 1.1rem;
+          font-weight: 600;
+        }
+
+        .category__box__rate {
+          font-size: 1.5rem;
+          color: #FFC949;
+        }
+      }
+    }
+  }
+
+  // 상세설명 컨테이너 스타일링
+  .description__container {
+    .body {
+    }
+
+    .input__length__container {
+      margin-top:5px;
+      font-size:0.8rem;
+      color:#bebebe;
+    }
+  }
+
+  // 동의체크박스, 생성버튼 영역
+  .create__review__container__footer {
+    text-align: center;
+    padding-top: 25px;
+
+    .txt__box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      input[type=checkbox] {
+        padding:10px;
+      }
+    }
+
+    button {
+      padding: 18px 55px;
+      background: #FF5F05;
+      color: #fff;
+    }
+  }
+}

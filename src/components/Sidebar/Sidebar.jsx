@@ -2,11 +2,11 @@ import { Layout } from 'antd';
 import SidebarHeader from '@components/SidebarHeader';
 import SidebarMain from '@components/SidebarMain';
 import ReviewDetail from '@components/ReviewDetail';
-import CreateReviewPopup from '@components/CreateReviewPopup';
 import { SidebarContext } from '@contexts/SidebarContext';
 
 import './Sidebar.scss';
 import { useEffect, useState } from 'react';
+import CreateReviewModal from '../CreateReviewModal';
 
 const { Sider } = Layout;
 
@@ -22,7 +22,7 @@ function Sidebar() {
   });
   const [createReviewObj, setCreateReviewObj] = useState({
     modalOpen: true,
-  })
+  });
 
   useEffect(() => {}, []);
 
@@ -53,7 +53,7 @@ function Sidebar() {
           </>
         )}
       </Sider>
-      { createReviewObj.modalOpen && <CreateReviewPopup /> }
+      {createReviewObj.modalOpen && <CreateReviewModal />}
     </SidebarContext.Provider>
   );
 }
