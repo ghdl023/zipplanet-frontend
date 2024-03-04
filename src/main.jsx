@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ErrorPage from './pages/ErrorPage';
+import MyPage from './pages/MyPage';
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@styles/reset.css';
@@ -26,6 +28,10 @@ const router = createBrowserRouter([
         path: '/zipplanet-frontend/register',
         element: <Register />,
       },
+      {
+        path: '/zipplanet-frontend/mypage',
+        element: <MyPage/>,
+      }
     ],
   },
 ]);
