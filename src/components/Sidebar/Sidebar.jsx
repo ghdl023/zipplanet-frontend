@@ -6,7 +6,9 @@ import { SidebarContext } from '@contexts/SidebarContext';
 
 import './Sidebar.scss';
 import { useEffect, useState } from 'react';
-import CreateReviewModal from '../CreateReviewModal';
+import ReviewCreateModal from '../ReviewCreateModal';
+import ReviewReportModal from '@components/ReviewReportModal';
+import { HouseAdd, X, PencilSquare } from 'react-bootstrap-icons';
 
 const { Sider } = Layout;
 
@@ -21,7 +23,8 @@ function Sidebar() {
     rate: 5, // 평점
   });
   const [createReviewObj, setCreateReviewObj] = useState({
-    modalOpen: true,
+    modalOpen: false, // 리뷰생성
+    reportModalOpen: false, // 리뷰신고
   });
 
   useEffect(() => {}, []);
@@ -53,7 +56,19 @@ function Sidebar() {
           </>
         )}
       </Sider>
-      {createReviewObj.modalOpen && <CreateReviewModal />}
+      {createReviewObj.modalOpen && <ReviewCreateModal />}
+      {createReviewObj.reportModalOpen && <ReviewReportModal />}
+      <div
+        id="review__add__btn"
+        onClick={() =>
+          setCreateReviewObj({
+            ...createReviewObj,
+            modalOpen: !createReviewObj.modalOpen,
+          })
+        }
+      >
+        {createReviewObj.modalOpen ? <X /> : <PencilSquare />}
+      </div>
     </SidebarContext.Provider>
   );
 }

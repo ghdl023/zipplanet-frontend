@@ -1,12 +1,12 @@
 import Modal from '@components/common/Modal';
 import { House, XSquareFill } from 'react-bootstrap-icons';
 
-import './CreateReviewModal.scss';
+import './ReviewCreateModal.scss';
 import { useContext, useState } from 'react';
 import { SidebarContext } from '@contexts/SidebarContext';
 import StarRatings from 'react-star-ratings';
 
-function CreateReviewModal() {
+function ReviewCreateModal() {
   const { createReviewObj, setCreateReviewObj } = useContext(SidebarContext);
 
   const [inputValue, setInputValue] = useState({
@@ -83,7 +83,7 @@ function CreateReviewModal() {
   return (
     <Modal
       params={{
-        title: '새 리뷰 작성',
+        title: '새 리뷰 작성하기',
         width: '56vw',
         height: '80vh',
         handleClose: closeModal,
@@ -502,14 +502,17 @@ function CreateReviewModal() {
             <div className="txt__box">
               <span>
                 <input
+                  id="agreeYn"
                   type="checkbox"
                   checked={bChecked}
                   onChange={(e) => {
                     setChecked(e.target.checked);
                   }}
                 />{' '}
-                리뷰 생성 규정을 확인하였으며,입력한 정보는 실제 정보와 다름이
-                없습니다. {bChecked}
+                <label htmlFor="agreeYn">
+                  리뷰 생성 규정을 확인하였으며,입력한 정보는 실제 정보와 다름이
+                  없습니다.
+                </label>
               </span>
             </div>
             <div>
@@ -528,4 +531,4 @@ function CreateReviewModal() {
   );
 }
 
-export default CreateReviewModal;
+export default ReviewCreateModal;

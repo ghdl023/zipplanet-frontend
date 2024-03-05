@@ -7,7 +7,15 @@ import StarRate from '@components/common/StarRate';
 import './ReviewDetail.scss';
 
 function ReviewDetail() {
-  const { reviewDetail, setReviewDetail } = useContext(SidebarContext);
+  const { reviewDetail, setReviewDetail, createReviewObj, setCreateReviewObj } =
+    useContext(SidebarContext);
+
+  const handleClickReport = () => {
+    setCreateReviewObj({
+      ...createReviewObj,
+      reportModalOpen: true,
+    });
+  };
 
   return (
     <div className="review__detail__container">
@@ -136,7 +144,7 @@ function ReviewDetail() {
           </div>
         </div>
         <div className="review__detail__main__footer">
-          <button>허위리뷰 신고하기</button>
+          <button onClick={handleClickReport}>허위리뷰 신고하기</button>
         </div>
       </div>
     </div>
@@ -144,65 +152,3 @@ function ReviewDetail() {
 }
 
 export default ReviewDetail;
-
-const arr = [0, 0, 0, 0, 0];
-
-function StarRating() {
-  const [score, setScore] = useState(0);
-  const [scoreFixed, setScoreFixed] = useState(score);
-
-  const handleLeftHalfEnter = (idx) => setScore(idx + 0.5);
-
-  const handleRightHalfEnter = (idx) => setScore(idx + 1);
-
-  const handleStarClick = () => {
-    setScoreFixed(score);
-  };
-
-  const handleStarLeave = () => {
-    if (score !== scoreFixed) {
-      setScore(scoreFixed);
-    }
-  };
-
-  return (
-    <>
-      {[0, 0, 0, 0, 0].map((i, idx) => (
-        <div key={idx} onClick={handleStarClick}>
-          {score - Math.floor(score) === 0.5 && Math.floor(score) === idx ? (
-            <FaStarHalfAlt
-              key={idx}
-              style={{ position: 'absolute' }}
-              size={32}
-              color="gold"
-            />
-          ) : idx + 1 > score ? (
-            <FaStar
-              key={idx}
-              style={{ position: 'absolute' }}
-              size={32}
-              color="lightGray"
-            />
-          ) : (
-            <FaStar
-              key={idx}
-              style={{ position: 'absolute' }}
-              size={32}
-              color="gold"
-            />
-          )}
-          {/* <Left
-            key={idx + 'left'}
-            onMouseEnter={() => handleLeftHalfEnter(idx)}
-            onMouseLeave={handleStarLeave}
-          />
-          <Right
-            key={idx + 'right'}
-            onMouseEnter={() => handleRightHalfEnter(idx)}
-            onMouseLeave={handleStarLeave}
-          /> */}
-        </div>
-      ))}
-    </>
-  );
-}

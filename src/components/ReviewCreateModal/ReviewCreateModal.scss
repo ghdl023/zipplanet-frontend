@@ -172,15 +172,20 @@
   .create__review__container__footer {
     text-align: center;
     padding-top: 25px;
-
     .txt__box {
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 25px;
+      
+      label {
+        cursor:pointer;
+      }
+
       input[type=checkbox] {
         padding:10px;
       }
+
     }
 
     button {
