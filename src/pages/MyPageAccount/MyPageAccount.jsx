@@ -10,7 +10,7 @@ function MyPageAccount() {
     return (
         <div className="mypage__account">
             {modalControl && <MyPageModal setModalControl={setModalControl}>
-                <MyPageModalBody modalNo={modalNo}/>
+                <MyPageModalBody modalNo={modalNo} setModalControl={setModalControl}/>
             </MyPageModal>}
             <AccountWrapper setModalNo={setModalNo} setModalControl={setModalControl}/>
         </div>
