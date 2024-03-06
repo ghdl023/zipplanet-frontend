@@ -1,0 +1,21 @@
+.mypage__modal__background {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 15%);
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+.mypage__modal__box {
+    background-color: white;
+    min-width: 400px;
+    min-height: 100px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

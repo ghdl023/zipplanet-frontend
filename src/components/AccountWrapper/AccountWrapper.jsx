@@ -2,7 +2,7 @@ import { ArrowDownLeftSquareFill, ArrowRightCircleFill, PersonCircle } from 'rea
 import './AccountWrapper.scss';
 import { useState } from 'react';
 
-function AccountWrapper() {
+function AccountWrapper(props) {
     const [accountInfo, setAccountInfo] = useState({
         userId: 'comet2667',
         userPwd: '',
@@ -24,7 +24,7 @@ function AccountWrapper() {
             <div className='account__item'>
                 <div className='account__item__label'>비밀번호</div>
                 <div>{accountInfo.userPwd}</div>
-                <ArrowRightCircleFill size={18} />
+                <ArrowRightCircleFill size={18} onClick={()=>props.setModalControl(true)}/>
             </div>
             <div className='account__item'>
                 <div className='account__item__label'>닉네임</div>
