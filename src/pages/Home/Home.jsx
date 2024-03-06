@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import Main from '../../components/Main';
-import Sidebar from '../../components/Sidebar';
-import './Home.scss';
+import Main from '@components/Main';
+import Sidebar from '@components/Sidebar';
 import { getHome } from '@api/user';
+
+import './Home.scss';
 
 function Home() {
   useEffect(() => {

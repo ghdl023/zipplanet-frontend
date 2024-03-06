@@ -1,0 +1,73 @@
+.review__report__container {
+    text-align: center;
+    width: 22vw;
+    padding: 25px 30px;
+    border-radius:12px;
+
+    .reivew__report__header {
+        h2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size:1.5rem;
+            font-weight: 600;
+        }
+    
+        .icon__siren {
+            font-size:2.5rem;
+        }
+
+        p {
+            padding: 15px 0 10px 0;
+            font-size:0.78rem;
+        }
+        
+    }
+
+    .review__report__main {
+        padding: 5px 0;
+        text-align: left;
+        .review__report__item {
+            display: inline-block;
+            width:100%;
+            padding: 15px;
+            align-self: center;
+            // background-color: turquoise;
+            border-radius:10px;
+            margin-bottom:2px;
+            border:1px solid #F3F4F6;
+            font-size:0.78rem;
+
+            transition: all 0.2s;
+
+            &:hover {
+                background: #F3F4F6;
+                color: #000;
+            }
+
+            &.active {
+                background:#F8312F;
+                color:#fff;
+            }
+
+        }
+    }
+
+    .review__report__footer {
+        background-color:#F8312F;
+        color: #fff;
+        font-weight: 600;
+        button {
+            width:100%;
+            padding: 15px;
+
+            &:hover {
+                background-color: #d41916;
+            }
+
+            &.disabled {
+                background-color: #F3F4F6
+            }
+        }
+    }
+}
