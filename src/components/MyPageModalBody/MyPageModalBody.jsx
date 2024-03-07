@@ -11,11 +11,11 @@ function MyPageModalBody(props) {
             {props.modalNo === 1 ?
             <UpdatePassword setModalControl={props.setModalControl}/> : 
             props.modalNo === 2 ?
-            <UpdateNickname/> :
+            <UpdateNickname setModalControl={props.setModalControl}/> :
             props.modalNo === 3 ?
-            <UpdatePhone/> :
+            <UpdatePhone setModalControl={props.setModalControl}/> :
             props.modalNo === 4 ?
-            <UpdateAdress/> : ''}
+            <UpdateAdress setModalControl={props.setModalControl}/> : ''}
         </div>
     );
 }

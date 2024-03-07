@@ -1,8 +1,10 @@
+import RegisterForm from "../../components/RegisterForm";
+import './Register.scss';
 function Register(){
     return(
-        <>
-            Register
-        </>
+        <div className="register__container">
+            <RegisterForm/>
+        </div>
     )
 }
 
