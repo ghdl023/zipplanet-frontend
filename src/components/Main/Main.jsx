@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { Layout } from 'antd';
 import MapImage from '@assets/images/kakao_map.png';
+import { searchReviews } from '../../apis/api/review';
 import {
   Map,
   MapMarker,
@@ -8,6 +9,7 @@ import {
   useKakaoLoader,
 } from 'react-kakao-maps-sdk';
 import './Main.scss';
+import { PageLayoutContext } from '../../contexts/PageLayoutContext';
 
 const { Content } = Layout;
 
@@ -24,29 +26,48 @@ function Main() {
     // ...options, // 추가 옵션
   });
 
+  const { setReviewList } = useContext(PageLayoutContext);
+
   const mapRef = useRef(null);
   const [positions, setPositions] = useState([]);
 
   useEffect(() => {
     setPositions(clusterPositionsData.positions);
-    // setPositions([
-    //   {
-    //     lat: 37.561110808242056,
-    //     lng: 126.9831268386891,
-    //   },
-    //   {
-    //     lat: 37.561110808242056,
-    //     lng: 126.9831268386891,
-    //   },
-    //   {
-    //     lat: 37.561110808242056,
-    //     lng: 126.9831268386891,
-    //   },
-    // ]);
+    setPositions([
+      {
+        lat: 37.49843289280568,
+        lng: 127.0254842133858,
+      },
+      {
+        lat: 37.49843289280568,
+        lng: 127.0254842133858,
+      },
+      {
+        lat: 37.49843289280568,
+        lng: 127.0254842133858,
+      },
+      {
+        lat: 37.561110808242056,
+        lng: 126.9831268386891,
+      },
+      {
+        lat: 37.561110808242056,
+        lng: 126.9831268386891,
+      },
+    ]);
   }, []);
 
-  const onCliickMarkcer = (pos) => {
+  const onCliickMarkcer = async (pos) => {
     console.log(pos.lat + ', ' + pos.lng);
+
+    const res = await searchReviews({
+      pos: `${pos.lat},${pos.lng}`,
+    });
+    console.log(res);
+
+    if(res.status.toLowerCase() == 'ok' && res.data.length > 0) {
+      setReviewList(res.data);
+    }
   };
 
   return (

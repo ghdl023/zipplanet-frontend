@@ -1,3 +1,5 @@
+import { defaultInstance } from "../core";
+
 export async function getReviews({
   order = 'createdAt',
   offset = 0,
@@ -9,4 +11,26 @@ export async function getReviews({
   );
   const body = await response.json();
   return body;
+}
+
+export const searchReviews = async (params) => {
+  try {
+    const { data } = await defaultInstance.get("/api/review/search", {
+      params,
+    })
+    return data;
+  } catch(e) {
+    console.log(e);
+  }
+}
+
+export const searchByFilterReviews = async (params) => {
+  try {
+    const { data } = await defaultInstance.get("/api/review/searchByFilter", {
+      params,
+    })
+    return data;
+  } catch(e) {
+    console.log(e);
+  }
 }

@@ -5,10 +5,12 @@ import ReviewDetail from '@components/ReviewDetail';
 import { SidebarContext } from '@contexts/SidebarContext';
 
 import './Sidebar.scss';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ReviewCreateModal from '../ReviewCreateModal';
 import ReviewReportModal from '@components/ReviewReportModal';
 import { HouseAdd, X, PencilSquare } from 'react-bootstrap-icons';
+import { searchByFilterReviews } from '../../apis/api/review';
+import { PageLayoutContext } from '../../contexts/PageLayoutContext';
 
 const { Sider } = Layout;
 
@@ -27,11 +29,32 @@ function Sidebar() {
     reportModalOpen: false, // 리뷰신고
   });
 
+  const { setReviewList } = useContext(PageLayoutContext);
+
   useEffect(() => {}, []);
 
   useEffect(() => {
     // console.log('reviewDetail 변경됨!');
   }, [reviewDetail]);
+
+  
+  useEffect(() => {
+    const { gu, dong, contractType, rate } = searchFilterObj;
+    async function search(){
+      const res = await searchByFilterReviews({
+        gu,
+        dong,
+        contractTypeId: contractType,
+        rate,
+      });
+      console.log(res);
+      
+      if(res.status.toLowerCase() === 'ok') {
+        setReviewList(res.data);
+      }
+    }
+    search();
+  }, [searchFilterObj.gu, searchFilterObj.dong, searchFilterObj.contractType, searchFilterObj.rate]);
 
   return (
     <SidebarContext.Provider

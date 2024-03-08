@@ -3,6 +3,7 @@ import ReviewListItem from '@components/ReviewListItem';
 import './ReviewList.scss';
 import { useContext } from 'react';
 import { SidebarContext } from '../../contexts/SidebarContext';
+import { PageLayoutContext } from '../../contexts/PageLayoutContext';
 
 const reviewItemList = [
   {
@@ -145,6 +146,8 @@ const reviewItemList = [
 function ReviewList() {
   const { setReviewDetail } = useContext(SidebarContext);
 
+  const { reviewList } = useContext(PageLayoutContext);
+
   const handleClickReview = (review) => {
     // console.log(review);
     setReviewDetail(review);
@@ -152,15 +155,20 @@ function ReviewList() {
 
   return (
     <>
-      <div className="reivew__list__container">
-        {reviewItemList.map((review, index) => (
+      {reviewList && reviewList.length > 0 ? <div className="reivew__list__container">
+        {reviewList.map((review, index) => (
           <ReviewListItem
-            key={review.review_id}
+            key={review.reviewId}
             review={review}
             onClick={handleClickReview}
           />
-        ))}
-      </div>
+        ))
+        }
+      </div> :
+        <div className="review__list__noresult">
+          <h3>😅 검색되는 리뷰가 없습니다.</h3>
+          <p>검색어 또는 필터를 변경해주세요.</p>
+        </div>}
       <div className="review__list__loading__container">
         {/* <div className="loading__icon">
           <ArrowClockwise />

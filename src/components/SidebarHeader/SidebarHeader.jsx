@@ -8,7 +8,7 @@ import './SidebarHeader.scss';
 
 function SidebarHeader() {
   const [openSearchFilter, setOpenSearchFilter] = useState(false);
-  const [sort, setSort] = useState('DEFAULT');
+  const [sort, setSort] = useState('LIKE_COUNT');
 
   return (
     <SidebarHeaderContext.Provider

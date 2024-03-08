@@ -4,7 +4,20 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
 
+.review__list__noresult {
+  // background-color: red;
+  width:100%;
+  position: relative;
+  top:41%;
+  font-size:1rem;
+
+  h3 {
+    font-size:1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
 }
 
 .review__list__loading__container {
