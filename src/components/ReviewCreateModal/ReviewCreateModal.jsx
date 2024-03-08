@@ -5,11 +5,13 @@ import './ReviewCreateModal.scss';
 import { useContext, useState } from 'react';
 import { SidebarContext } from '@contexts/SidebarContext';
 import StarRatings from 'react-star-ratings';
+import { createReview } from '@api/review';
 
 function ReviewCreateModal() {
   const { createReviewObj, setCreateReviewObj } = useContext(SidebarContext);
 
-  const [inputValue, setInputValue] = useState({
+  const [inputValues, setInputValues] = useState({
+    userId: 10000,
     totalRate: 0,
     transRate: 0,
     infraRate: 0,
@@ -18,21 +20,21 @@ function ReviewCreateModal() {
     title: '',
     description: '',
     jibun: '',
+    pos: '37.49843289280568,127.0254842133858',
     floorsCount: '',
     pyungCount: '',
-    roomCount: '',
+    roomInfo: '',
     roomOption: '',
-    contractType: 1,
+    contractTypeId: "1",
     startDate: '',
     endDate: '',
   });
-
   const [images, setImages] = useState([]);
   const [bChecked, setChecked] = useState(false);
 
   const changeRating = (newRating, name) => {
-    setInputValue({
-      ...inputValue,
+    setInputValues({
+      ...inputValues,
       [name]: newRating,
     });
   };
@@ -60,10 +62,26 @@ function ReviewCreateModal() {
     setImages(images.filter((_, index) => index !== id));
   };
 
-  const createReview = () => {
-    console.log(inputValue);
+  const handleChange = (e) => {
+    setInputValues({
+      ...inputValues,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const create = async () => {
+    console.log(inputValues);
     console.log(images);
-    closeModal();
+
+    const res = await createReview({
+      ...inputValues,
+    });
+
+    console.log(res);
+    
+    if(res.status.toLowerCase() == 'ok') {
+      closeModal();
+    }
   };
 
   const closeModal = () => {
@@ -115,7 +133,7 @@ function ReviewCreateModal() {
                 <h4 className="category__box__title">총 평점</h4>
                 <div className="category__box__rate">
                   <StarRatings
-                    rating={inputValue.totalRate}
+                    rating={inputValues.totalRate}
                     starDimension={'1.7rem'}
                     starSpacing={0}
                     starRatedColor="#FFC949"
@@ -133,7 +151,7 @@ function ReviewCreateModal() {
                 <h4 className="category__box__title">교통점수</h4>
                 <div className="category__box__rate">
                   <StarRatings
-                    rating={inputValue.transRate}
+                    rating={inputValues.transRate}
                     starDimension={'1.7rem'}
                     starSpacing={0}
                     starRatedColor="#FFC949"
@@ -151,7 +169,7 @@ function ReviewCreateModal() {
                 <h4 className="category__box__title">관리점수</h4>
                 <div className="category__box__rate">
                   <StarRatings
-                    rating={inputValue.manageRate}
+                    rating={inputValues.manageRate}
                     starDimension={'1.7rem'}
                     starSpacing={0}
                     starRatedColor="#FFC949"
@@ -169,7 +187,7 @@ function ReviewCreateModal() {
                 <h4 className="category__box__title">주변환경점수</h4>
                 <div className="category__box__rate">
                   <StarRatings
-                    rating={inputValue.infraRate}
+                    rating={inputValues.infraRate}
                     starDimension={'1.7rem'}
                     starSpacing={0}
                     starRatedColor="#FFC949"
@@ -187,7 +205,7 @@ function ReviewCreateModal() {
                 <h4 className="category__box__title">거주환경점수</h4>
                 <div className="category__box__rate">
                   <StarRatings
-                    rating={inputValue.lifeRate}
+                    rating={inputValues.lifeRate}
                     starDimension={'1.7rem'}
                     starSpacing={0}
                     starRatedColor="#FFC949"
@@ -214,16 +232,15 @@ function ReviewCreateModal() {
                   <input
                     className="full__width"
                     type="text"
-                    value={inputValue.title}
+                    name="title"
+                    value={inputValues.title}
                     placeholder="리스트에 노출되는 문구입니다. 40자 이내로 입력해주세요."
                     maxLength={40}
-                    onChange={(e) =>
-                      setInputValue({ ...inputValue, title: e.target.value })
-                    }
+                    onChange={handleChange}
                   />
                   <br />
                   <div className="input__length__container">
-                    {inputValue.title.length}/40
+                    {inputValues.title.length}/40
                   </div>
                 </div>
               </div>
@@ -233,19 +250,15 @@ function ReviewCreateModal() {
                 </h4>
                 <div>
                   <textarea
-                    value={inputValue.description}
+                    name="description"
+                    value={inputValues.description}
                     placeholder="리스트에 노출되는 문구입니다. 1000자 이내로 입력해주세요."
                     maxLength={1000}
-                    onChange={(e) =>
-                      setInputValue({
-                        ...inputValue,
-                        description: e.target.value,
-                      })
-                    }
+                    onChange={handleChange}
                   />
                   <br />
                   <div className="input__length__container">
-                    {inputValue.description.length}/1000
+                    {inputValues.description.length}/1000
                   </div>
                 </div>
               </div>
@@ -276,46 +289,6 @@ function ReviewCreateModal() {
                   </div>
                 </div>
               </div>
-              {/* <div className="category__grid__row">
-                <h4>사진 2</h4>
-                <div>
-                  <input
-                    className="full__width"
-                    type="text"
-                    placeholder="이미지 URL"
-                  />
-                </div>
-              </div>
-              <div className="category__grid__row">
-                <h4>사진 3</h4>
-                <div>
-                  <input
-                    className="full__width"
-                    type="text"
-                    placeholder="이미지 URL"
-                  />
-                </div>
-              </div>
-              <div className="category__grid__row">
-                <h4>사진 4</h4>
-                <div>
-                  <input
-                    className="full__width"
-                    type="text"
-                    placeholder="이미지 URL"
-                  />
-                </div>
-              </div>
-              <div className="category__grid__row">
-                <h4>사진 5</h4>
-                <div>
-                  <input
-                    className="full__width"
-                    type="text"
-                    placeholder="이미지 URL"
-                  />
-                </div>
-              </div> */}
             </div>
           </div>
 
@@ -332,10 +305,9 @@ function ReviewCreateModal() {
                   <input
                     className="full__width"
                     type="text"
-                    value={inputValue.jibun}
-                    onChange={(e) =>
-                      setInputValue({ ...inputValue, jibun: e.target.value })
-                    }
+                    name="jibun"
+                    value={inputValues.jibun}
+                    onChange={handleChange}
                     placeholder="지번주소를 입력해주세요. 예) 서울시 강남구 역삼동 826-37"
                     maxLength={100}
                   />
@@ -349,14 +321,10 @@ function ReviewCreateModal() {
                   <input
                     className="short__width"
                     type="text"
-                    value={inputValue.floorsCount}
-                    onChange={(e) =>
-                      setInputValue({
-                        ...inputValue,
-                        floorsCount: e.target.value,
-                      })
-                    }
-                    placeholder=""
+                    name="floorsCount"
+                    value={inputValues.floorsCount}
+                    onChange={handleChange}
+                    placeholder="1"
                     maxLength={2}
                   />{' '}
                   층
@@ -370,13 +338,9 @@ function ReviewCreateModal() {
                   <input
                     className="short__width"
                     type="text"
-                    value={inputValue.pyungCount}
-                    onChange={(e) =>
-                      setInputValue({
-                        ...inputValue,
-                        pyungCount: e.target.value,
-                      })
-                    }
+                    name="pyungCount"
+                    value={inputValues.pyungCount}
+                    onChange={handleChange}
                     placeholder=""
                     maxLength={3}
                   />{' '}
@@ -384,7 +348,7 @@ function ReviewCreateModal() {
                   <input
                     className="short__width"
                     type="text"
-                    value={Math.floor(inputValue.pyungCount * 3.3058)}
+                    value={Math.floor(inputValues.pyungCount * 3.3058)}
                     placeholder=""
                     maxLength={3}
                     readOnly
@@ -400,13 +364,9 @@ function ReviewCreateModal() {
                   <input
                     className="full__width"
                     type="text"
-                    value={inputValue.roomCount}
-                    onChange={(e) =>
-                      setInputValue({
-                        ...inputValue,
-                        roomCount: e.target.value,
-                      })
-                    }
+                    name="roomInfo"
+                    value={inputValues.roomInfo}
+                    onChange={handleChange}
                     placeholder="예) 주방 분리형 원룸"
                     maxLength={100}
                   />
@@ -420,13 +380,9 @@ function ReviewCreateModal() {
                   <input
                     className="full__width"
                     type="text"
-                    value={inputValue.roomoption}
-                    onChange={(e) =>
-                      setInputValue({
-                        ...inputValue,
-                        roomOption: e.target.value,
-                      })
-                    }
+                    name="roomOption"
+                    value={inputValues.roomOption}
+                    onChange={handleChange}
                     placeholder="예) 에어컨,세탁기,인덕션 (,로 구분하여 여러개 작성 가능)"
                     maxLength={100}
                   />
@@ -438,24 +394,18 @@ function ReviewCreateModal() {
                 </h4>
                 <div>
                   <button
-                    className={`${inputValue.contractType === 1 ? 'active' : ''}`}
-                    onClick={() =>
-                      setInputValue({
-                        ...inputValue,
-                        contractType: 1,
-                      })
-                    }
+                    className={`${inputValues.contractTypeId === "1" ? 'active' : ''}`}
+                    name="contractTypeId"
+                    value="1"
+                    onClick={handleChange}
                   >
                     월세
                   </button>
                   <button
-                    className={`${inputValue.contractType === 2 ? 'active' : ''}`}
-                    onClick={() =>
-                      setInputValue({
-                        ...inputValue,
-                        contractType: 2,
-                      })
-                    }
+                    className={`${inputValues.contractTypeId === "2" ? 'active' : ''}`}
+                    name="contractTypeId"
+                    value="2"
+                    onClick={handleChange}
                   >
                     전세
                   </button>
@@ -469,13 +419,9 @@ function ReviewCreateModal() {
                   <input
                     className="long__width"
                     type="text"
-                    value={inputValue.startDate}
-                    onChange={(e) =>
-                      setInputValue({
-                        ...inputValue,
-                        startDate: e.target.value,
-                      })
-                    }
+                    name="startDate"
+                    value={inputValues.startDate}
+                    onChange={handleChange}
                     placeholder="YYYY.MM.DD"
                     maxLength={10}
                   />
@@ -487,10 +433,9 @@ function ReviewCreateModal() {
                   <input
                     className="long__width"
                     type="text"
-                    value={inputValue.endDate}
-                    onChange={(e) =>
-                      setInputValue({ ...inputValue, endDate: e.target.value })
-                    }
+                    name="endDate"
+                    value={inputValues.endDate}
+                    onChange={handleChange}
                     placeholder="YYYY.MM.DD"
                     maxLength={10}
                   />
@@ -518,7 +463,7 @@ function ReviewCreateModal() {
             <div>
               <button
                 className={`${!bChecked ? 'disabled' : ''}`}
-                onClick={createReview}
+                onClick={create}
                 disabled={!bChecked}
               >
                 리뷰 생성

@@ -1,4 +1,4 @@
-import { defaultInstance } from "../core";
+import { defaultInstance } from '../core';
 
 export async function getReviews({
   order = 'createdAt',
@@ -34,3 +34,12 @@ export const searchByFilterReviews = async (params) => {
     console.log(e);
   }
 }
+
+export const createReview = async (params) => {
+  try {
+    const { data } = await defaultInstance.post('/api/review/create', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};

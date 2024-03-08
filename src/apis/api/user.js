@@ -1,4 +1,3 @@
-// import request from './core';
 import { defaultInstance } from '../core';
 
 export const getHome = async () => {
