@@ -11,6 +11,7 @@ import ReviewReportModal from '@components/ReviewReportModal';
 import { HouseAdd, X, PencilSquare } from 'react-bootstrap-icons';
 import { searchByFilterReviews } from '../../apis/api/review';
 import { PageLayoutContext } from '../../contexts/PageLayoutContext';
+import { Tooltip } from 'react-tooltip';
 
 const { Sider } = Layout;
 
@@ -37,10 +38,9 @@ function Sidebar() {
     // console.log('reviewDetail 변경됨!');
   }, [reviewDetail]);
 
-  
   useEffect(() => {
     const { gu, dong, contractType, rate } = searchFilterObj;
-    async function search(){
+    async function search() {
       const res = await searchByFilterReviews({
         gu,
         dong,
@@ -48,13 +48,18 @@ function Sidebar() {
         rate,
       });
       console.log(res);
-      
-      if(res.status.toLowerCase() === 'ok') {
+
+      if (res.status.toLowerCase() === 'ok') {
         setReviewList(res.data);
       }
     }
     search();
-  }, [searchFilterObj.gu, searchFilterObj.dong, searchFilterObj.contractType, searchFilterObj.rate]);
+  }, [
+    searchFilterObj.gu,
+    searchFilterObj.dong,
+    searchFilterObj.contractType,
+    searchFilterObj.rate,
+  ]);
 
   return (
     <SidebarContext.Provider
@@ -89,9 +94,12 @@ function Sidebar() {
             modalOpen: !createReviewObj.modalOpen,
           })
         }
+        data-tooltip-id="tooltip"
+        data-tooltip-content="새 리뷰 작성"
       >
         {createReviewObj.modalOpen ? <X /> : <PencilSquare />}
       </div>
+      <Tooltip id="tooltip" />
     </SidebarContext.Provider>
   );
 }

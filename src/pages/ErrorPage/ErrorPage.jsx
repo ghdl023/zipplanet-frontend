@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import LogoImage from '@assets/images/logo/logo_kr.png';
+import LogoImage from '@assets/images/logo/logo.png';
 import './ErrorPage.scss';
 
 function ErrorPage() {

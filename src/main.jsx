@@ -7,6 +7,8 @@ import ErrorPage from './pages/ErrorPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@styles/reset.css';
+import '@styles/tooltip.css';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const router = createBrowserRouter([
   {
