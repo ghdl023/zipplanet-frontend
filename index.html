@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
@@ -9,21 +9,98 @@
     />
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
     <meta name="title" content="집플래닛 | Zipplanet" />
-    <meta
-      name="description"
-      content=""
-    />
+    <meta name="description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="집플래닛" />
     <meta property="og:description" content="집플래닛" />
-    <meta property="og:url" content="https://ghdl023.github.io/zipplanet-frontend/" />
+    <meta
+      property="og:url"
+      content="https://ghdl023.github.io/zipplanet-frontend/"
+    />
     <link
       rel="icon"
-      href="/src/assets/images/favicon.ico"
+      href="/src/assets/favicon/favicon.ico"
       type="image/x-icon"
       sizes="16x16"
     />
-    <title>집플래닛 | Zipplanet</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="/src/assetes/favicon/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="/src/assetes/favicon/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/src/assetes/favicon/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="/src/assetes/favicon/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/src/assetes/favicon/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/src/assetes/favicon/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/src/assetes/favicon/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/src/assetes/favicon/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/src/assetes/favicon/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/src/assetes/favicon/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/src/assetes/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/src/assetes/favicon/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/src/assetes/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/src/assetes/favicon/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="/src/assetes/favicon/ms-icon-144x144.png"
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>집플래닛 | 우리동네 좋은집</title>
 
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
@@ -43,19 +120,19 @@
           var q = {};
           l.search
             .slice(1)
-            .split("&")
+            .split('&')
             .forEach(function (v) {
-              var a = v.split("=");
-              q[a[0]] = a.slice(1).join("=").replace(/~and~/g, "&");
+              var a = v.split('=');
+              q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
             });
           if (q.p !== undefined) {
             window.history.replaceState(
               null,
               null,
               l.pathname.slice(0, -1) +
-                (q.p || "") +
-                (q.q ? "?" + q.q : "") +
-                l.hash
+                (q.p || '') +
+                (q.q ? '?' + q.q : '') +
+                l.hash,
             );
           }
         }
@@ -65,7 +142,7 @@
   </head>
 
   <body>
-    <div id="root" style="height:100%"></div>
+    <div id="root" style="height: 100%"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
