@@ -1,40 +1,35 @@
 import React, { useState, useContext } from 'react';
 import { Search, FilterSquare, XLg } from 'react-bootstrap-icons';
-import { SidebarHeaderContext } from '@contexts/SidebarHeaderContext';
 import { searchByFilterReviews } from '../../apis/api/review';
-import './ReviewSearchBar.scss';
-import { SidebarContext } from '../../contexts/SidebarContext';
 import { PageLayoutContext } from '../../contexts/PageLayoutContext';
+import { useRecoilState } from 'recoil';
+import { searchState } from '../../recoil/searchState';
+import ReviewSearchFilter from '../ReviewSearchFilter/ReviewSearchFilter';
+import './ReviewSearchBar.scss';
 
 function ReviewSearchBar() {
+  const [search, setSearch] = useRecoilState(searchState);
+  const [filterOpen, setFilterOpen] = useState(false);
 
-  const [searchInput, setSearchInput] = useState('');
-  const { searchFilterObj : { gu, dong, contractType, rate }  } = useContext(SidebarContext);
   const { setReviewList } = useContext(PageLayoutContext);
 
-  const { openSearchFilter, setOpenSearchFilter } =
-    useContext(SidebarHeaderContext);
+  const getReviewList = async () => {
+    const res = await searchByFilterReviews({
+      keyword: search.keyword,
+    });
 
-  const handleClickFilter = () => {
-    setOpenSearchFilter((prevOpenSearchFilter) => !prevOpenSearchFilter);
+    console.log(res);
+    if (res.status.toLowerCase() == 'ok') {
+      setReviewList(res.data);
+    }
   };
 
-  const search = async () => {
-      
-     const res = await searchByFilterReviews({
-        keyword: searchInput,
-        // gu: '',
-        // dong: '',
-        // contractTypeId: '',
-        // rate: 5
-     });
-
-     console.log(res);
-     if(res.status.toLowerCase() == 'ok') {
-        setReviewList(res.data);
-     }
-     
-  }
+  const handleChangeInput = (e) => {
+    setSearch({
+      ...search,
+      keyword: e.target.value,
+    });
+  };
 
   return (
     <div className="review__searchbar">
@@ -42,11 +37,19 @@ function ReviewSearchBar() {
         <Search />
       </div>
       <div className="review__searchbar__input">
-        <input type="text" placeholder="지번 검색" value={searchInput} onChange={(e)=> setSearchInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && search()}/>
+        <input
+          type="text"
+          placeholder="지번 검색"
+          onChange={handleChangeInput}
+          onKeyDown={(e) => e.key === 'Enter' && getReviewList()}
+        />
       </div>
-      <div className="review__searchbar__filter" onClick={handleClickFilter}>
+      <div
+        className="review__searchbar__filter"
+        onClick={() => setFilterOpen((prev) => !prev)}
+      >
         <button>
-          {!openSearchFilter ? (
+          {!filterOpen ? (
             <>
               <FilterSquare />
               &nbsp;
@@ -61,6 +64,7 @@ function ReviewSearchBar() {
           )}
         </button>
       </div>
+      {filterOpen && <ReviewSearchFilter />}
     </div>
   );
 }

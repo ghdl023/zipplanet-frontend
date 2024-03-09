@@ -4,12 +4,15 @@
     padding: 20px 15px;
     position: absolute;
     top: 65px;
+    right: 0px;
+    color: #000;
     border: 1px solid #F3F4F6;
     background-color: #fff;
     overflow-y: scroll;
     overflow-x: hidden;
     // letter-spacing: -1px;
     z-index: 9999;
+    font-weight: 600;
 
     animation: fadein 0.4s;
     
@@ -87,15 +90,17 @@
                 margin-top: 20px;
 
                 .review__search__filter__main__item__box__btn {
-                    width: 155px;
-                    height: 65px;
+                    width: 25%;
+                    height: 55px;
                     border-radius: 10px;
                     border: 1px solid #F3F4F6; 
                     margin-right: 10px;
                     margin-bottom: 10px;
 
                     &.active {
-                        background-color: #000;
+                        // background-color: #000;
+                        // color: #fff;
+                        background: #FF8B11;
                         color: #fff;
                     }
                 }

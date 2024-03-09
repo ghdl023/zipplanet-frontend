@@ -2,12 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import LogoImage from '@assets/images/logo/logo.png';
 import { Layout } from 'antd';
-import {
-  useRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useSetRecoilState,
-} from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { userInfoAtom } from '../../recoil/userInfoState';
 import { BoxArrowRight, PersonCircle } from 'react-bootstrap-icons';
 import { Tooltip } from 'react-tooltip';

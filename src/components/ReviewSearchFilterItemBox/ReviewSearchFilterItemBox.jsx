@@ -1,35 +1,31 @@
-import { useContext } from 'react';
+import { useRecoilState } from 'recoil';
+import { searchState } from '../../recoil/searchState';
 import './ReviewSearchFilterItemBox.scss';
-import { SidebarContext } from '../../contexts/SidebarContext';
 
-function ReviewSearchFilterItemBox({ title, itemList }) {
-  const { searchFilterObj, setSearchFilterObj } = useContext(SidebarContext);
-  const { gu, guDongListPopupType } = searchFilterObj;
+function ReviewSearchFilterItemBox({ title, itemList, onClickGudongType }) {
+  const [search, setSearch] = useRecoilState(searchState);
+  const { gu } = search;
 
-  const handleClick = (btn) => {
+  const handleClick = (e, btn) => {
     if (title == '구/동') {
       // 구 선택안했을때는 동 비활성화
       if (btn.type === 'dong' && gu === '') {
         return;
       }
 
-      setSearchFilterObj({
-        ...searchFilterObj,
-        guDongListPopupType:
-          guDongListPopupType === ''
-            ? btn.type
-            : guDongListPopupType === btn.type // 타입이 같을때만 닫히게
-              ? ''
-              : btn.type, // btn.type : 'gu' or 'dong'
+      setSearch({
+        ...search,
       });
+
+      onClickGudongType(btn.type);
     } else if (title === '거래유형') {
-      setSearchFilterObj({
-        ...searchFilterObj,
-        contractType: btn.value,
+      setSearch({
+        ...search,
+        contractTypeId: btn.value,
       });
     } else if (title === '평점') {
-      setSearchFilterObj({
-        ...searchFilterObj,
+      setSearch({
+        ...search,
         rate: btn.value,
       });
     }
@@ -41,8 +37,8 @@ function ReviewSearchFilterItemBox({ title, itemList }) {
         {itemList.map((btn, index) => (
           <button
             key={index}
-            className={`review__search__filter__main__item__box__btn ${btn.isActive ? 'active' : ''}`}
-            onClick={() => handleClick(btn)}
+            className={`review__search__filter__main__item__box__btn ${btn.isActive ? 'active' : ''} ${title === '구/동' ? btn.type : ''}`}
+            onClick={(e) => handleClick(e, btn)}
           >
             {btn.label}
           </button>

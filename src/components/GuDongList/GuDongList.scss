@@ -6,6 +6,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 0;
+    font-weight: 600;
 
     .gudong__list__popup__item {
         height: 50px;
@@ -16,9 +17,8 @@
         border: 1px solid #F3F4F6;
         cursor: pointer;
         &:hover {
-            background-color: #000;
+            background-color: #FF8B11;
             color: #fff;
-            font-weight: 600;
         }
     }
 }

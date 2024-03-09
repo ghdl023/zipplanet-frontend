@@ -3,32 +3,28 @@ import SidebarHeader from '@components/SidebarHeader';
 import SidebarMain from '@components/SidebarMain';
 import ReviewDetail from '@components/ReviewDetail';
 import { SidebarContext } from '@contexts/SidebarContext';
-
-import './Sidebar.scss';
 import { useContext, useEffect, useState } from 'react';
 import ReviewCreateModal from '../ReviewCreateModal';
 import ReviewReportModal from '@components/ReviewReportModal';
-import { HouseAdd, X, PencilSquare } from 'react-bootstrap-icons';
+import { X, PencilSquare } from 'react-bootstrap-icons';
 import { searchByFilterReviews } from '../../apis/api/review';
 import { PageLayoutContext } from '../../contexts/PageLayoutContext';
 import { Tooltip } from 'react-tooltip';
+import { useRecoilState } from 'recoil';
+import { searchState } from '../../recoil/searchState';
+import './Sidebar.scss';
 
 const { Sider } = Layout;
 
 function Sidebar() {
   const [reviewDetail, setReviewDetail] = useState(null); // 리뷰상세
-  const [searchFilterObj, setSearchFilterObj] = useState({
-    // 검색창 필터설정하기 관련 변수
-    gu: '', // 선택 '구'
-    dong: '', // 선택 '동'
-    guDongListPopupType: '', // '구/동 목록 팝어 노출여부'  => '' : 숨김 /  'gu' or 'dong' : 노출
-    contractType: '', // 거래 유형 => 전체: '' / 월세: 1 / 전세: 2
-    rate: 5, // 평점
-  });
   const [createReviewObj, setCreateReviewObj] = useState({
     modalOpen: false, // 리뷰생성
     reportModalOpen: false, // 리뷰신고
   });
+
+  const [search, setSearch] = useRecoilState(searchState);
+  const { gu, dong, contractTypeId, rate } = search;
 
   const { setReviewList } = useContext(PageLayoutContext);
 
@@ -39,35 +35,26 @@ function Sidebar() {
   }, [reviewDetail]);
 
   useEffect(() => {
-    const { gu, dong, contractType, rate } = searchFilterObj;
-    async function search() {
+    async function getReviewList() {
       const res = await searchByFilterReviews({
         gu,
         dong,
-        contractTypeId: contractType,
+        contractTypeId,
         rate,
       });
       console.log(res);
-
       if (res.status.toLowerCase() === 'ok') {
         setReviewList(res.data);
       }
     }
-    search();
-  }, [
-    searchFilterObj.gu,
-    searchFilterObj.dong,
-    searchFilterObj.contractType,
-    searchFilterObj.rate,
-  ]);
+    getReviewList();
+  }, [gu, dong, contractTypeId, rate]);
 
   return (
     <SidebarContext.Provider
       value={{
         reviewDetail,
         setReviewDetail,
-        searchFilterObj,
-        setSearchFilterObj,
         createReviewObj,
         setCreateReviewObj,
       }}
