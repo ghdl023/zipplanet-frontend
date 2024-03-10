@@ -12,22 +12,21 @@ function ReviewSearchFilterItemBox({ title, itemList, onClickGudongType }) {
       if (btn.type === 'dong' && gu === '') {
         return;
       }
-
-      setSearch({
-        ...search,
-      });
-
       onClickGudongType(btn.type);
     } else if (title === '거래유형') {
       setSearch({
         ...search,
+        searchType: 'filter',
         contractTypeId: btn.value,
       });
+      window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
     } else if (title === '평점') {
       setSearch({
         ...search,
+        searchType: 'filter',
         rate: btn.value,
       });
+      window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
     }
   };
   return (

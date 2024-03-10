@@ -13,27 +13,16 @@ export async function getReviews({
   return body;
 }
 
-export const searchReviews = async (params) => {
+export const search = async (params) => {
   try {
-    const { data } = await defaultInstance.get("/api/review/search", {
+    const { data } = await defaultInstance.get('/api/review/search', {
       params,
-    })
+    });
     return data;
-  } catch(e) {
+  } catch (e) {
     console.log(e);
   }
-}
-
-export const searchByFilterReviews = async (params) => {
-  try {
-    const { data } = await defaultInstance.get("/api/review/searchByFilter", {
-      params,
-    })
-    return data;
-  } catch(e) {
-    console.log(e);
-  }
-}
+};
 
 export const createReview = async (params) => {
   try {

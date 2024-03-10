@@ -554,16 +554,19 @@ function GuDongList({ gudongType, onClickGudongType }) {
     if (gudongType === 'gu') {
       setSearch({
         ...search,
+        searchType: 'filter',
         gu: item.value,
-        dong: item.value === '' ? '' : search.dong,
+        dong: '',
       });
     } else {
       setSearch({
         ...search,
+        searchType: 'filter',
         dong: item.label,
       });
     }
     onClickGudongType('');
+    window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
   };
 
   return (

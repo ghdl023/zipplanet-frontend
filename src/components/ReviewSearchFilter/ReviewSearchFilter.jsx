@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReviewSearchFilterItemBox from '@components/ReviewSearchFilterItemBox';
 import GuDongList from '@components/GuDongList';
 import { useRecoilState, useResetRecoilState } from 'recoil';

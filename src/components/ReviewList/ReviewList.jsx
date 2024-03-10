@@ -2,10 +2,11 @@ import ReviewListItem from '@components/ReviewListItem';
 import { useContext, useState, useEffect } from 'react';
 import { SidebarContext } from '../../contexts/SidebarContext';
 import Loading from '../common/Loading';
-import { searchByFilterReviews } from '../../apis/api/review';
+import { search } from '../../apis/api/review';
 import { useRecoilValue } from 'recoil';
 import { searchState } from '../../recoil/searchState';
 import './ReviewList.scss';
+import { useEventListeners } from '../../hooks/useEventListeners';
 
 const LIMIT = 6;
 
@@ -19,7 +20,9 @@ function ReviewList() {
   const [loadingError, setLoadingError] = useState(null);
   const [items, setItems] = useState([]);
   const [target, setTarget] = useState(null); // 구독할 대상 (target을 지켜보고 있다가 이 target이 정해진 threshold 비율만큼 보이면 지정한 행동을 합니다. )
-  const sortedItems = items.sort((a, b) => b[sort] - a[sort]);
+  const sortedItems = items.sort(
+    (a, b) => b[sort.replace('_', '')] - a[sort.replace('_', '')],
+  );
   const [totalCount, setTotalCount] = useState(0);
 
   const handleLoad = async (options) => {
@@ -32,16 +35,20 @@ function ReviewList() {
         setHasNext(false);
         return;
       }
-      result = await searchByFilterReviews(options);
+
+      result = await search({
+        ...options,
+        ...searchValue,
+      });
       // const { paging, reviews } = result;
       const { data } = result;
-      if (options.offset === 0) {
+      if (options.offset === 1) {
         setItems(data.reviews);
       } else {
         setItems([...items, ...data.reviews]);
       }
       setOffset(options.offset + options.limit);
-
+      console.log(options.offset + options.limit);
       setTotalCount(data.totalCount);
       const _hasNext = data.totalCount > items.length;
       setHasNext(_hasNext);
@@ -75,6 +82,12 @@ function ReviewList() {
   useEffect(() => {
     handleLoad({ offset: 1, limit: LIMIT });
   }, []);
+
+  useEventListeners('callSearchReviewEvent', (event) => {
+    setTimeout(() => {
+      handleLoad({ offset: 1, limit: LIMIT });
+    }, 200);
+  });
 
   const handleClickReview = (review) => {
     // console.log(review);

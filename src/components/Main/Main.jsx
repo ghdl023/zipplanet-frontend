@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { flushSync } from 'react-dom';
 import { Layout } from 'antd';
-import MapImage from '@assets/images/kakao_map.png';
-import { searchReviews } from '../../apis/api/review';
 import {
   Map,
   MapMarker,
@@ -9,7 +8,8 @@ import {
   useKakaoLoader,
 } from 'react-kakao-maps-sdk';
 import './Main.scss';
-import { PageLayoutContext } from '../../contexts/PageLayoutContext';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { searchState } from '../../recoil/searchState';
 
 const { Content } = Layout;
 
@@ -26,8 +26,8 @@ function Main() {
     // ...options, // 추가 옵션
   });
 
-  const { setReviewList } = useContext(PageLayoutContext);
-
+  const [search, setSearch] = useRecoilState(searchState);
+  const searchValue = useRecoilValue(searchState);
   const mapRef = useRef(null);
   const [positions, setPositions] = useState([]);
 
@@ -60,14 +60,14 @@ function Main() {
   const onCliickMarkcer = async (pos) => {
     console.log(pos.lat + ', ' + pos.lng);
 
-    const res = await searchReviews({
+    setSearch({
+      ...searchValue,
+      searchType: 'pos',
       pos: `${pos.lat},${pos.lng}`,
+      offset: 1,
     });
-    console.log(res);
-
-    if(res.status.toLowerCase() == 'ok' && res.data.length > 0) {
-      setReviewList(res.data);
-    }
+    console.log(search);
+    window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
   };
 
   return (
@@ -77,8 +77,8 @@ function Main() {
         <Map // 지도를 표시할 Container
           center={{
             // 지도의 중심좌표
-            lat: 37.566535,
-            lng: 126.9779692,
+            lat: 37.49843289280568,
+            lng: 127.0254842133858,
           }}
           style={{
             // 지도의 크기

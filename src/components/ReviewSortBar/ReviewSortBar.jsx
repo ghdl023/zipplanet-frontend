@@ -6,9 +6,9 @@ import './ReviewSortBar.scss';
 
 function ReviewSortBar() {
   const sortBtnList = [
-    { label: '좋아요순', value: 'likeCount' },
-    { label: '평점순', value: 'totalRate' },
-    { label: '최신순', value: 'createDate' },
+    { label: '좋아요순', value: 'like_Count' },
+    { label: '평점순', value: 'total_Rate' },
+    { label: '최신순', value: 'create_Date' },
   ];
 
   const [search, setSearch] = useRecoilState(searchState);

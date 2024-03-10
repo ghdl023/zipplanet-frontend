@@ -1,7 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Search, FilterSquare, XLg } from 'react-bootstrap-icons';
-import { searchByFilterReviews } from '../../apis/api/review';
-import { PageLayoutContext } from '../../contexts/PageLayoutContext';
 import { useRecoilState } from 'recoil';
 import { searchState } from '../../recoil/searchState';
 import ReviewSearchFilter from '../ReviewSearchFilter/ReviewSearchFilter';
@@ -11,22 +9,15 @@ function ReviewSearchBar() {
   const [search, setSearch] = useRecoilState(searchState);
   const [filterOpen, setFilterOpen] = useState(false);
 
-  const { setReviewList } = useContext(PageLayoutContext);
-
-  const getReviewList = async () => {
-    const res = await searchByFilterReviews({
-      keyword: search.keyword,
-    });
-
-    console.log(res);
-    if (res.status.toLowerCase() == 'ok') {
-      setReviewList(res.data);
-    }
+  const getReviewList = () => {
+    console.log('Enter!');
+    window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
   };
 
   const handleChangeInput = (e) => {
     setSearch({
       ...search,
+      searchType: 'keyword',
       keyword: e.target.value,
     });
   };
