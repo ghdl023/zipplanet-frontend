@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  margin-bottom:130px;
 }
 
 .review__list__noresult {
@@ -33,19 +34,15 @@
 
   .loading__icon {
     font-size:1.8rem;
-    animation: rotate 2s linear infinite;transform-origin: 50% 50%;
+    // animation: rotate 2s linear infinite;transform-origin: 50% 50%;
   }
 
   h2 {
-    font-size:1rem;
+    font-size:0.89rem;
     font-weight: 600;
-    margin-top: 5px;
+    margin-top: 15px;
     margin-bottom: 10px;
-  }
-
-  h3 {
-    font-size:0.8rem;
-    font-weight: 600;
+    letter-spacing: -2px;
   }
 
   @keyframes rotate{

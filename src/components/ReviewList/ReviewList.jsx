@@ -1,152 +1,80 @@
 import ReviewListItem from '@components/ReviewListItem';
-// import { ArrowClockwise } from 'react-bootstrap-icons';
-import './ReviewList.scss';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { SidebarContext } from '../../contexts/SidebarContext';
 import { PageLayoutContext } from '../../contexts/PageLayoutContext';
+import Loading from '../common/Loading';
+import { searchByFilterReviews } from '../../apis/api/review';
+import './ReviewList.scss';
 
-const reviewItemList = [
-  {
-    review_id: 1,
-    address: '서울시 강남구 논현동 33-1',
-    title: '제목1',
-    detail:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    thumbnail: [
-      'https://www.zipdeco.co.kr/upload/2018/04/24/IMAGE_201804240306006060_V6N7I',
-      'https://contents-cdn.viewus.co.kr/image/2023/12/CP-2023-0010/image-466b9eb6-954e-46d3-af59-e1a74ce5dbcd.jpeg',
-      'https://mblogthumb-phinf.pstatic.net/MjAxNzExMTVfMjUg/MDAxNTEwNzI3Nzk0ODAw.v4kiIifZvqbzIinRZhmA6XJQvMcQtwnrDpsk0gQrlKYg.PtUU5kw-qSjjzkq0Ev70shFeehsU6GkpOxfwHP5AEksg.JPEG.thedesigns11/natural-wood-flooring.jpg?type=w800',
-    ],
-    creator: '종필이네신발가게',
-    floors: 25,
-    pyungsoo: 12,
-    room: '2룸 1거실',
-    option:
-      '냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨',
-    contractType: '전세',
-    ibjuDate: '2023.12.19',
-    endDate: '2024.06.04',
-    likeCount: 13,
-    total_score: 3.5, // 3 / 1 / 1
-    trans_score: 4.6, // 5 / 0 / 0
-    infra_score: 2.3, // 2 / 1 / 2
-    manage_score: 3.0, // 3 / 0 // 2
-    life_score: 5.0, // 5 / 0/ 0
-  },
-  {
-    review_id: 2,
-    address: '서울시 강남구 논현동 33-2',
-    title: '제목2',
-    detail:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    thumbnail: [
-      'https://www.zipdeco.co.kr/upload/2018/04/24/IMAGE_201804240306006060_V6N7I',
-      'https://contents-cdn.viewus.co.kr/image/2023/12/CP-2023-0010/image-466b9eb6-954e-46d3-af59-e1a74ce5dbcd.jpeg',
-      'https://mblogthumb-phinf.pstatic.net/MjAxNzExMTVfMjUg/MDAxNTEwNzI3Nzk0ODAw.v4kiIifZvqbzIinRZhmA6XJQvMcQtwnrDpsk0gQrlKYg.PtUU5kw-qSjjzkq0Ev70shFeehsU6GkpOxfwHP5AEksg.JPEG.thedesigns11/natural-wood-flooring.jpg?type=w800',
-    ],
-    creator: '종필이네신발가게',
-    floors: 25,
-    pyungsoo: 12,
-    room: '2룸 1거실',
-    option:
-      '냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨',
-    contractType: '전세',
-    ibjuDate: '2023.12.19',
-    endDate: '2024.06.04',
-    likeCount: 13,
-    total_score: 3.5, // 3 / 1 / 1
-    trans_score: 4.6, // 5 / 0 / 0
-    infra_score: 2.3, // 2 / 1 / 2
-    manage_score: 3.0, // 3 / 0 // 2
-    life_score: 5.0, // 5 / 0/ 0
-  },
-  {
-    review_id: 3,
-    address: '서울시 강남구 논현동 33-3',
-    title: '제목3',
-    detail:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    thumbnail: [
-      'https://www.zipdeco.co.kr/upload/2018/04/24/IMAGE_201804240306006060_V6N7I',
-      'https://contents-cdn.viewus.co.kr/image/2023/12/CP-2023-0010/image-466b9eb6-954e-46d3-af59-e1a74ce5dbcd.jpeg',
-      'https://mblogthumb-phinf.pstatic.net/MjAxNzExMTVfMjUg/MDAxNTEwNzI3Nzk0ODAw.v4kiIifZvqbzIinRZhmA6XJQvMcQtwnrDpsk0gQrlKYg.PtUU5kw-qSjjzkq0Ev70shFeehsU6GkpOxfwHP5AEksg.JPEG.thedesigns11/natural-wood-flooring.jpg?type=w800',
-    ],
-    creator: '종필이네신발가게',
-    floors: 25,
-    pyungsoo: 12,
-    room: '2룸 1거실',
-    option:
-      '냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨',
-    contractType: '전세',
-    ibjuDate: '2023.12.19',
-    endDate: '2024.06.04',
-    likeCount: 13,
-    total_score: 3.5, // 3 / 1 / 1
-    trans_score: 4.6, // 5 / 0 / 0
-    infra_score: 2.3, // 2 / 1 / 2
-    manage_score: 3.0, // 3 / 0 // 2
-    life_score: 5.0, // 5 / 0/ 0
-  },
-  {
-    review_id: 4,
-    address: '서울시 강남구 논현동 33-4',
-    title: '제목4',
-    detail:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    thumbnail: [
-      'https://www.zipdeco.co.kr/upload/2018/04/24/IMAGE_201804240306006060_V6N7I',
-      'https://contents-cdn.viewus.co.kr/image/2023/12/CP-2023-0010/image-466b9eb6-954e-46d3-af59-e1a74ce5dbcd.jpeg',
-      'https://mblogthumb-phinf.pstatic.net/MjAxNzExMTVfMjUg/MDAxNTEwNzI3Nzk0ODAw.v4kiIifZvqbzIinRZhmA6XJQvMcQtwnrDpsk0gQrlKYg.PtUU5kw-qSjjzkq0Ev70shFeehsU6GkpOxfwHP5AEksg.JPEG.thedesigns11/natural-wood-flooring.jpg?type=w800',
-    ],
-    creator: '종필이네신발가게',
-    floors: 25,
-    pyungsoo: 12,
-    room: '2룸 1거실',
-    option:
-      '냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨',
-    contractType: '전세',
-    ibjuDate: '2023.12.19',
-    endDate: '2024.06.04',
-    likeCount: 13,
-    total_score: 3.5, // 3 / 1 / 1
-    trans_score: 4.6, // 5 / 0 / 0
-    infra_score: 2.3, // 2 / 1 / 2
-    manage_score: 3.0, // 3 / 0 // 2
-    life_score: 5.0, // 5 / 0/ 0
-  },
-  {
-    review_id: 5,
-    address: '서울시 강남구 논현동 33-5',
-    title: '제목5',
-    detail:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    thumbnail: [
-      'https://www.zipdeco.co.kr/upload/2018/04/24/IMAGE_201804240306006060_V6N7I',
-      'https://contents-cdn.viewus.co.kr/image/2023/12/CP-2023-0010/image-466b9eb6-954e-46d3-af59-e1a74ce5dbcd.jpeg',
-      'https://mblogthumb-phinf.pstatic.net/MjAxNzExMTVfMjUg/MDAxNTEwNzI3Nzk0ODAw.v4kiIifZvqbzIinRZhmA6XJQvMcQtwnrDpsk0gQrlKYg.PtUU5kw-qSjjzkq0Ev70shFeehsU6GkpOxfwHP5AEksg.JPEG.thedesigns11/natural-wood-flooring.jpg?type=w800',
-    ],
-    creator: '종필이네신발가게',
-    floors: 25,
-    pyungsoo: 12,
-    room: '2룸 1거실',
-    option:
-      '냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨, 냉장고, 세탁기, 에어컨',
-    contractType: '전세',
-    ibjuDate: '2023.12.19',
-    endDate: '2024.06.04',
-    likeCount: 13,
-    total_score: 3.5, // 3 / 1 / 1
-    trans_score: 4.6, // 5 / 0 / 0
-    infra_score: 2.3, // 2 / 1 / 2
-    manage_score: 3.0, // 3 / 0 // 2
-    life_score: 5.0, // 5 / 0/ 0
-  },
-];
+const LIMIT = 6;
 
 function ReviewList() {
   const { setReviewDetail } = useContext(SidebarContext);
-
   const { reviewList } = useContext(PageLayoutContext);
+
+  const [order, setOrder] = useState('LIKE_COUNT');
+  const [offset, setOffset] = useState(1);
+  const [hasNext, setHasNext] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState(null);
+  const [items, setItems] = useState([]);
+  const [target, setTarget] = useState(null); // 구독할 대상 (target을 지켜보고 있다가 이 target이 정해진 threshold 비율만큼 보이면 지정한 행동을 합니다. )
+  const sortedItems = items.sort((a, b) => b[order] - a[order]);
+  const [totalCount, setTotalCount] = useState(0);
+  const handleLoad = async (options) => {
+    let result;
+    try {
+      setLoadingError(null);
+      setIsLoading(true);
+
+      if (totalCount > 0 && !(totalCount > items.length)) {
+        setHasNext(false);
+        return;
+      }
+      result = await searchByFilterReviews(options);
+      // const { paging, reviews } = result;
+      const { data } = result;
+      if (options.offset === 0) {
+        setItems(data.reviews);
+      } else {
+        setItems([...items, ...data.reviews]);
+      }
+      setOffset(options.offset + options.limit);
+
+      setTotalCount(data.totalCount);
+      const _hasNext = data.totalCount > items.length;
+      console.log(_hasNext);
+      setHasNext(_hasNext); //paging.hasNext
+    } catch (error) {
+      setLoadingError(error);
+      return;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    let options = {
+      threshold: '1',
+    };
+
+    // 새롭게 생성할 observer가 수행할 행동 정의
+    let handleIntersection = async ([entries], observer) => {
+      if (entries.isIntersecting) {
+        hasNext && (await handleLoad({ order, offset: offset, limit: LIMIT }));
+        observer.unobserve(entries.target);
+      }
+    };
+
+    // 새로운 observer 생성
+    const io = new IntersectionObserver(handleIntersection, options);
+    if (target) io.observe(target);
+    return () => io && io.disconnect();
+  }, [target, offset]);
+
+  useEffect(() => {
+    handleLoad({ order, offset: 1, limit: LIMIT });
+  }, []);
 
   const handleClickReview = (review) => {
     // console.log(review);
@@ -155,29 +83,34 @@ function ReviewList() {
 
   return (
     <>
-      {reviewList && reviewList.length > 0 ? <div className="reivew__list__container">
-        {reviewList.map((review, index) => (
-          <ReviewListItem
-            key={review.reviewId}
-            review={review}
-            onClick={handleClickReview}
-          />
-        ))
-        }
-      </div> :
+      {items && items.length > 0 ? (
+        <div className="reivew__list__container">
+          {items.map((review, idx) => {
+            const lastItem = idx === items.length - 2;
+            return (
+              <ReviewListItem
+                key={idx}
+                review={review}
+                onClick={handleClickReview}
+                ref={lastItem ? setTarget : null}
+              />
+            );
+          })}
+        </div>
+      ) : (
         <div className="review__list__noresult">
           <h3>😅 검색되는 리뷰가 없습니다.</h3>
           <p>검색어 또는 필터를 변경해주세요.</p>
-        </div>}
-      <div className="review__list__loading__container">
-        {/* <div className="loading__icon">
-          <ArrowClockwise />
         </div>
-        <h2>리뷰를 추가로 불러옵니다.</h2>
-        <h3>
-          잠시만 기다려 주세요! 장시간 불러오지 못하는 경우 새로고침 해주세요.
-        </h3> */}
-      </div>
+      )}
+      {hasNext && (
+        <div className="review__list__loading__container">
+          <div className="loading__icon">
+            <Loading />
+          </div>
+          <h2>리뷰를 추가로 불러옵니다.</h2>
+        </div>
+      )}
     </>
   );
 }

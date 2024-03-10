@@ -3,15 +3,15 @@ import { NavLink } from 'react-router-dom';
 import LogoImage from '@assets/images/logo/logo.png';
 import { Layout } from 'antd';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { userInfoAtom } from '../../recoil/userInfoState';
+import { userInfoState } from '../../recoil/userInfoState';
 import { BoxArrowRight, PersonCircle } from 'react-bootstrap-icons';
 import { Tooltip } from 'react-tooltip';
 import './Header.scss';
 
 const Header = () => {
-  const setUserInfo = useSetRecoilState(userInfoAtom);
-  const { userId, username } = useRecoilValue(userInfoAtom);
-  const refresh = useResetRecoilState(userInfoAtom);
+  const setUserInfo = useSetRecoilState(userInfoState);
+  const { userId, nickname } = useRecoilValue(userInfoState);
+  const refresh = useResetRecoilState(userInfoState);
 
   const navigate = useNavigate();
   const logoClick = () => {
@@ -58,7 +58,7 @@ const Header = () => {
               data-tooltip-content="마이페이지"
             >
               <PersonCircle />
-              <h3>{username}</h3>
+              <h3>{nickname}</h3>
             </div>
             <BoxArrowRight
               data-tooltip-id="tooltip"

@@ -24,6 +24,6 @@ const ReviewListItem = forwardRef(({ item, onDelete }, ref) => {
     </div>
   );
 });
-ReviewListItem.displayName = 'ReviewListItem';
+ReviewListItem.displayName = 'ReviewListItemTest';
 
 export default ReviewListItem;

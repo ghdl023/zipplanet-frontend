@@ -1,16 +1,11 @@
-import { useEffect } from 'react';
 import Main from '@components/Main';
 import Sidebar from '@components/Sidebar';
-import { getHome } from '@api/user';
-
+import { useSetRecoilState } from 'recoil';
+import { userInfoState } from '../../recoil/userInfoState';
 import './Home.scss';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { userInfoAtom } from '../../recoil/userInfoState';
 
 function Home() {
-  const setUserInfo = useSetRecoilState(userInfoAtom);
-  // const { username } = useRecoilValue(userInfoAtom);
-
+  const setUserInfo = useSetRecoilState(userInfoState);
   setTimeout(() => {
     setUserInfo({
       userId: 10000,
