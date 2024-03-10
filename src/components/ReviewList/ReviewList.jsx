@@ -1,26 +1,27 @@
 import ReviewListItem from '@components/ReviewListItem';
 import { useContext, useState, useEffect } from 'react';
 import { SidebarContext } from '../../contexts/SidebarContext';
-import { PageLayoutContext } from '../../contexts/PageLayoutContext';
 import Loading from '../common/Loading';
 import { searchByFilterReviews } from '../../apis/api/review';
+import { useRecoilValue } from 'recoil';
+import { searchState } from '../../recoil/searchState';
 import './ReviewList.scss';
 
 const LIMIT = 6;
 
 function ReviewList() {
   const { setReviewDetail } = useContext(SidebarContext);
-  const { reviewList } = useContext(PageLayoutContext);
-
-  const [order, setOrder] = useState('LIKE_COUNT');
+  const searchValue = useRecoilValue(searchState);
+  const { sort } = searchValue;
   const [offset, setOffset] = useState(1);
   const [hasNext, setHasNext] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
   const [items, setItems] = useState([]);
   const [target, setTarget] = useState(null); // 구독할 대상 (target을 지켜보고 있다가 이 target이 정해진 threshold 비율만큼 보이면 지정한 행동을 합니다. )
-  const sortedItems = items.sort((a, b) => b[order] - a[order]);
+  const sortedItems = items.sort((a, b) => b[sort] - a[sort]);
   const [totalCount, setTotalCount] = useState(0);
+
   const handleLoad = async (options) => {
     let result;
     try {
@@ -43,8 +44,7 @@ function ReviewList() {
 
       setTotalCount(data.totalCount);
       const _hasNext = data.totalCount > items.length;
-      console.log(_hasNext);
-      setHasNext(_hasNext); //paging.hasNext
+      setHasNext(_hasNext);
     } catch (error) {
       setLoadingError(error);
       return;
@@ -61,7 +61,7 @@ function ReviewList() {
     // 새롭게 생성할 observer가 수행할 행동 정의
     let handleIntersection = async ([entries], observer) => {
       if (entries.isIntersecting) {
-        hasNext && (await handleLoad({ order, offset: offset, limit: LIMIT }));
+        hasNext && (await handleLoad({ offset: offset, limit: LIMIT }));
         observer.unobserve(entries.target);
       }
     };
@@ -73,7 +73,7 @@ function ReviewList() {
   }, [target, offset]);
 
   useEffect(() => {
-    handleLoad({ order, offset: 1, limit: LIMIT });
+    handleLoad({ offset: 1, limit: LIMIT });
   }, []);
 
   const handleClickReview = (review) => {
@@ -83,10 +83,10 @@ function ReviewList() {
 
   return (
     <>
-      {items && items.length > 0 ? (
+      {sortedItems && sortedItems.length > 0 ? (
         <div className="reivew__list__container">
-          {items.map((review, idx) => {
-            const lastItem = idx === items.length - 2;
+          {sortedItems.map((review, idx) => {
+            const lastItem = idx === sortedItems.length - 2;
             return (
               <ReviewListItem
                 key={idx}

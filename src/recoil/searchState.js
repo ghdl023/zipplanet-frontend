@@ -8,6 +8,6 @@ export const searchState = atom({
     dong: '', // 필터설정하기 '동'
     contractTypeId: '', // 필터설정하기 '거래유형'
     rate: 5, // 필터설정하기 '평점'
-    sort: 'LIKE_COUNT',
+    sort: 'likeCount',
   },
 });
