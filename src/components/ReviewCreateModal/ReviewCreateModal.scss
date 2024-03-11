@@ -179,6 +179,7 @@
   .create__review__container__footer {
     text-align: center;
     padding-top: 25px;
+
     .txt__box {
       display: flex;
       align-items: center;
@@ -191,12 +192,13 @@
 
       input[type=checkbox] {
         padding:10px;
+        cursor:pointer;
       }
 
     }
 
     button {
-      padding: 18px 55px;
+      padding: 18px 25px;
       background: #FF5F05;
       color: #fff;
 
