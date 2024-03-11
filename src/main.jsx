@@ -9,6 +9,7 @@ import MyPage from './pages/MyPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@styles/reset.css';
+import FindId from './pages/FindId';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/zipplanet-frontend/mypage',
         element: <MyPage/>,
+      },
+      {
+        path: '/zipplanet-frontend/findId',
+        element: <FindId/>
       }
     ],
   },

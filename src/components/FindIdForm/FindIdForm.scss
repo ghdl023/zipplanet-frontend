@@ -1,7 +1,7 @@
-.register__wrapper {
+.FindId__wrapper {
     border: 1px solid rgb(243, 244, 246);
 }
-.register__box {
+.FindId__box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,7 +9,7 @@
     margin: 70px 40px 70px 40px;
 }
 
-.register__header {
+.FindId__header {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,16 +22,17 @@
     h4 {
         font-size: 20px;
         margin-top: 50px;
+        text-align: center;
     }
 }
 
-.register__body {
+.FindId__body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    .register__form {
+    .FindId__form {
         display: flex;
         flex-direction: column;
         justify-content: center;

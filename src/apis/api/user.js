@@ -29,7 +29,14 @@ export const signUp = async (params) => {
   }
 };
 
-
+export const findId = async (params) => {
+  try {
+    const {data} = await defaultInstance.post('api/user/findId', params);
+    return data;
+  } catch (e) {
+    console.log(e)
+  }
+};
 
 
 // export const getHome = () => {
