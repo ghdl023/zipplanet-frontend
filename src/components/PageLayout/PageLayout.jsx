@@ -25,24 +25,24 @@ function PageLayout() {
           </Layout>
         </Layout>
         <Toaster
-            position="bottom-center"
-            containerStyle={{
-              zIndex: 99999999,
-            }}
-            toastOptions={{
-              duration: 3000,
-              success: {
-                style: {
-                  background: 'green',
-                  color: '#fff',
-                },
+          position="bottom-center"
+          containerStyle={{
+            zIndex: 99999999,
+          }}
+          toastOptions={{
+            duration: 3000,
+            success: {
+              style: {
+                // background: 'green',
+                // color: '#fff',
               },
-              error: {
-                style: {
-                  background: 'red',
-                  color: '#fff',
-                },
+            },
+            error: {
+              style: {
+                // background: 'red',
+                // color: '#fff',
               },
+            },
           }}
         />
       </PageLayoutContext.Provider>

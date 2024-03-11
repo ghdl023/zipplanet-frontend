@@ -103,6 +103,13 @@
         justify-content: space-around;
         align-items: center;
         padding: 20px 0 45px 0;
+
+        transition: all 0.2s ease-out;
+        &:hover {
+          background-color: black;
+          color:#fff;
+        }
+
         .category__box__icon { 
           font-size: 2rem;
         }

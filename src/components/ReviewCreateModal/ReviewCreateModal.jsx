@@ -1,5 +1,12 @@
-import { useContext, useState } from 'react';
-import { House, XSquareFill } from 'react-bootstrap-icons';
+import { useContext, useState, useRef } from 'react';
+import {
+  Award,
+  House,
+  XSquareFill,
+  CarFrontFill,
+  PersonGear,
+  ImageFill,
+} from 'react-bootstrap-icons';
 import StarRatings from 'react-star-ratings';
 import toast from 'react-hot-toast';
 import Modal from '@components/common/Modal';
@@ -26,12 +33,22 @@ function ReviewCreateModal() {
     pyungCount: '',
     roomInfo: '',
     roomOption: '',
-    contractTypeId: "1",
+    contractTypeId: '1',
     startDate: '',
     endDate: '',
   });
   const [images, setImages] = useState([]);
   const [bChecked, setChecked] = useState(false);
+
+  const refTitle = useRef(null);
+  const refDescription = useRef(null);
+  const refJibun = useRef(null);
+  const refFloorsCount = useRef(null);
+  const refPyungCount = useRef(null);
+  const refRoomInfo = useRef(null);
+  const refRoomOption = useRef(null);
+  const refStartDate = useRef(null);
+  const refEndDate = useRef(null);
 
   const changeRating = (newRating, name) => {
     setInputValues({
@@ -68,21 +85,23 @@ function ReviewCreateModal() {
       ...inputValues,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
   const create = async () => {
-    // console.log(inputValues);
-    // console.log(images);
+    if (!checkValidation()) {
+      return;
+    }
+
     const res = await createReview({
       ...inputValues,
     });
     // console.log(res);
-    
-    if(res.status.toLowerCase() == 'ok' && res.data > 0) {
-      toast.success("리뷰가 생성되었습니다!");
+
+    if (res.status.toLowerCase() == 'ok' && res.data > 0) {
+      toast.success('리뷰가 생성되었습니다!');
       closeModal();
     } else {
-      toast.error("리뷰 생성을 실패했습니다.");
+      toast.error('리뷰 생성을 실패했습니다.');
     }
   };
 
@@ -98,6 +117,106 @@ function ReviewCreateModal() {
       ...createReviewObj,
       modalOpen: false,
     });
+  };
+
+  const checkValidation = () => {
+    console.log(inputValues);
+    // console.log(images);
+    const {
+      totalRate,
+      transRate,
+      manageRate,
+      infraRate,
+      lifeRate,
+      title,
+      description,
+      jibun,
+      floorsCount,
+      pyungCount,
+      roomInfo,
+      roomOption,
+      startDate,
+      endDate,
+    } = inputValues;
+
+    if (totalRate === 0) {
+      toast.error('총 평점을 선택해주세요.');
+      return false;
+    } else if (transRate === 0) {
+      toast.error('교통점수를 선택해주세요.');
+      return false;
+    } else if (manageRate === 0) {
+      toast.error('관리점수를 선택해주세요.');
+      return false;
+    } else if (infraRate === 0) {
+      toast.error('주변환경점수를 선택해주세요.');
+      return false;
+    } else if (lifeRate === 0) {
+      toast.error('거주환경점수를 선택해주세요.');
+      return false;
+    } else if (title === null || title === '') {
+      toast.error('제목을 입력해주세요.');
+      refTitle.current.focus();
+      return false;
+    } else if (description === null || description === '') {
+      toast.error('내용을 입력해주세요.');
+      refDescription.current.focus();
+      return false;
+    } else if (jibun === null || jibun === '') {
+      toast.error('지번주소를 입력해주세요.');
+      refJibun.current.focus();
+      return false;
+    } else if (floorsCount === null || floorsCount === '') {
+      toast.error('층 수를 입력해주세요.');
+      refFloorsCount.current.focus();
+      return false;
+    } else if (pyungCount === null || pyungCount === '') {
+      toast.error('평 수를 입력해주세요.');
+      refPyungCount.current.focus();
+      return false;
+    } else if (roomInfo === null || roomInfo === '') {
+      toast.error('방 정보를 입력해주세요.');
+      refRoomInfo.current.focus();
+      return false;
+    } else if (roomOption === null || roomOption === '') {
+      toast.error('방 옵션을 입력해주세요.');
+      refRoomOption.current.focus();
+      return false;
+    }
+
+    const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gim;
+    if (startDate === null || startDate === '') {
+      toast.error('입주시작일을 입력해주세요.');
+      refStartDate.current.focus();
+      return false;
+    } else {
+      let yyyymmdd = startDate.replace(reg, '');
+      if (yyyymmdd.length !== 8) {
+        toast.error('YYYY-MM-DD 형식으로 입력해주세요.');
+        refStartDate.current.focus();
+        return false;
+      } else {
+        setInputValues({
+          ...inputValues,
+          startDate: `${yyyymmdd.slice(0, 4)}-${yyyymmdd.slice(4, 6)}-${yyyymmdd.slice(6)}`,
+        });
+      }
+    }
+
+    if (endDate !== null && endDate !== '') {
+      let yyyymmdd = endDate.replace(reg, '');
+      if (yyyymmdd.length !== 8) {
+        toast.error('YYYY-MM-DD 형식으로 입력해주세요.');
+        refEndDate.current.focus();
+        return false;
+      } else {
+        setInputValues({
+          ...inputValues,
+          endDate: `${yyyymmdd.slice(0, 4)}-${yyyymmdd.slice(4, 6)}-${yyyymmdd.slice(6)}`,
+        });
+      }
+    }
+    return true;
   };
 
   return (
@@ -130,7 +249,7 @@ function ReviewCreateModal() {
             <div className="body">
               <div className="category__box">
                 <div className="category__box__icon">
-                  <House />
+                  <Award />
                 </div>
                 <h4 className="category__box__title">총 평점</h4>
                 <div className="category__box__rate">
@@ -148,7 +267,7 @@ function ReviewCreateModal() {
               </div>
               <div className="category__box">
                 <div className="category__box__icon">
-                  <House />
+                  <CarFrontFill />
                 </div>
                 <h4 className="category__box__title">교통점수</h4>
                 <div className="category__box__rate">
@@ -166,7 +285,7 @@ function ReviewCreateModal() {
               </div>
               <div className="category__box">
                 <div className="category__box__icon">
-                  <House />
+                  <PersonGear />
                 </div>
                 <h4 className="category__box__title">관리점수</h4>
                 <div className="category__box__rate">
@@ -184,7 +303,7 @@ function ReviewCreateModal() {
               </div>
               <div className="category__box">
                 <div className="category__box__icon">
-                  <House />
+                  <ImageFill />
                 </div>
                 <h4 className="category__box__title">주변환경점수</h4>
                 <div className="category__box__rate">
@@ -239,6 +358,7 @@ function ReviewCreateModal() {
                     placeholder="리스트에 노출되는 문구입니다. 40자 이내로 입력해주세요."
                     maxLength={40}
                     onChange={handleChange}
+                    ref={refTitle}
                   />
                   <br />
                   <div className="input__length__container">
@@ -257,6 +377,7 @@ function ReviewCreateModal() {
                     placeholder="리스트에 노출되는 문구입니다. 1000자 이내로 입력해주세요."
                     maxLength={1000}
                     onChange={handleChange}
+                    ref={refDescription}
                   />
                   <br />
                   <div className="input__length__container">
@@ -312,6 +433,7 @@ function ReviewCreateModal() {
                     onChange={handleChange}
                     placeholder="지번주소를 입력해주세요. 예) 서울시 강남구 역삼동 826-37"
                     maxLength={100}
+                    ref={refJibun}
                   />
                 </div>
               </div>
@@ -328,6 +450,7 @@ function ReviewCreateModal() {
                     onChange={handleChange}
                     placeholder="1"
                     maxLength={2}
+                    ref={refFloorsCount}
                   />{' '}
                   층
                 </div>
@@ -345,6 +468,7 @@ function ReviewCreateModal() {
                     onChange={handleChange}
                     placeholder=""
                     maxLength={3}
+                    ref={refPyungCount}
                   />{' '}
                   평&nbsp;&nbsp;/&nbsp;&nbsp;
                   <input
@@ -371,6 +495,7 @@ function ReviewCreateModal() {
                     onChange={handleChange}
                     placeholder="예) 주방 분리형 원룸"
                     maxLength={100}
+                    ref={refRoomInfo}
                   />
                 </div>
               </div>
@@ -387,6 +512,7 @@ function ReviewCreateModal() {
                     onChange={handleChange}
                     placeholder="예) 에어컨,세탁기,인덕션 (,로 구분하여 여러개 작성 가능)"
                     maxLength={100}
+                    ref={refRoomOption}
                   />
                 </div>
               </div>
@@ -396,7 +522,7 @@ function ReviewCreateModal() {
                 </h4>
                 <div>
                   <button
-                    className={`${inputValues.contractTypeId === "1" ? 'active' : ''}`}
+                    className={`${inputValues.contractTypeId === '1' ? 'active' : ''}`}
                     name="contractTypeId"
                     value="1"
                     onClick={handleChange}
@@ -404,7 +530,7 @@ function ReviewCreateModal() {
                     월세
                   </button>
                   <button
-                    className={`${inputValues.contractTypeId === "2" ? 'active' : ''}`}
+                    className={`${inputValues.contractTypeId === '2' ? 'active' : ''}`}
                     name="contractTypeId"
                     value="2"
                     onClick={handleChange}
@@ -426,6 +552,7 @@ function ReviewCreateModal() {
                     onChange={handleChange}
                     placeholder="YYYY-MM-DD"
                     maxLength={10}
+                    ref={refStartDate}
                   />
                 </div>
               </div>
@@ -440,6 +567,7 @@ function ReviewCreateModal() {
                     onChange={handleChange}
                     placeholder="YYYY-MM-DD"
                     maxLength={10}
+                    ref={refEndDate}
                   />
                 </div>
               </div>
