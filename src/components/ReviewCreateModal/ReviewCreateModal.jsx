@@ -9,36 +9,54 @@ import {
 } from 'react-bootstrap-icons';
 import StarRatings from 'react-star-ratings';
 import toast from 'react-hot-toast';
+import moment from 'moment';
 import Modal from '@components/common/Modal';
 import { SidebarContext } from '@contexts/SidebarContext';
-import { createReview } from '@api/review';
+import { createReview, updateReview } from '@api/review';
 import { pyungToArea } from '@utils/common';
 import './ReviewCreateModal.scss';
-
+import { useRecoilValue } from 'recoil';
+import { reviewUpdateState } from '../../recoil/reviewUpdateState';
 function ReviewCreateModal() {
   const { createReviewObj, setCreateReviewObj } = useContext(SidebarContext);
-
-  const [inputValues, setInputValues] = useState({
-    userId: '',
-    totalRate: 0,
-    transRate: 0,
-    infraRate: 0,
-    manageRate: 0,
-    lifeRate: 0,
-    title: '',
-    description: '',
-    jibun: '',
-    pos: '37.49843289280568,127.0254842133858',
-    floorsCount: '',
-    pyungCount: '',
-    roomInfo: '',
-    roomOption: '',
-    contractTypeId: '1',
-    startDate: '',
-    endDate: '',
-  });
+  const reviewUpdateValue = useRecoilValue(reviewUpdateState);
+  const geocoder = new kakao.maps.services.Geocoder();
+  const [inputValues, setInputValues] = useState(
+    reviewUpdateState.reviewId === ''
+      ? {
+          reviewId: null,
+          userId: '',
+          totalRate: 0,
+          transRate: 0,
+          infraRate: 0,
+          manageRate: 0,
+          lifeRate: 0,
+          title: '',
+          description: '',
+          jibun: '',
+          pos: '',
+          floorsCount: '',
+          pyungCount: '',
+          roomInfo: '',
+          roomOption: '',
+          contractTypeId: '1',
+          startDate: '',
+          endDate: '',
+        }
+      : {
+          ...reviewUpdateValue,
+          startDate: reviewUpdateValue.startDate
+            ? moment(reviewUpdateValue.startDate).format('YYYY-MM-DD')
+            : reviewUpdateValue.startDate,
+          endDate: reviewUpdateValue.endDate
+            ? moment(reviewUpdateValue.endDate).format('YYYY-MM-DD')
+            : reviewUpdateValue.endDate,
+        },
+  );
+  const isCreate = inputValues.reviewId === null;
   const [images, setImages] = useState([]);
   const [bChecked, setChecked] = useState(false);
+  const [jibunErrMsg, setJibunErrMsg] = useState('');
 
   const refTitle = useRef(null);
   const refDescription = useRef(null);
@@ -87,12 +105,36 @@ function ReviewCreateModal() {
     });
   };
 
+  const handleBlurJibun = () => {
+    const { jibun } = inputValues;
+    if (jibun) {
+      geocoder.addressSearch(jibun, function (result, status) {
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+          // Lat: result[0].y
+          // Lng: result[0].x
+          setJibunErrMsg('');
+          setInputValues({
+            ...inputValues,
+            pos: `${result[0].y},${result[0].x}`,
+          });
+        } else {
+          // ZERO_RESULT
+          setJibunErrMsg(
+            '잘못된 지번주소를 입력하셨습니다. 정확하게 다시 입력해주세요.',
+          );
+        }
+      });
+    }
+  };
+
   const create = async () => {
     if (!checkValidation()) {
       return;
     }
 
-    const res = await createReview({
+    const callApi = isCreate ? createReview : updateReview;
+    const res = await callApi({
       ...inputValues,
     });
     // console.log(res);
@@ -162,7 +204,7 @@ function ReviewCreateModal() {
       toast.error('내용을 입력해주세요.');
       refDescription.current.focus();
       return false;
-    } else if (jibun === null || jibun === '') {
+    } else if (jibun === null || jibun === '' || jibunErrMsg) {
       toast.error('지번주소를 입력해주세요.');
       refJibun.current.focus();
       return false;
@@ -222,7 +264,7 @@ function ReviewCreateModal() {
   return (
     <Modal
       params={{
-        title: '새 리뷰 작성하기',
+        title: isCreate ? '새 리뷰 작성' : '리뷰 수정',
         width: '56vw',
         height: '80vh',
         handleClose: closeModal,
@@ -232,7 +274,7 @@ function ReviewCreateModal() {
       <>
         <div className="create__review__container">
           <div className="notice__container">
-            <p>- 지번당 1개의 리뷰만 등록 가능합니다.</p>
+            {isCreate && <p>- 지번당 1개의 리뷰만 등록 가능합니다.</p>}
             <p>
               - 주소를 다르게 입력하거나, 리뷰 내용을 사실과 다르게 작성할 경우
               허위 리뷰로 신고될 수 있으니 꼭 동일하게 입력 바랍니다.
@@ -431,10 +473,14 @@ function ReviewCreateModal() {
                     name="jibun"
                     value={inputValues.jibun}
                     onChange={handleChange}
+                    onBlur={handleBlurJibun}
                     placeholder="지번주소를 입력해주세요. 예) 서울시 강남구 역삼동 826-37"
                     maxLength={100}
                     ref={refJibun}
                   />
+                  <div>
+                    <small style={{ color: 'red' }}>{jibunErrMsg}</small>
+                  </div>
                 </div>
               </div>
               <div className="category__grid__row">
@@ -585,8 +631,8 @@ function ReviewCreateModal() {
                   }}
                 />{' '}
                 <label htmlFor="agreeYn">
-                  리뷰 생성 규정을 확인하였으며,입력한 정보는 실제 정보와 다름이
-                  없습니다.
+                  리뷰 {isCreate ? '생성' : '수정'} 규정을 확인하였으며,입력한
+                  정보는 실제 정보와 다름이 없습니다.
                 </label>
               </span>
             </div>
@@ -596,7 +642,7 @@ function ReviewCreateModal() {
                 onClick={create}
                 disabled={!bChecked}
               >
-                리뷰 생성
+                리뷰 {isCreate ? '생성' : '수정'}
               </button>
             </div>
           </div>

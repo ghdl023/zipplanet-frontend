@@ -22,7 +22,7 @@ const contentStyle = {
 function Main() {
   const [loading, error] = useKakaoLoader({
     appkey: import.meta.env.VITE_KAKAO_MAP_API_KEY, // 발급 받은 APPKEY
-    libraries: ['clusterer'],
+    libraries: ['clusterer', 'services'],
     // ...options, // 추가 옵션
   });
 
@@ -35,24 +35,28 @@ function Main() {
     setPositions(clusterPositionsData.positions);
     setPositions([
       {
-        lat: 37.49843289280568,
-        lng: 127.0254842133858,
+        lat: 37.4985356558395,
+        lng: 127.032615766508,
       },
       {
-        lat: 37.49843289280568,
-        lng: 127.0254842133858,
+        lat: 37.4985356558395,
+        lng: 127.032615766508,
       },
       {
-        lat: 37.49843289280568,
-        lng: 127.0254842133858,
+        lat: 37.4985356558395,
+        lng: 127.032615766508,
       },
       {
-        lat: 37.561110808242056,
-        lng: 126.9831268386891,
+        lat: 37.4985356558395,
+        lng: 127.032615766508,
       },
       {
-        lat: 37.561110808242056,
-        lng: 126.9831268386891,
+        lat: 37.4985356558395,
+        lng: 127.032615766508,
+      },
+      {
+        lat: 37.4985356558395,
+        lng: 127.032615766508,
       },
     ]);
   }, []);
@@ -66,10 +70,10 @@ function Main() {
       pos: `${pos.lat},${pos.lng}`,
     });
     console.log(search);
-    setTimeout(()=>{
+    setTimeout(() => {
       console.log('callSearchReviewEvent before');
       window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
-    }, 100)
+    }, 100);
   };
 
   return (

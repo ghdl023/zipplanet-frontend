@@ -175,6 +175,13 @@
    
   }
 
+  .option__container {
+
+    small {
+      font-size:0.7rem;
+    }
+  }
+
   // 동의체크박스, 생성버튼 영역
   .create__review__container__footer {
     text-align: center;
