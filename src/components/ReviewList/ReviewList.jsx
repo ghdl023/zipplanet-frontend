@@ -1,5 +1,5 @@
 import ReviewListItem from '@components/ReviewListItem';
-import { useContext, useState, useEffect } from 'react';
+import { useRef, useContext, useState, useEffect } from 'react';
 import { SidebarContext } from '../../contexts/SidebarContext';
 import Loading from '../common/Loading';
 import { search } from '../../apis/api/review';
@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { searchState } from '../../recoil/searchState';
 import './ReviewList.scss';
 import { useEventListeners } from '../../hooks/useEventListeners';
-
+import moment from 'moment';
 const LIMIT = 6;
 
 function ReviewList() {
@@ -23,7 +23,7 @@ function ReviewList() {
   const sortedItems = items.sort(
     (a, b) => b[sort.replace('_', '')] - a[sort.replace('_', '')],
   );
-  const [totalCount, setTotalCount] = useState(0);
+  const totalCount = useRef(0);
 
   const handleLoad = async (options) => {
     let result;
@@ -42,6 +42,15 @@ function ReviewList() {
       });
       // const { paging, reviews } = result;
       const { data } = result;
+
+      for(let review of data.reviews) { // 날짜 포맷 변환
+        // console.log(review.createDate);
+        if(review.createDate) review.createDate = moment(review.createDate).format('YYYYMMDDHHmmss');
+        if(review.updateDate) review.updateDate = moment(review.updateDate).format('YYYYMMDDHHmmss');
+        if(review.startDate) review.startDate = moment(review.startDate).format('YYYYMMDD');
+        if(review.endDate) review.endDate = moment(review.endDate).format('YYYYMMDD');
+      }
+
       if (options.offset === 1) {
         setItems(data.reviews);
       } else {
@@ -49,7 +58,7 @@ function ReviewList() {
       }
       setOffset(options.offset + options.limit);
       console.log(options.offset + options.limit);
-      setTotalCount(data.totalCount);
+      totalCount.current = data.totalCount;
       const _hasNext = data.totalCount > items.length;
       setHasNext(_hasNext);
     } catch (error) {
@@ -84,6 +93,8 @@ function ReviewList() {
   }, []);
 
   useEventListeners('callSearchReviewEvent', (event) => {
+    console.log('callSearchReviewEvent called!');
+    totalCount.current = 0;
     setTimeout(() => {
       handleLoad({ offset: 1, limit: LIMIT });
     }, 200);

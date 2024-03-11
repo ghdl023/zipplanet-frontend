@@ -64,10 +64,12 @@ function Main() {
       ...searchValue,
       searchType: 'pos',
       pos: `${pos.lat},${pos.lng}`,
-      offset: 1,
     });
     console.log(search);
-    window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
+    setTimeout(()=>{
+      console.log('callSearchReviewEvent before');
+      window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
+    }, 100)
   };
 
   return (
