@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import Header from '@components/Header';
+import { Toaster } from 'react-hot-toast';
 import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
-import { PageLayoutContext } from '../../contexts/PageLayoutContext';
 import { RecoilRoot } from 'recoil';
+import Header from '@components/Header';
+import { PageLayoutContext } from '../../contexts/PageLayoutContext';
 import './PageLayout.scss';
 
 function PageLayout() {
@@ -23,6 +24,27 @@ function PageLayout() {
             <Outlet />
           </Layout>
         </Layout>
+        <Toaster
+            position="bottom-center"
+            containerStyle={{
+              zIndex: 99999999,
+            }}
+            toastOptions={{
+              duration: 3000,
+              success: {
+                style: {
+                  background: 'green',
+                  color: '#fff',
+                },
+              },
+              error: {
+                style: {
+                  background: 'red',
+                  color: '#fff',
+                },
+              },
+          }}
+        />
       </PageLayoutContext.Provider>
     </RecoilRoot>
   );

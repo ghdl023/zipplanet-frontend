@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { House, XSquareFill } from 'react-bootstrap-icons';
 import StarRatings from 'react-star-ratings';
+import toast from 'react-hot-toast';
 import Modal from '@components/common/Modal';
 import { SidebarContext } from '@contexts/SidebarContext';
 import { createReview } from '@api/review';
@@ -11,7 +12,7 @@ function ReviewCreateModal() {
   const { createReviewObj, setCreateReviewObj } = useContext(SidebarContext);
 
   const [inputValues, setInputValues] = useState({
-    userId: 10000,
+    userId: '',
     totalRate: 0,
     transRate: 0,
     infraRate: 0,
@@ -70,17 +71,18 @@ function ReviewCreateModal() {
   }
 
   const create = async () => {
-    console.log(inputValues);
-    console.log(images);
-
+    // console.log(inputValues);
+    // console.log(images);
     const res = await createReview({
       ...inputValues,
     });
-
-    console.log(res);
+    // console.log(res);
     
-    if(res.status.toLowerCase() == 'ok') {
+    if(res.status.toLowerCase() == 'ok' && res.data > 0) {
+      toast.success("리뷰가 생성되었습니다!");
       closeModal();
+    } else {
+      toast.error("리뷰 생성을 실패했습니다.");
     }
   };
 
@@ -422,7 +424,7 @@ function ReviewCreateModal() {
                     name="startDate"
                     value={inputValues.startDate}
                     onChange={handleChange}
-                    placeholder="YYYY.MM.DD"
+                    placeholder="YYYY-MM-DD"
                     maxLength={10}
                   />
                 </div>
@@ -436,7 +438,7 @@ function ReviewCreateModal() {
                     name="endDate"
                     value={inputValues.endDate}
                     onChange={handleChange}
-                    placeholder="YYYY.MM.DD"
+                    placeholder="YYYY-MM-DD"
                     maxLength={10}
                   />
                 </div>
