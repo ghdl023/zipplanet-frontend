@@ -1,11 +1,11 @@
-import Modal from '@components/common/Modal';
-import { House, XSquareFill } from 'react-bootstrap-icons';
-
-import './ReviewCreateModal.scss';
 import { useContext, useState } from 'react';
-import { SidebarContext } from '@contexts/SidebarContext';
+import { House, XSquareFill } from 'react-bootstrap-icons';
 import StarRatings from 'react-star-ratings';
+import Modal from '@components/common/Modal';
+import { SidebarContext } from '@contexts/SidebarContext';
 import { createReview } from '@api/review';
+import { pyungToArea } from '@utils/common';
+import './ReviewCreateModal.scss';
 
 function ReviewCreateModal() {
   const { createReviewObj, setCreateReviewObj } = useContext(SidebarContext);
@@ -348,7 +348,7 @@ function ReviewCreateModal() {
                   <input
                     className="short__width"
                     type="text"
-                    value={Math.floor(inputValues.pyungCount * 3.3058)}
+                    value={pyungToArea(inputValues.pyungCount)}
                     placeholder=""
                     maxLength={3}
                     readOnly

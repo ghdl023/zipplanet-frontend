@@ -1,13 +1,12 @@
 import { forwardRef } from 'react';
 import { StarFill } from 'react-bootstrap-icons';
-
 import './ReviewListItem.scss';
 
-const ReviewListItem = forwardRef(({ review, onClick }, ref) => {
+const ReviewListItem = forwardRef(({ review, onClickReviewItem }, ref) => {
   return (
     <div
       className="review__list__item"
-      onClick={() => onClick(review)}
+      onClick={() => onClickReviewItem(review)}
       ref={ref}
     >
       <div className="review__list__item__thumb">

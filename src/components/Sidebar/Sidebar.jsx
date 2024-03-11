@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import { Layout } from 'antd';
+import { Tooltip } from 'react-tooltip';
+import { X, PencilSquare } from 'react-bootstrap-icons';
+import { useRecoilValue } from 'recoil';
 import SidebarHeader from '@components/SidebarHeader';
 import SidebarMain from '@components/SidebarMain';
 import ReviewDetail from '@components/ReviewDetail';
 import { SidebarContext } from '@contexts/SidebarContext';
-import { useState } from 'react';
 import ReviewCreateModal from '../ReviewCreateModal';
 import ReviewReportModal from '@components/ReviewReportModal';
-import { X, PencilSquare } from 'react-bootstrap-icons';
-import { Tooltip } from 'react-tooltip';
-import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../recoil/userInfoState';
+import { reviewDetailState } from '../../recoil/reviewDetailState';
 import './Sidebar.scss';
 
 const { Sider } = Layout;
 
 function Sidebar() {
-  const [reviewDetail, setReviewDetail] = useState(null); // 리뷰상세
+  const reviewDetailValue = useRecoilValue(reviewDetailState);
   const [createReviewObj, setCreateReviewObj] = useState({
     modalOpen: false, // 리뷰생성
     reportModalOpen: false, // 리뷰신고
@@ -27,23 +27,14 @@ function Sidebar() {
   return (
     <SidebarContext.Provider
       value={{
-        reviewDetail,
-        setReviewDetail,
         createReviewObj,
         setCreateReviewObj,
       }}
     >
       <Sider className="sidebar__container">
-        {!reviewDetail ? (
-          <>
-            <SidebarHeader />
-            <SidebarMain />
-          </>
-        ) : (
-          <>
-            <ReviewDetail />
-          </>
-        )}
+        <SidebarHeader />
+        <SidebarMain />
+        { (reviewDetailValue && reviewDetailValue.reviewId) && <ReviewDetail /> }
       </Sider>
       {createReviewObj.modalOpen && <ReviewCreateModal />}
       {createReviewObj.reportModalOpen && <ReviewReportModal />}

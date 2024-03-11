@@ -3,6 +3,9 @@
   height: 100%;
   background-color: #fff;
 
+  position: absolute;
+  top:0px;
+
   .review__detail__header {
     padding: 0 25px;
     height: 60px;
@@ -61,7 +64,7 @@
       }
 
       h2 {
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 600;
       }
 
@@ -167,7 +170,7 @@
       font-size: 0.9rem;
       font-weight: 600;
       color: #fff;
-      margin-bottom:45px;
+      margin-bottom:60px;
       
       transition: background-color 0.5s;
       

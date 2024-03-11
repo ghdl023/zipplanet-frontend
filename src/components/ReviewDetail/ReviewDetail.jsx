@@ -1,29 +1,42 @@
-import { useState, useContext } from 'react';
-import { SidebarContext } from '@contexts/SidebarContext';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { ArrowLeft, Share } from 'react-bootstrap-icons';
 import { Carousel } from 'react-bootstrap';
-import { FaStarHalfAlt, FaStar } from 'react-icons/fa';
+import moment from 'moment';
 import StarRate from '@components/common/StarRate';
+import { reviewDetailState } from '../../recoil/reviewDetailState';
+import { pyungToArea } from '@utils/common';
 import './ReviewDetail.scss';
 
 function ReviewDetail() {
-  const { reviewDetail, setReviewDetail, createReviewObj, setCreateReviewObj } =
-    useContext(SidebarContext);
+
+  const [reviewDetail, setReviewDetail] = useRecoilState(reviewDetailState);
+  const resetReviewDetail = useResetRecoilState(reviewDetailState);
+  const { 
+    reviewId, userId, creator,
+    totalRate, transRate, manageRate, infraRate, lifeRate,
+    title, description,
+    jibun, floorsCount, pyungCount, roomInfo, roomOption, contractTypeId, startDate, endDate,
+    // images
+  } = reviewDetail;
+
+  // 테스트 이미지 데이터
+  const images = [
+    'https://img.freepik.com/free-photo/minimalist-interior-3d-rendering_52683-131548.jpg?size=626&ext=jpg&ga=GA1.1.1292351815.1709942400&semt=ais',
+    'https://lh3.googleusercontent.com/proxy/uc2QvnuFeATrNhByoFUkVyZlydGe4l5CSU6kkJ1QfDVGyTWGTnTXZsVOhQ4MqAhLlj1z_w83nxgszk9MdsX9qcQrY3c0sbcsH6Z1IE4cA81O6SilcmZpCmLRQ4AJDW7hFkA0hxbYBh3xx-DK6bMeh37R85dr0w',
+    'https://www.zipdeco.co.kr/upload/2017/11/28/EDITOR_201711281009336180_w2Qe4',
+    'https://www.qplace.kr/content/images/2022/10/No.2227------------------70------------------------------19.jpeg'
+  ];
 
   const handleClickReport = () => {
-    setCreateReviewObj({
-      ...createReviewObj,
-      reportModalOpen: true,
-    });
   };
 
   return (
     <div className="review__detail__container">
       <div className="review__detail__header">
-        <button onClick={() => setReviewDetail(null)}>
+        <button onClick={resetReviewDetail}>
           <ArrowLeft />
         </button>
-        <h2>{reviewDetail.address}</h2>
+        <h2>{jibun}</h2>
         <button>
           <Share />
         </button>
@@ -32,7 +45,7 @@ function ReviewDetail() {
         <div className="review__detail__main__content">
           <div className="review__detail__main__content__img__container">
             <Carousel data-bs-theme="light">
-              {reviewDetail.thumbnail.map((img, index) => (
+              {images && images.map((img, index) => (
                 <Carousel.Item key={index}>
                   <img src={img} alt="room-image" />
                 </Carousel.Item>
@@ -43,37 +56,37 @@ function ReviewDetail() {
             <div className="category__box">
               <h3>총 평점</h3>
               <div className="category__box__item__rate">
-                <StarRate score={reviewDetail.total_score} />
+                <StarRate score={totalRate} />
               </div>
             </div>
             <div className="category__box">
               <h3>작성자</h3>
               <div className="category__box__item__user">
-                {reviewDetail.creator}
+                { creator }
               </div>
             </div>
             <div className="category__box">
               <h3>교통점수</h3>
               <div className="category__box__item__rate">
-                <StarRate score={reviewDetail.trans_score} />
+                <StarRate score={transRate} />
               </div>
             </div>
             <div className="category__box">
               <h3>주변환경</h3>
               <div className="category__box__item__rate">
-                <StarRate score={reviewDetail.infra_score} />
+                <StarRate score={infraRate} />
               </div>
             </div>
             <div className="category__box">
               <h3>관리점수</h3>
               <div className="category__box__item__rate">
-                <StarRate score={reviewDetail.manage_score} />
+                <StarRate score={manageRate} />
               </div>
             </div>
             <div className="category__box">
               <h3>거주환경</h3>
               <div className="category__box__item__rate">
-                <StarRate score={reviewDetail.life_score} />
+                <StarRate score={lifeRate} />
               </div>
             </div>
           </div>
@@ -81,31 +94,11 @@ function ReviewDetail() {
             <div className="eval__header">
               <h1>상세 설명</h1>
               <h2>
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
-                {reviewDetail.title}
+                { title }
               </h2>
             </div>
             <div className="eval__main">
-              {reviewDetail.detail}
-              {reviewDetail.detail}
-              {reviewDetail.detail}
-              {reviewDetail.detail}
-              {reviewDetail.detail}
-              {reviewDetail.detail}
-              {reviewDetail.detail}
+              { description }
             </div>
           </div>
           <div className="review__detail__main__content__info__container">
@@ -116,28 +109,33 @@ function ReviewDetail() {
             <div className="info__main">
               <div className="info__main__item">
                 <h2>층 수</h2>
-                <span>{reviewDetail.floors}층</span>
+                <span>{floorsCount}층</span>
               </div>
               <div className="info__main__item">
                 <h2>평 수</h2>
-                <span>{reviewDetail.pyungsoo}평 / 39.6㎡</span>
+                <span>{pyungCount}평 / {pyungToArea(pyungCount)}㎡</span>
               </div>
               <div className="info__main__item">
                 <h2>방 정보</h2>
-                <span>{reviewDetail.room}</span>
+                <span>{roomInfo}</span>
               </div>
               <div className="info__main__item">
                 <h2>옵션</h2>
-                <span>{reviewDetail.option}</span>
+                <span>{roomOption}</span>
               </div>
               <div className="info__main__item">
                 <h2>계약유형</h2>
-                <span>{reviewDetail.contractType}</span>
+                <span>{contractTypeId}</span>
               </div>
               <div className="info__main__item">
                 <h2>입주기간</h2>
                 <span>
-                  {reviewDetail.ibjuDate} ~ {reviewDetail.endDate}
+                  { moment(startDate).format("YYYY년MM월DD일") }
+                  {
+                    endDate && <>
+                      ~ { moment(endDate).format("YYYY년MM월DD일") }
+                    </>
+                  }
                 </span>
               </div>
             </div>

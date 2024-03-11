@@ -16,6 +16,7 @@ export default ({ mode }) => {
         { find: '@api', replacement: '/src/apis/api' },
         { find: '@contexts', replacement: '/src/contexts' },
         { find: '@reocil', replacement: '/src/recoil' },
+        { find: '@utils', replacement: '/src/utils' },
       ],
     },
   });

@@ -1,17 +1,18 @@
+import { useRef, useState, useEffect } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import moment from 'moment';
 import ReviewListItem from '@components/ReviewListItem';
-import { useRef, useContext, useState, useEffect } from 'react';
-import { SidebarContext } from '../../contexts/SidebarContext';
 import Loading from '../common/Loading';
 import { search } from '../../apis/api/review';
-import { useRecoilValue } from 'recoil';
 import { searchState } from '../../recoil/searchState';
-import './ReviewList.scss';
 import { useEventListeners } from '../../hooks/useEventListeners';
-import moment from 'moment';
+import { reviewDetailState } from '../../recoil/reviewDetailState';
+import './ReviewList.scss';
+
 const LIMIT = 6;
 
 function ReviewList() {
-  const { setReviewDetail } = useContext(SidebarContext);
+  const setReviewDetail = useSetRecoilState(reviewDetailState);
   const searchValue = useRecoilValue(searchState);
   const { sort } = searchValue;
   const [offset, setOffset] = useState(1);
@@ -100,8 +101,8 @@ function ReviewList() {
     }, 200);
   });
 
-  const handleClickReview = (review) => {
-    // console.log(review);
+  const onClickReviewItem = (review) => {
+    console.log(review);
     setReviewDetail(review);
   };
 
@@ -115,7 +116,7 @@ function ReviewList() {
               <ReviewListItem
                 key={idx}
                 review={review}
-                onClick={handleClickReview}
+                onClickReviewItem={onClickReviewItem}
                 ref={lastItem ? setTarget : null}
               />
             );
