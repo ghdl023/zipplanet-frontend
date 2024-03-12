@@ -11,11 +11,11 @@ import './Header.scss';
 const Header = () => {
   const setUserInfo = useSetRecoilState(userInfoState);
   const { userId, nickname } = useRecoilValue(userInfoState);
-  const refresh = useResetRecoilState(userInfoState);
-
+  const resetUserInfo = useResetRecoilState(userInfoState);
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
+
   const logoClick = () => {
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
     navigate(BASE_URL);
   };
 
@@ -31,7 +31,7 @@ const Header = () => {
   };
 
   const logout = () => {
-    refresh();
+    resetUserInfo();
   };
 
   return (
@@ -56,6 +56,7 @@ const Header = () => {
               className="nickname__container"
               data-tooltip-id="tooltip"
               data-tooltip-content="마이페이지"
+              onClick={()=> navigate(`${BASE_URL}mypage`)}
             >
               <PersonCircle />
               <h3>{nickname}</h3>
