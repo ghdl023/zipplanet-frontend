@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
@@ -9,6 +9,12 @@ import './PageLayout.scss';
 
 function PageLayout() {
   const [reviewList, setReviewList] = useState([]);
+
+  useEffect(()=>{
+    if(!localStorage.getItem("watched")) {
+      localStorage.setItem("watched", JSON.stringify([]));
+    }
+  }, [])
 
   return (
     <RecoilRoot>
