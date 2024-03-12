@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import './FindIdForm.scss';
 import { findId } from '../../apis/api/user';
+import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 
 function FindIdForm() {
 
     const [phone, setPhone] = useState('');
+    const navigate = useNavigate();
 
     const onClickFindId = async () => {
         console.log(phone);
@@ -12,6 +15,12 @@ function FindIdForm() {
             phone: phone
         });
         console.log(result);
+        if (result != null){
+            navigate('/zipplanet-frontend/findIdResult', { state: { result } });
+        } else {
+            toast.error('유저 정보를 찾을 수 없습니다.', {position:'top-center'});
+        }
+        
     }
 
     return (
