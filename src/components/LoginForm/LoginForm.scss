@@ -1,0 +1,89 @@
+
+.login__wrapper {
+    border: 1px solid rgb(243, 244, 246);
+}
+.login__box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 70px 40px 70px 40px;
+}
+
+.login__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-size: 36px;
+        font-weight: bold;
+    }
+    
+    h4 {
+        font-size: 20px;
+        margin-top: 50px;
+    }
+}
+
+.login__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .login__form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        font-size: 20px;
+        div {
+            border-style: solid;
+            border-radius: 10px;
+            border-width: thin;
+            border-color: rgb(243, 244, 246);
+            margin-top: 15px;
+
+            input {
+                height: 60px;
+                width: 450px;
+                padding-left: 20px;
+                outline: none;
+                box-shadow: none;
+                border: none;
+                border-radius: 15px;
+            }
+        }
+
+        button {
+            border-radius: 15px;
+            margin-top: 30px;
+            background-color: rgb(255, 92, 0);
+            height: 60px;
+            width: 450px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            transition-duration: 0.3s;
+        }
+        button:hover {
+            background-color: rgb(255, 132, 60);
+            transition-duration: 0.3;
+        }
+    }
+}
+.search__nav {
+    margin-top: 40px;
+    a {
+        margin: 0px 20px 0px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: rgb(107, 107, 107);
+        transition-duration: 0.3s;
+    }
+    a:hover {
+        color: rgba(107, 107, 107, 0.466);
+    }
+}

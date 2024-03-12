@@ -1,9 +1,11 @@
+import LoginFrom from "../../components/LoginForm";
+import './Login.scss';
 
 function Login(){
     return(
-        <>
-            login
-        </>
+        <div className="login__container">
+            <LoginFrom/>
+        </div>
     )
 }
 

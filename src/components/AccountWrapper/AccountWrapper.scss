@@ -1,0 +1,47 @@
+.account__container {
+    border: 1px solid rgb(243, 244, 246);
+    width: 438px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.user__icon {
+    margin-bottom: 20px;
+    margin-left: 14px;
+}
+.account__item {
+    display: flex;
+    margin: 20px;
+    :not(.account__item__label, svg) {
+        text-align: right;
+        width: 180px;
+    }
+    svg {
+        margin-left: 20px;
+        transition-duration: 0.3s;
+    }
+    svg:hover {
+        color: chocolate;
+        transition-duration: 0.3s;
+    }
+}
+
+.account__item__label {
+    text-align: left;
+    font-weight: 700;
+    width: 100px;
+}
+.account__item__userId {
+    margin-right: 57px;
+}
+.user__icon__update {
+    margin-top: 40px;
+    transition-duration: 0.3s;
+    
+}
+.user__icon__update:hover {
+    color: chocolate;
+    transition-duration: 0.4s;
+}

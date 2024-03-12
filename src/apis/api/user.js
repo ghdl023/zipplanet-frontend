@@ -9,6 +9,35 @@ export const getHome = async () => {
   }
 };
 
+export const login = async (params) => {
+  try {
+    const { data } = await defaultInstance.post('api/user/login', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+
+export const signUp = async (params) => {
+  try {
+    const { data } = await defaultInstance.post('api/user/signup', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const findId = async (params) => {
+  try {
+    const {data} = await defaultInstance.post('api/user/findId', params);
+    return data;
+  } catch (e) {
+    console.log(e)
+  }
+};
+
+
 // export const getHome = () => {
 //   return request({ url: 'home' });
 // };
