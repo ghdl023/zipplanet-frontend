@@ -5,12 +5,14 @@ import moment from 'moment';
 import StarRate from '@components/common/StarRate';
 import { reviewDetailState } from '../../recoil/reviewDetailState';
 import { pyungToArea } from '@utils/common';
+import { modalState } from '../../recoil/modalState';
 import './ReviewDetail.scss';
 
 function ReviewDetail() {
 
   const [reviewDetail, setReviewDetail] = useRecoilState(reviewDetailState);
   const resetReviewDetail = useResetRecoilState(reviewDetailState);
+  const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const { 
     reviewId, userId, creator,
     totalRate, transRate, manageRate, infraRate, lifeRate,
@@ -28,6 +30,10 @@ function ReviewDetail() {
   ];
 
   const handleClickReport = () => {
+    setModalOpen({
+      ...modalOpen,
+      reviewReportModalOpen: !modalOpen.reviewReportModalOpen
+    })
   };
 
   return (

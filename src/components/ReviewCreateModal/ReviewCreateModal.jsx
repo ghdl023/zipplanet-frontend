@@ -11,15 +11,16 @@ import StarRatings from 'react-star-ratings';
 import toast from 'react-hot-toast';
 import moment from 'moment';
 import Modal from '@components/common/Modal';
-import { SidebarContext } from '@contexts/SidebarContext';
 import { createReview, updateReview } from '@api/review';
 import { pyungToArea } from '@utils/common';
-import './ReviewCreateModal.scss';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { reviewUpdateState } from '../../recoil/reviewUpdateState';
+import { modalState } from '../../recoil/modalState';
+import './ReviewCreateModal.scss';
+
 function ReviewCreateModal() {
-  const { createReviewObj, setCreateReviewObj } = useContext(SidebarContext);
   const reviewUpdateValue = useRecoilValue(reviewUpdateState);
+  const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const [inputValues, setInputValues] = useState(
     reviewUpdateState.reviewId === ''
       ? {
@@ -159,10 +160,9 @@ function ReviewCreateModal() {
         window.URL.revokeObjectURL(url);
       }
     }
-
-    setCreateReviewObj({
-      ...createReviewObj,
-      modalOpen: false,
+    setModalOpen({
+      ...modalOpen,
+      reviewCreateModalOpen: !modalOpen.reviewCreateModalOpen,
     });
   };
 

@@ -1,17 +1,19 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 import ReviewReportModalBody from '../ReviewReportModalBody';
 import LightModal from '../common/LightModal';
-import { SidebarContext } from '@contexts/SidebarContext';
-
+import { modalState } from '../../recoil/modalState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { reportReview } from '../../apis/api/review';
+import { userInfoState } from '../../recoil/userInfoState';
+import { reviewDetailState } from '../../recoil/reviewDetailState';
 import './ReviewReportModal.scss';
 
 function ReviewReportModal() {
   const [reportType, setReportType] = useState(null);
-  const { createReviewObj, setCreateReviewObj } = useContext(SidebarContext);
-
-  const handleClose = () => {
-    setCreateReviewObj({ ...createReviewObj, reportModalOpen: false });
-  };
+  const [modalOpen, setModalOpen] = useRecoilState(modalState);
+  const { reviewId } = useRecoilValue(reviewDetailState);
+  const { userId } = useRecoilValue(userInfoState);
 
   const items = [
     {
@@ -31,8 +33,8 @@ function ReviewReportModal() {
       reportTypeName: '신고사유4입니다.신고사유1입니다.신고사유1입니다.',
     },
     {
-      reportTypeId: 5,
-      reportTypeName: '신고사유5입니다.신고사유1입니다.신고사유1입니다.',
+      reportTypeId: 99,
+      reportTypeName: '기타',
     },
   ];
 
@@ -40,12 +42,30 @@ function ReviewReportModal() {
     setReportType(value);
   };
 
-  const onClickSubmit = () => {
+  const onClickSubmit = async () => {
     if (!reportType) {
       return;
     }
 
-    handleClose();
+    const res = await reportReview({
+      reviewId,
+      userId,
+      reportTypeId: reportType,
+    });
+
+    if(res.status.toLowerCase() === 'ok' && res.data === 1) {
+      toast.success("신고 접수 되었습니다.");
+      handleClose();
+    } else {
+      toast.error(res.message || "오류가 발생했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const handleClose = () => {
+    setModalOpen({
+      ...modalOpen,
+      reviewReportModalOpen: !modalOpen.reviewReportModalOpen,
+    })
   };
 
   return (
