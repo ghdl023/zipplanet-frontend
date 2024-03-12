@@ -20,7 +20,6 @@ import { reviewUpdateState } from '../../recoil/reviewUpdateState';
 function ReviewCreateModal() {
   const { createReviewObj, setCreateReviewObj } = useContext(SidebarContext);
   const reviewUpdateValue = useRecoilValue(reviewUpdateState);
-  const geocoder = new kakao.maps.services.Geocoder();
   const [inputValues, setInputValues] = useState(
     reviewUpdateState.reviewId === ''
       ? {
@@ -109,23 +108,28 @@ function ReviewCreateModal() {
   const handleBlurJibun = () => {
     const { jibun } = inputValues;
     if (jibun) {
-      geocoder.addressSearch(jibun, function (result, status) {
-        // 정상적으로 검색이 완료됐으면
-        if (status === kakao.maps.services.Status.OK) {
-          // Lat: result[0].y
-          // Lng: result[0].x
-          setJibunErrMsg('');
-          setInputValues({
-            ...inputValues,
-            pos: `${result[0].y},${result[0].x}`,
-          });
-        } else {
-          // ZERO_RESULT
-          setJibunErrMsg(
-            '잘못된 지번주소를 입력하셨습니다. 정확하게 다시 입력해주세요.',
-          );
-        }
-      });
+      try {
+        const geocoder = new kakao.maps.services.Geocoder();
+        geocoder.addressSearch(jibun, function (result, status) {
+          // 정상적으로 검색이 완료됐으면
+          if (status === kakao.maps.services.Status.OK) {
+            // Lat: result[0].y
+            // Lng: result[0].x
+            setJibunErrMsg('');
+            setInputValues({
+              ...inputValues,
+              pos: `${result[0].y},${result[0].x}`,
+            });
+          } else {
+            // ZERO_RESULT
+            setJibunErrMsg(
+              '잘못된 지번주소를 입력하셨습니다. 정확하게 다시 입력해주세요.',
+            );
+          }
+        });
+      } catch(e){
+        console.error(e);
+      }
     }
   };
 
