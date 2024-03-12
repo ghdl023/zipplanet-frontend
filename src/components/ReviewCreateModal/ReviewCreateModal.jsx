@@ -24,7 +24,7 @@ function ReviewCreateModal() {
   const [inputValues, setInputValues] = useState(
     reviewUpdateState.reviewId === ''
       ? {
-          reviewId: null,
+          reviewId: '',
           userId: '',
           totalRate: 0,
           transRate: 0,
@@ -53,7 +53,7 @@ function ReviewCreateModal() {
             : reviewUpdateValue.endDate,
         },
   );
-  const isCreate = inputValues.reviewId === null;
+  const isCreate = !inputValues.reviewId;
   const [images, setImages] = useState([]);
   const [bChecked, setChecked] = useState(false);
   const [jibunErrMsg, setJibunErrMsg] = useState('');
