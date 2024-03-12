@@ -30,7 +30,7 @@ function PageLayout() {
             zIndex: 99999999,
           }}
           toastOptions={{
-            duration: 3000,
+            duration: 4500,
             success: {
               style: {
                 // background: 'green',

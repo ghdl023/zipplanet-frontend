@@ -54,6 +54,7 @@ function ReviewCreateModal() {
         },
   );
   const isCreate = !inputValues.reviewId;
+  const TITLE = isCreate ? '생성' : '수정';
   const [images, setImages] = useState([]);
   const [bChecked, setChecked] = useState(false);
   const [jibunErrMsg, setJibunErrMsg] = useState('');
@@ -140,10 +141,10 @@ function ReviewCreateModal() {
     // console.log(res);
 
     if (res.status.toLowerCase() == 'ok' && res.data > 0) {
-      toast.success('리뷰가 생성되었습니다!');
+      toast.success(`리뷰가 ${TITLE}되었습니다!`);
       closeModal();
     } else {
-      toast.error('리뷰 생성을 실패했습니다.');
+      toast.error(`리뷰 ${TITLE}을 실패했습니다.`);
     }
   };
 
@@ -181,19 +182,25 @@ function ReviewCreateModal() {
       endDate,
     } = inputValues;
 
+    const modalBody = document.getElementsByClassName('modal__content__body');
     if (totalRate === 0) {
+      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('총 평점을 선택해주세요.');
       return false;
     } else if (transRate === 0) {
+      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('교통점수를 선택해주세요.');
       return false;
     } else if (manageRate === 0) {
+      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('관리점수를 선택해주세요.');
       return false;
     } else if (infraRate === 0) {
+      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('주변환경점수를 선택해주세요.');
       return false;
     } else if (lifeRate === 0) {
+      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('거주환경점수를 선택해주세요.');
       return false;
     } else if (title === null || title === '') {
@@ -264,7 +271,7 @@ function ReviewCreateModal() {
   return (
     <Modal
       params={{
-        title: isCreate ? '새 리뷰 작성' : '리뷰 수정',
+        title: isCreate ? '새 리뷰 작성' : `리뷰 ${TITLE}`,
         width: '56vw',
         height: '80vh',
         handleClose: closeModal,
@@ -631,7 +638,7 @@ function ReviewCreateModal() {
                   }}
                 />{' '}
                 <label htmlFor="agreeYn">
-                  리뷰 {isCreate ? '생성' : '수정'} 규정을 확인하였으며,입력한
+                  리뷰 {TITLE} 규정을 확인하였으며,입력한
                   정보는 실제 정보와 다름이 없습니다.
                 </label>
               </span>
@@ -642,7 +649,7 @@ function ReviewCreateModal() {
                 onClick={create}
                 disabled={!bChecked}
               >
-                리뷰 {isCreate ? '생성' : '수정'}
+                리뷰 {TITLE}
               </button>
             </div>
           </div>
