@@ -1,4 +1,4 @@
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { ArrowLeft, Share } from 'react-bootstrap-icons';
 import { Carousel } from 'react-bootstrap';
 import moment from 'moment';
@@ -6,21 +6,22 @@ import StarRate from '@components/common/StarRate';
 import { reviewDetailState } from '../../recoil/reviewDetailState';
 import { pyungToArea } from '@utils/common';
 import { modalState } from '../../recoil/modalState';
+import { userInfoState } from '../../recoil/userInfoState';
 import './ReviewDetail.scss';
 
 function ReviewDetail() {
-
   const [reviewDetail, setReviewDetail] = useRecoilState(reviewDetailState);
   const resetReviewDetail = useResetRecoilState(reviewDetailState);
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const { 
-    reviewId, userId, creator,
+    reviewId, creator,
     totalRate, transRate, manageRate, infraRate, lifeRate,
     title, description,
     jibun, floorsCount, pyungCount, roomInfo, roomOption, contractTypeId, startDate, endDate,
     // images
   } = reviewDetail;
-
+  const userInfoValue = useRecoilValue(userInfoState);
+  const { userId } = userInfoValue;
   // 테스트 이미지 데이터
   const images = [
     'https://img.freepik.com/free-photo/minimalist-interior-3d-rendering_52683-131548.jpg?size=626&ext=jpg&ga=GA1.1.1292351815.1709942400&semt=ais',
@@ -30,6 +31,7 @@ function ReviewDetail() {
   ];
 
   const handleClickReport = () => {
+    if(!userId) return;
     setModalOpen({
       ...modalOpen,
       reviewReportModalOpen: !modalOpen.reviewReportModalOpen
@@ -147,8 +149,10 @@ function ReviewDetail() {
             </div>
           </div>
         </div>
-        <div className="review__detail__main__footer">
-          <button onClick={handleClickReport}>허위리뷰 신고하기</button>
+        <div className="review__detail__main__footer" style={{background: userId ? '#FF5C00' : '#fff'}}>
+          { 
+            userId && <button onClick={handleClickReport}>허위리뷰 신고하기</button>
+          }
         </div>
       </div>
     </div>
