@@ -7,12 +7,12 @@ function FindIdResult() {
     const location = useLocation();
     const [findResult] = useState(location.state.result["data"]);
     useEffect(() => {
-        console.log(location.state.result);
+        console.log(location.state.result['data']);
     })
 
     return (
         <div className='findIdResult__container'>
-            <FindResult userId={findResult} />
+            <FindResult result={findResult} />
         </div>
     );
 }

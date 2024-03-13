@@ -8,6 +8,12 @@ function FindIdForm() {
 
     const [phone, setPhone] = useState('');
     const navigate = useNavigate();
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+    const onChangeInput = (e) => {
+        const validInputValue = e.target.value.replace(/[^0-9]/g, "");
+        setPhone(validInputValue);
+    }
 
     const onClickFindId = async () => {
         console.log(phone);
@@ -16,7 +22,7 @@ function FindIdForm() {
         });
         console.log(result);
         if (result != null){
-            navigate('/zipplanet-frontend/findIdResult', { state: { result } });
+            navigate(`${BASE_URL}findIdResult`, { state: { result } });
         } else {
             toast.error('유저 정보를 찾을 수 없습니다.');
         }
@@ -33,7 +39,7 @@ function FindIdForm() {
                 <div className="FindId__body">
                     <div className='FindId__form'>
                         <div>
-                            <input name="phone" type="text" onChange={(e)=> setPhone(e.target.value)} placeholder="휴대폰번호(-제외)" />
+                            <input name="phone" type="text" value={phone} onChange={onChangeInput} maxLength={11} placeholder="휴대폰번호(-제외)" />
                         </div>
                         <button onClick={onClickFindId}>아이디 찾기</button>
                     </div>

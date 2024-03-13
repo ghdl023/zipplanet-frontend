@@ -28,7 +28,7 @@ function FindPwdResult() {
     return(
         <div className='findPwdResult__container'>
             <h3>{count}초 후 로그인 화면으로 이동합니다.</h3>
-            <FindResult userPwd={findResult}/>
+            <FindResult result={findResult}/>
         </div>
     );
 }
