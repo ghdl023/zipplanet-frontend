@@ -50,3 +50,13 @@ export const reportReview = async (params) => {
     console.log(e);
   }
 }
+
+
+export const selectAllPos = async () => {
+  try {
+    const { data } = await defaultInstance.get('/api/review/selectAllPos');
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}

@@ -147,6 +147,7 @@ function ReviewCreateModal() {
 
     if (res.status.toLowerCase() == 'ok' && res.data > 0) {
       toast.success(`리뷰가 ${TITLE}되었습니다!`);
+      window.dispatchEvent(new CustomEvent('callSelectAllPos', {})); // 좌표 조회
       closeModal();
     } else {
       toast.error(`리뷰 ${TITLE}을 실패했습니다.`);
