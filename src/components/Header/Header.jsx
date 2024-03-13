@@ -14,7 +14,6 @@ const Header = () => {
   const resetUserInfo = useResetRecoilState(userInfoState);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
-  const userInfo = getUser
   const logoClick = () => {
     navigate(BASE_URL);
   };
