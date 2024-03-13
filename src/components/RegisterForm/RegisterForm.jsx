@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { signUp } from '../../apis/api/user';
 import './RegisterForm.scss';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 function RegisterForm() {
-
+    const navigate = useNavigate();
     const [userInput, setUserInput] = useState({
         username: '',
         password: '',
@@ -14,6 +16,7 @@ function RegisterForm() {
     const { username, password, passwordConfirm, phone } = userInput;
 
     const onClick = async () => {
+        console.log(userInput);
         const result = await signUp({
             username,
             password,
@@ -21,14 +24,27 @@ function RegisterForm() {
             phone,
             nickname: username,
         });
-        console.log(result);
+        if (result['data'] === null) {
+            toast.error(result['message']);
+            return false;
+        }
+        toast.success('회원가입 성공!');
+        navigate('/zipplanet-frontend/login');
     }
 
     const onChangeInput = (e) => {
-        setUserInput({
-            ...userInput,
-            [e.target.name]: e.target.value,
-        });
+        if (e.target.name === 'phone') {
+            const validInputValue = e.target.value.replace(/[^0-9]/g, "");
+            setUserInput({
+                ...userInput,
+                [e.target.name]: validInputValue,
+            });
+        } else {
+            setUserInput({
+                ...userInput,
+                [e.target.name]: e.target.value,
+            });
+        }
     }
 
     return (
