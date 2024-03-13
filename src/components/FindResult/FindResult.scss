@@ -1,0 +1,86 @@
+.findResult__wrapper {
+    border: 1px solid rgb(243, 244, 246);
+}
+.findResult__box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 70px 40px 70px 40px;
+}
+
+.findResult__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-size: 36px;
+        font-weight: bold;
+    }
+}
+
+.findResult__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .findResult__form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        font-size: 20px;
+        div {
+            border-style: solid;
+            border-radius: 10px;
+            border-width: thin;
+            border-color: rgb(243, 244, 246);
+            margin-top: 15px;
+
+            input {
+                height: 60px;
+                width: 450px;
+                padding-left: 20px;
+                outline: none;
+                box-shadow: none;
+                border: none;
+                border-radius: 15px;
+            }
+        }
+
+        .btn__copy {
+            border-radius: 15px;
+            margin-top: 30px;
+            background-color: rgb(0, 0, 0);
+            height: 60px;
+            width: 450px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            transition-duration: 0.3s;
+        }
+        .btn__login {
+            border-radius: 15px;
+            border: 1px solid rgba(226, 226, 226, 0.774);
+            margin-top: 30px;
+            background-color: rgb(255, 255, 255);
+            height: 60px;
+            width: 450px;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            transition-duration: 0.3s;
+        }
+        .btn__copy:hover {
+            background-color: rgba(0, 0, 0, 0.644);
+            transition-duration: 0.3;
+        }
+        .btn__login:hover {
+            background-color: rgba(199, 199, 199, 0.644);
+            transition-duration: 0.3;
+        }
+    }
+}

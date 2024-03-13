@@ -2,32 +2,20 @@ import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import LogoImage from '@assets/images/logo/logo.png';
 import { Layout } from 'antd';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userInfoState } from '../../recoil/userInfoState';
 import { BoxArrowRight, PersonCircle } from 'react-bootstrap-icons';
 import { Tooltip } from 'react-tooltip';
 import './Header.scss';
 
 const Header = () => {
-  const setUserInfo = useSetRecoilState(userInfoState);
+
   const { userId, nickname } = useRecoilValue(userInfoState);
   const resetUserInfo = useResetRecoilState(userInfoState);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
-
   const logoClick = () => {
     navigate(BASE_URL);
-  };
-
-  const login = () => {
-    setUserInfo({
-      userId: 10000,
-      username: 'test',
-      nickname: '종필이네신발가게',
-      address: '서울시 강남구 논현동',
-      phone: '01012345678',
-      roleName: 'ROLE_USER',
-    });
   };
 
   const logout = () => {
@@ -46,8 +34,8 @@ const Header = () => {
               <NavLink to="register">회원가입</NavLink>
             </li>
             <li>
-              <a onClick={login}>로그인</a>
-              {/* <NavLink to="login">로그인</NavLink> */}
+              {/* <a onClick={login}>로그인</a> */}
+              <NavLink to="login">로그인</NavLink>
             </li>
           </ul>
         ) : (

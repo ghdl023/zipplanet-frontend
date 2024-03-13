@@ -12,6 +12,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@styles/reset.css';
 import '@styles/tooltip.css';
 import 'react-tooltip/dist/react-tooltip.css';
+import FindId from './pages/FindId';
+import FindIdResult from './pages/FindIdResult';
+import FindPwd from './pages/FindPwd';
+import FindPwdResult from './pages/FindPwdResult/FindPwdResult';
 import App from './App';
 
 const router = createBrowserRouter([
@@ -38,7 +42,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/zipplanet-frontend/findId',
-        element: <FindId />
+        element: <FindId/>
+      },
+      {
+        path: '/zipplanet-frontend/findIdResult',
+        element: <FindIdResult/>
+      },
+      {
+        path: '/zipplanet-frontend/findPwd',
+        element: <FindPwd/>
+      },
+      {
+        path: '/zipplanet-frontend/findPwdResult',
+        element: <FindPwdResult/>
       }
     ],
   },
