@@ -3,15 +3,14 @@ import { Layout } from 'antd';
 import { Tooltip } from 'react-tooltip';
 import { X, PencilSquare } from 'react-bootstrap-icons';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import _ from 'lodash';
 import SidebarHeader from '@components/SidebarHeader';
 import SidebarMain from '@components/SidebarMain';
 import ReviewDetail from '@components/ReviewDetail';
-import ReviewCreateModal from '../ReviewCreateModal';
 import ReviewReportModal from '@components/ReviewReportModal';
 import { userInfoState } from '../../recoil/userInfoState';
 import { reviewDetailState } from '../../recoil/reviewDetailState';
 import { modalState } from '../../recoil/modalState';
-import _ from 'lodash';
 import './Sidebar.scss';
 
 const { Sider } = Layout;
@@ -56,7 +55,6 @@ function Sidebar() {
           <SidebarMain />
           { (reviewDetailValue && reviewDetailValue.reviewId) && <ReviewDetail /> }
         </Sider>
-        {reviewCreateModalOpen && <ReviewCreateModal />}
         {reviewReportModalOpen && <ReviewReportModal />}
         {userInfo.userId && (
           <div

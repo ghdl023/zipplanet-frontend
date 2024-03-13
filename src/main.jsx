@@ -1,17 +1,17 @@
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import PageLayout from '@components/PageLayout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ErrorPage from './pages/ErrorPage';
 import MyPage from './pages/MyPage';
-
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import FindId from './pages/FindId';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@styles/reset.css';
 import '@styles/tooltip.css';
 import 'react-tooltip/dist/react-tooltip.css';
-import FindId from './pages/FindId';
 
 const router = createBrowserRouter([
   {
@@ -44,5 +44,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />,
-);
+  <RecoilRoot>
+    <RouterProvider router={router} />,
+  </RecoilRoot>
+  );
