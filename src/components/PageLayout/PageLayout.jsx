@@ -21,41 +21,41 @@ function PageLayout() {
   }, [])
 
   return (
-    <PageLayoutContext.Provider
-      value={{
-        reviewList,
-        setReviewList,
-      }}
-    >
-      <Layout id="page-layout">
-        <Header />
-        <Layout>
-          <Outlet />
-        </Layout>
-      </Layout>
-      {reviewCreateModalOpen && <ReviewCreateModal />}
-      <Toaster
-        position="bottom-center"
-        containerStyle={{
-          zIndex: 99999999,
-        }}
-        toastOptions={{
-          duration: 4500,
-          success: {
-            style: {
-              // background: 'green',
-              // color: '#fff',
-            },
-          },
-          error: {
-            style: {
-              // background: 'red',
-              // color: '#fff',
-            },
-          },
-        }}
-      />
-    </PageLayoutContext.Provider>
+        <PageLayoutContext.Provider
+          value={{
+            reviewList,
+            setReviewList,
+          }}
+        >
+          <Layout id="page-layout">
+            <Header />
+            <Layout>
+              <Outlet />
+            </Layout>
+          </Layout>
+          { reviewCreateModalOpen && <ReviewCreateModal />}
+          <Toaster
+            position="bottom-center"
+            containerStyle={{
+              zIndex: 99999999,
+            }}
+            toastOptions={{
+              duration: 4500,
+              success: {
+                style: {
+                  // background: 'green',
+                  // color: '#fff',
+                },
+              },
+              error: {
+                style: {
+                  // background: 'red',
+                  // color: '#fff',
+                },
+              },
+            }}
+          />
+        </PageLayoutContext.Provider>
   );
 }
 

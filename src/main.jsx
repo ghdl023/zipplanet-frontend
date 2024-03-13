@@ -12,11 +12,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@styles/reset.css';
 import '@styles/tooltip.css';
 import 'react-tooltip/dist/react-tooltip.css';
+import App from './App';
 
 const router = createBrowserRouter([
   {
     path: '/zipplanet-frontend/',
-    element: <PageLayout />,
+    element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -33,18 +34,16 @@ const router = createBrowserRouter([
       },
       {
         path: '/zipplanet-frontend/mypage',
-        element: <MyPage/>,
+        element: <MyPage />,
       },
       {
         path: '/zipplanet-frontend/findId',
-        element: <FindId/>
+        element: <FindId />
       }
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RecoilRoot>
-    <RouterProvider router={router} />,
-  </RecoilRoot>
-  );
+  <RouterProvider router={router} />,
+);
