@@ -18,7 +18,7 @@ function FindIdForm() {
         if (result != null){
             navigate('/zipplanet-frontend/findIdResult', { state: { result } });
         } else {
-            toast.error('유저 정보를 찾을 수 없습니다.', {position:'top-center'});
+            toast.error('유저 정보를 찾을 수 없습니다.');
         }
         
     }
