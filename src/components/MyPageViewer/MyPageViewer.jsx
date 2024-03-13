@@ -1,9 +1,9 @@
 
-import MyPageAccount from '../../pages/MyPageAccount';
-import MyPageRecent from '../../pages/MyPageRecent';
-import MyPageReview from '../../pages/MyPageReview';
-import MyPageZzim from '../../pages/MyPageZzim';
-import MyPageReport from '../../pages/MyPageReport';
+import MyPageAccount from '@components/MyPageAccount';
+import MyPageRecent from '@components/MyPageRecent';
+import MyPageReview from '@components/MyPageReview';
+import MyPageZzim from '@components/MyPageZzim';
+import MyPageReport from '@components/MyPageReport';
 
 import './MyPageViewer.scss';
 

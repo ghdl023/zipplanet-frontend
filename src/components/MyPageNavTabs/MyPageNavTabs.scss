@@ -2,31 +2,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+
+    h1 {
+        font-size: 2.3rem;
+        font-weight: 600;
+        letter-spacing: -3px;
+        margin: 30px;
+    }
 
     .mypage__nav__item {
         display: flex;
+        justify-content: center;
+        width:100%;
 
         div {
-            width: 200px;
-            text-align: center;
-            height: 70px;
-            padding-top: 25px;
-            font-size: 16px;
+            width: 20%;
+            height: 60px;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border: 1px solid rgb(243, 244, 246);
-            transition-duration: 0.4s;
-        }
-        div:hover {
-            background-color: black;
-            color: white;
-            font-weight: 700;
-            transition-duration: 0.4s;
             cursor: pointer;
         }
-    }
-
-    h1 {
-        font-weight: 700;
-        margin: 30px;
     }
 }
 .mypage__btn__active {

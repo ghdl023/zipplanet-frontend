@@ -8,7 +8,7 @@ function MyPage() {
 
     return (
         <div className="mypage__main">
-            <div>
+            <div className="mypage__header">
                 <MyPageNavTabs setPageNo={setPageNo}/>
             </div>
             <div className="mypage__veiwer">

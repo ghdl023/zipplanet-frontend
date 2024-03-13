@@ -17,9 +17,8 @@ function AccountWrapper(props) {
     }
     return (
         <div className="account__container">
-            <div>
+            <div className="user__icon__container">
                 <PersonCircle className='user__icon' size={80} />
-                <ArrowDownLeftSquareFill className='user__icon__update' />
             </div>
             <div className='account__item account__item__userId'>
                 <div className='account__item__label'>아이디</div>
@@ -44,6 +43,9 @@ function AccountWrapper(props) {
                 <div className='account__item__label'>거주지</div>
                 <div>{accountInfo.adress}</div>
                 <ArrowRightCircleFill size={18} onClick={()=>modalOpen(4)}/>
+            </div>
+            <div className="account__footer">
+                <button>회원탈퇴</button>
             </div>
         </div>
     );
