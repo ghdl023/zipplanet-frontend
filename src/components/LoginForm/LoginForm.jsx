@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import { login } from '../../apis/api/user';
 import './LoginForm.scss';
+import { useSetRecoilState } from 'recoil';
+import { userInfoState } from '../../recoil/userInfoState';
+import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 
 function LoginFrom() {
-
+    const navigate = useNavigate();
     const [id, setId] = useState('');
     const [pwd, setPwd] = useState('');
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+    
+
+    const setUserInfo = useSetRecoilState(userInfoState);
 
     const onClickLogin = async () => {
         console.log(id);
@@ -15,6 +23,12 @@ function LoginFrom() {
             password: pwd
         });
         console.log(result);
+        if (result['data'] === null) {
+            toast.error(result['message']);
+            return false;
+        }
+        setUserInfo(result['data']);
+        navigate(BASE_URL)
     }
 
     return (
