@@ -67,13 +67,13 @@ function Sidebar() {
                 reviewCreateModalOpen: !reviewCreateModalOpen,
               })
             }
-            data-tooltip-id="tooltip"
+            data-tooltip-id="add-btn-tooltip"
             data-tooltip-content="새 리뷰 작성"
           >
             {reviewCreateModalOpen ? <X /> : <PencilSquare />}
           </div>
         )}
-        <Tooltip id="tooltip" />
+        <Tooltip id="add-btn-tooltip" className="tooltip"/>
       </>
   );
 }
