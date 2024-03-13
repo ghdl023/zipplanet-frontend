@@ -1,6 +1,9 @@
-#tooltip {
-    padding: 8px;
-    border-radius: 3px;
-    font-size: 78%;
+.tooltip {
+    padding: 2px 6px !important;
+    border-radius: 0px;
+    font-size: 0.7rem !important;
+    height:25px;
+    display:flex;
+    align-items: center;
+    z-index:1000;
 }
-  

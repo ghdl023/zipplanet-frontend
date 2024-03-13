@@ -11,11 +11,11 @@ import './Header.scss';
 const Header = () => {
   const setUserInfo = useSetRecoilState(userInfoState);
   const { userId, nickname } = useRecoilValue(userInfoState);
-  const refresh = useResetRecoilState(userInfoState);
-
+  const resetUserInfo = useResetRecoilState(userInfoState);
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
+
   const logoClick = () => {
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
     navigate(BASE_URL);
   };
 
@@ -31,7 +31,7 @@ const Header = () => {
   };
 
   const logout = () => {
-    refresh();
+    resetUserInfo();
   };
 
   return (
@@ -54,21 +54,22 @@ const Header = () => {
           <div className="header__account__container">
             <div
               className="nickname__container"
-              data-tooltip-id="tooltip"
+              data-tooltip-id="header-tooltip"
               data-tooltip-content="마이페이지"
+              onClick={()=> navigate(`${BASE_URL}mypage`)}
             >
               <PersonCircle />
               <h3>{nickname}</h3>
             </div>
             <BoxArrowRight
-              data-tooltip-id="tooltip"
+              data-tooltip-id="header-tooltip"
               data-tooltip-content="로그아웃"
               onClick={logout}
             />
           </div>
         )}
       </nav>
-      <Tooltip id="tooltip" />
+      <Tooltip id="header-tooltip" className="tooltip"/>
     </Layout.Header>
   );
 };

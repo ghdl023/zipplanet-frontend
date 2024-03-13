@@ -41,3 +41,12 @@ export const updateReview = async (params) => {
     console.log(e);
   }
 };
+
+export const reportReview = async (params) => {
+  try {
+    const { data } = await defaultInstance.post('/api/review/report', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
