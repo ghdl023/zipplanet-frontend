@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { login } from '../../apis/api/user';
-import './LoginForm.scss';
 import { useSetRecoilState } from 'recoil';
 import { userInfoState } from '../../recoil/userInfoState';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import { NavLink } from 'react-router-dom';
+import './LoginForm.scss';
 
 function LoginFrom() {
     const navigate = useNavigate();

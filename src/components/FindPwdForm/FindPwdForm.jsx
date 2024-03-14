@@ -30,14 +30,14 @@ function FindPwdForm() {
     }
 
     return (
-        <div className='findPwd__wrapper'>
-            <div className="findPwd__box">
-                <div className="findPwd__header">
+        <div className='login__wrapper'>
+            <div className="login__box">
+                <div className="login__header">
                     <h1>비밀번호 찾기</h1>
                     <h4>아이디와 가입 시 입력한 휴대폰 번호로<br></br>간편하게 비밀번호를 찾을 수 있어요!</h4>
                 </div>
-                <div className="findPwd__body">
-                    <div className='findPwd__form'>
+                <div className="login__body">
+                    <div className='login__form'>
                         <div>
                             <input name="username" type="text" onChange={(e)=>setUsername(e.target.value)} placeholder="아이디" />
                         </div>

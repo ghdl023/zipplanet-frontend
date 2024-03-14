@@ -54,14 +54,14 @@ function RegisterForm() {
     }
 
     return (
-        <div className='register__wrapper'>
-            <div className="register__box">
-                <div className="register__header">
+        <div className='login__wrapper'>
+            <div className="login__box">
+                <div className="login__header">
                     <h1>회원가입</h1>
                     <h4>지금 회원가입해서 리뷰를 작성해보세요!</h4>
                 </div>
-                <div className="register__body">
-                    <div className='register__form'>
+                <div className="login__body">
+                    <div className='login__form'>
                         <div>
                             <input name="username" type="text" value={username} onChange={onChangeInput} placeholder="아이디" />
                         </div>
