@@ -41,13 +41,11 @@ function Main() {
     }
   }
 
-  const onCliickMarker = async (pos) => {
-    console.log(pos.lat + ', ' + pos.lng);
-
+  const onClickCluster = async (lat, lng) => {
     setSearch({
       ...searchValue,
       searchType: 'pos',
-      pos: `${pos.lat},${pos.lng}`,
+      pos: `${lat},${lng}`,
     });
     console.log(search);
     setTimeout(() => {
@@ -83,23 +81,26 @@ function Main() {
           maxLevel={1}
           minLevel={6}
           ref={mapRef}
-          // onCenterChanged={(map) => {
-          //   const level = map.getLevel();
-          //   const latlng = map.getCenter();
-
-          //   console.log(`level : ${level}`);
-          //   console.log(`lat: ${latlng.getLat()}, lng: ${latlng.getLng()}`);
-          // }}
           onClick={(_, mouseEvent) => {
             const latlng = mouseEvent.latLng;
-            // console.log(`클릭한 위치의 위도는 ${latlng.getLat()} 이고, 경도는 ${latlng.getLng()} 입니다`);
+            console.log(`클릭한 위치의 위도는 ${latlng.getLat()} 이고, 경도는 ${latlng.getLng()} 입니다`);
           }}
         >
           <MarkerClusterer
             averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-            minLevel={4} // 클러스터 할 최소 지도 레벨
-            // onClusterclick={onClickCluster}
-            // disableClickZoom={true}
+            minLevel={1} // 클러스터 할 최소 지도 레벨
+            disableClickZoom={true}
+            onCreate={(clusterer)=> {
+              kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+                let markers = cluster.getMarkers();
+                if(markers.length > 0) {
+                  const position = markers[0].getPosition();
+                  const lat = position.getLat();
+                  const lng = position.getLng();
+                  onClickCluster(lat, lng);
+                }
+            });
+            }}
           >
             {positions.map((pos, index) => (
               <MapMarker
@@ -108,7 +109,7 @@ function Main() {
                   lat: pos.lat,
                   lng: pos.lng,
                 }}
-                onClick={() => onCliickMarker(pos)}
+                // onClick={() => onCliickMarker(pos)}
               ></MapMarker>
             ))}
           </MarkerClusterer>
