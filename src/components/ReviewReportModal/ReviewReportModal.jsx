@@ -18,19 +18,19 @@ function ReviewReportModal() {
   const items = [
     {
       reportTypeId: 1,
-      reportTypeName: '신고사유1입니다.신고사유1입니다.신고사유1입니다.',
+      reportTypeName: '리뷰 내용이 허위 사실입니다.',
     },
     {
       reportTypeId: 2,
-      reportTypeName: '신고사유2입니다.신고사유1입니다.신고사유1입니다.',
+      reportTypeName: '일방적인 비난으로만 작성되었습니다.',
     },
     {
       reportTypeId: 3,
-      reportTypeName: '신고사유3입니다.신고사유1입니다.신고사유1입니다.',
+      reportTypeName: '폭력적인 내용이 포함되어 있습니다.',
     },
     {
       reportTypeId: 4,
-      reportTypeName: '신고사유4입니다.신고사유1입니다.신고사유1입니다.',
+      reportTypeName: '리뷰내용이 제 개인의 명예를 훼손하고 있습니다.',
     },
     {
       reportTypeId: 99,
