@@ -1,11 +1,20 @@
 import { useState } from 'react';
 import { login } from '../../apis/api/user';
 import './LoginForm.scss';
+import { useSetRecoilState } from 'recoil';
+import { userInfoState } from '../../recoil/userInfoState';
+import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
+import { NavLink } from 'react-router-dom';
 
 function LoginFrom() {
-
+    const navigate = useNavigate();
     const [id, setId] = useState('');
     const [pwd, setPwd] = useState('');
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+    
+
+    const setUserInfo = useSetRecoilState(userInfoState);
 
     const onClickLogin = async () => {
         console.log(id);
@@ -15,6 +24,12 @@ function LoginFrom() {
             password: pwd
         });
         console.log(result);
+        if (result['data'] === null) {
+            toast.error(result['message']);
+            return false;
+        }
+        setUserInfo(result['data']);
+        navigate(BASE_URL)
     }
 
     return (
@@ -35,8 +50,8 @@ function LoginFrom() {
                         <button onClick={onClickLogin}>로그인</button>
                     </div>
                     <div className='search__nav'>
-                        <a href="/zipplanet-frontend/findId">아이디찾기</a>
-                        <a href="/zipplanet-frontend/findPwd">비밀번호찾기</a>
+                        <NavLink to={`${BASE_URL}findId`}>아이디찾기</NavLink>
+                        <NavLink to={`${BASE_URL}findPwd`}>비밀번호찾기</NavLink>
                     </div>
                 </div>
             </div>

@@ -33,9 +33,18 @@ export const findId = async (params) => {
     const {data} = await defaultInstance.post('api/user/findId', params);
     return data;
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 };
+
+export const findPwd = async (parmas) => {
+  try {
+    const {data} =await defaultInstance.post('api/user/findPwd', parmas);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 
 // export const getHome = () => {
