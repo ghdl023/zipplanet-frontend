@@ -1,5 +1,10 @@
+import { useState } from 'react';
 import './UpdatePassword.scss';
 function UpdatePassword(props) {
+    const [bCheck, setBCheck] = useState(true);
+    const [oldPassword, setOldPassword] = useState();
+    const [newPassword, setNewPassword] = useState();
+    const [passwordConfirm, setPasswordConfirm] = useState();
     return (
         <div className='update__password__container'>
             <div>비밀번호 재설정</div>
@@ -22,7 +27,7 @@ function UpdatePassword(props) {
                 </div>
                 <div className='update__submit__btn'>
                     <button type='button' onClick={()=>props.setModalControl(false)}>닫기</button>
-                    <button type="submit" disabled={true}>변경</button>
+                    <button type="submit" disabled={bCheck}>변경</button>
                 </div>
             </form>
         </div>
