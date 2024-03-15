@@ -5,7 +5,7 @@
     flex-direction: column;
     font-weight: bold;
 
-    form {
+    .update__nickname__form {
         display: flex;
         flex-direction: column;
         .update__nickname__header {
@@ -37,6 +37,9 @@
                 box-shadow: none;
                 border: none;
                 border-radius: 10px;
+            }
+            ::placeholder {
+                color: rgb(204, 204, 204);
             }
         }
         .update__submit__btn {

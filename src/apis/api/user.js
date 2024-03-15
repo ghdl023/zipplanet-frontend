@@ -44,7 +44,16 @@ export const findPwd = async (parmas) => {
   } catch (e) {
     console.log(e);
   }
-}
+};
+
+export const updateUser = async (params) => {
+  try {
+    const {data} = await defaultInstance.post('api/user/updateUser', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 
 // export const getHome = () => {

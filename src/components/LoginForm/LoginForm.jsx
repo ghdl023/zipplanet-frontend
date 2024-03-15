@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { login } from '../../apis/api/user';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userInfoState } from '../../recoil/userInfoState';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
@@ -13,7 +13,7 @@ function LoginFrom() {
     const [pwd, setPwd] = useState('');
     const BASE_URL = import.meta.env.VITE_BASE_URL;
     
-
+    const userInfo = useRecoilValue(userInfoState);
     const setUserInfo = useSetRecoilState(userInfoState);
 
     const onClickLogin = async () => {
@@ -29,6 +29,7 @@ function LoginFrom() {
             return false;
         }
         setUserInfo(result['data']);
+        
         navigate(BASE_URL)
     }
 
