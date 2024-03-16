@@ -116,14 +116,16 @@ function ReviewDetail() {
             </Carousel>
           </div>
           <div className="review__detail__main__content__rate__container">
-            <div className="icon__container">
-              <span className="icon__favorite" onClick={onClickFavorite}>
-                {favorite ? <HeartFill /> : <Heart />}
-              </span>
-              <span className="icon__like">
-                {true ? <HandThumbsUp /> : <HandThumbsUpFill />}
-              </span>
-            </div>
+            {userId && (
+              <div className="icon__container">
+                <span className="icon__favorite" onClick={onClickFavorite}>
+                  {favorite ? <HeartFill /> : <Heart />}
+                </span>
+                <span className="icon__like">
+                  {true ? <HandThumbsUp /> : <HandThumbsUpFill />}
+                </span>
+              </div>
+            )}
             <div className="category__container">
               <div className="category__box">
                 <h3>총 평점</h3>

@@ -36,13 +36,15 @@ const ReviewListItem = forwardRef(
 
     return (
       <div className="review__list__item" onClick={onClickReviewItem} ref={ref}>
-        <div
-          className={`review__list__item__favorite ${favorite ? 'fill' : ''}`}
-        >
-          <button onClick={onClickFavorite}>
-            {favorite ? <HeartFill /> : <Heart />}
-          </button>
-        </div>
+        {userId && (
+          <div
+            className={`review__list__item__favorite ${favorite ? 'fill' : ''}`}
+          >
+            <button onClick={onClickFavorite}>
+              {favorite ? <HeartFill /> : <Heart />}
+            </button>
+          </div>
+        )}
         <div className="review__list__item__thumb">
           {review.images && review.images.length > 0 ? (
             <img src={review.images[0]} alt="img" />
