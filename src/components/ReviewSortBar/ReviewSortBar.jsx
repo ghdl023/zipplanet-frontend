@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReviewSortButton from '@components/ReviewSortButton';
-import { useRecoilState } from 'recoil';
-import { searchState } from '../../recoil/searchState';
 import './ReviewSortBar.scss';
+import { SidebarContext } from '../../contexts/SidebarContext';
 
 function ReviewSortBar() {
   const sortBtnList = [
@@ -10,15 +9,10 @@ function ReviewSortBar() {
     { label: '평점순', value: 'total_Rate' },
     { label: '좋아요순', value: 'like_Count' },
   ];
-
-  const [search, setSearch] = useRecoilState(searchState);
+  const { setOrder } = useContext(SidebarContext);
 
   const onClickSortButton = async (value) => {
-    console.log(value);
-    setSearch({
-      ...search,
-      sort: value,
-    });
+    setOrder(value);
   };
 
   return (
