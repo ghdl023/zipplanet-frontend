@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Layout } from 'antd';
 import {
   Map,
@@ -14,12 +14,6 @@ import './Main.scss';
 
 const { Content } = Layout;
 
-const contentStyle = {
-  textAlign: 'center',
-  lineHeight: '120px',
-  color: '#fff',
-};
-
 function Main() {
   const [loading, error] = useKakaoLoader({
     appkey: import.meta.env.VITE_KAKAO_MAP_API_KEY, // 발급 받은 APPKEY
@@ -31,15 +25,25 @@ function Main() {
   const searchValue = useRecoilValue(searchState);
   const mapRef = useRef(null);
   const [positions, setPositions] = useState([]);
+  const [clusterer, setClusterer] = useState(null);
 
-  
   const loadPositions = async () => {
     const res = await selectAllPos();
     // console.log(res);
-    if(res.status.toLowerCase() == 'ok') {
+    if (res.status.toLowerCase() == 'ok') {
       setPositions(res.data);
     }
-  }
+  };
+
+  const onClickClusterHandler = function (cluster) {
+    let markers = cluster.getMarkers();
+    if (markers.length > 0) {
+      const position = markers[0].getPosition();
+      const lat = position.getLat();
+      const lng = position.getLng();
+      onClickCluster(lat, lng);
+    }
+  };
 
   const onClickCluster = async (lat, lng) => {
     setSearch({
@@ -47,16 +51,22 @@ function Main() {
       searchType: 'pos',
       pos: `${lat},${lng}`,
     });
-    console.log(search);
-    setTimeout(() => {
-      console.log('callSearchReviewEvent before');
-      window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
-    }, 100);
+    // console.log(search);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     loadPositions();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    if (clusterer !== null) {
+      kakao.maps.event.addListener(
+        clusterer,
+        'clusterclick',
+        onClickClusterHandler,
+      );
+    }
+  }, [clusterer]);
 
   useEventListeners('callSelectAllPos', (event) => {
     // console.log('callSelectAllPos called!');
@@ -65,7 +75,7 @@ function Main() {
 
   return (
     <>
-      <Content style={contentStyle}>
+      <Content>
         <Map // 지도를 표시할 Container
           center={{
             // 지도의 중심좌표
@@ -82,24 +92,18 @@ function Main() {
           minLevel={6}
           ref={mapRef}
           onClick={(_, mouseEvent) => {
-            const latlng = mouseEvent.latLng;
-            console.log(`클릭한 위치의 위도는 ${latlng.getLat()} 이고, 경도는 ${latlng.getLng()} 입니다`);
+            // const latlng = mouseEvent.latLng;
+            // console.log(
+            //   `클릭한 위치의 위도는 ${latlng.getLat()} 이고, 경도는 ${latlng.getLng()} 입니다`,
+            // );
           }}
         >
           <MarkerClusterer
             averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
             minLevel={1} // 클러스터 할 최소 지도 레벨
             disableClickZoom={true}
-            onCreate={(clusterer)=> {
-              kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-                let markers = cluster.getMarkers();
-                if(markers.length > 0) {
-                  const position = markers[0].getPosition();
-                  const lat = position.getLat();
-                  const lng = position.getLng();
-                  onClickCluster(lat, lng);
-                }
-            });
+            onCreate={(clusterer) => {
+              setClusterer(clusterer);
             }}
           >
             {positions.map((pos, index) => (

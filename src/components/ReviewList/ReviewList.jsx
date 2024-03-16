@@ -6,7 +6,6 @@ import ReviewListItem from '@components/ReviewListItem';
 import Loading from '../common/Loading';
 import { search } from '../../apis/api/review';
 import { searchState } from '../../recoil/searchState';
-import { useEventListeners } from '../../hooks/useEventListeners';
 import { reviewDetailState } from '../../recoil/reviewDetailState';
 import { reviewListState } from '../../recoil/reviewListState';
 import './ReviewList.scss';
@@ -34,16 +33,19 @@ function ReviewList() {
       setLoadingError(null);
       setIsLoading(true);
 
-      if (totalCount > 0 && !(totalCount > items.length)) {
+      const params = {
+        ...options,
+        ...searchValue,
+      };
+      console.log(params);
+
+      if (options.offset > 1 && options.offset >= totalCount.current) {
+        totalCount.current = 0;
         setHasNext(false);
         return;
       }
 
-      result = await search({
-        ...options,
-        ...searchValue,
-      });
-      // const { paging, reviews } = result;
+      result = await search(params);
       const { data } = result;
 
       for (let review of data.reviews) {
@@ -102,15 +104,7 @@ function ReviewList() {
 
   useEffect(() => {
     handleLoad({ offset: 1, limit: LIMIT });
-  }, []);
-
-  useEventListeners('callSearchReviewEvent', (event) => {
-    console.log('callSearchReviewEvent called!');
-    totalCount.current = 0;
-    setTimeout(() => {
-      handleLoad({ offset: 1, limit: LIMIT });
-    }, 200);
-  });
+  }, [searchValue]);
 
   const onClickReviewItem = (e, review) => {
     if (e.target.closest('.review__list__item__favorite')) {
