@@ -27,6 +27,11 @@ function Main() {
   const [positions, setPositions] = useState([]);
   const [clusterer, setClusterer] = useState(null);
 
+  const CENTER = {
+    LAT: '37.49843289280568',
+    LNG: '127.0254842133858',
+  };
+
   const loadPositions = async () => {
     const res = await selectAllPos();
     // console.log(res);
@@ -56,6 +61,9 @@ function Main() {
 
   useEffect(() => {
     loadPositions();
+    setTimeout(() => {
+      relayout();
+    }, 100);
   }, []);
 
   useEffect(() => {
@@ -73,14 +81,25 @@ function Main() {
     loadPositions();
   });
 
+  const relayout = () => {
+    if (mapRef.current) {
+      mapRef.current.relayout();
+      // center 정렬이안된다..
+      // mapRef.current.center({
+      //   lat: CENTER_LAT,
+      //   lng: CENTER_LNG,
+      // });
+    }
+  };
+
   return (
     <>
       <Content>
         <Map // 지도를 표시할 Container
           center={{
             // 지도의 중심좌표
-            lat: 37.49843289280568,
-            lng: 127.0254842133858,
+            lat: CENTER.LAT,
+            lng: CENTER.LNG,
           }}
           style={{
             // 지도의 크기
