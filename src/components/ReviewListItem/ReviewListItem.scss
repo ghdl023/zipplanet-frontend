@@ -11,6 +11,17 @@
         background-color: #F3F4F6;
     }
 
+    .review__list__item__favorite {
+        position: absolute;
+        padding: 6px;
+        font-size:1.3rem;
+        color:#fff;
+
+        &.fill {
+            color:#F12D3C;
+        }
+    }
+
     .review__list__item__thumb {
         width:100%;
         height: 155px;

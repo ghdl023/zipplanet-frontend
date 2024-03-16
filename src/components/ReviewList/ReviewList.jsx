@@ -1,12 +1,14 @@
 import { useRef, useState, useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import moment from 'moment';
+import _ from 'lodash';
 import ReviewListItem from '@components/ReviewListItem';
 import Loading from '../common/Loading';
 import { search } from '../../apis/api/review';
 import { searchState } from '../../recoil/searchState';
 import { useEventListeners } from '../../hooks/useEventListeners';
 import { reviewDetailState } from '../../recoil/reviewDetailState';
+import { reviewListState } from '../../recoil/reviewListState';
 import './ReviewList.scss';
 
 const LIMIT = 6;
@@ -19,9 +21,9 @@ function ReviewList() {
   const [hasNext, setHasNext] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useRecoilState(reviewListState);
   const [target, setTarget] = useState(null); // 구독할 대상 (target을 지켜보고 있다가 이 target이 정해진 threshold 비율만큼 보이면 지정한 행동을 합니다. )
-  const sortedItems = items.sort(
+  const sortedItems = [...items].sort(
     (a, b) => b[sort.replace('_', '')] - a[sort.replace('_', '')],
   );
   const totalCount = useRef(0);
@@ -44,12 +46,21 @@ function ReviewList() {
       // const { paging, reviews } = result;
       const { data } = result;
 
-      for(let review of data.reviews) { // 날짜 포맷 변환
+      for (let review of data.reviews) {
+        // 날짜 포맷 변환
         // console.log(review.createDate);
-        if(review.createDate) review.createDate = moment(review.createDate).format('YYYYMMDDHHmmss');
-        if(review.updateDate) review.updateDate = moment(review.updateDate).format('YYYYMMDDHHmmss');
-        if(review.startDate) review.startDate = moment(review.startDate).format('YYYYMMDD');
-        if(review.endDate) review.endDate = moment(review.endDate).format('YYYYMMDD');
+        if (review.createDate)
+          review.createDate = moment(review.createDate).format(
+            'YYYYMMDDHHmmss',
+          );
+        if (review.updateDate)
+          review.updateDate = moment(review.updateDate).format(
+            'YYYYMMDDHHmmss',
+          );
+        if (review.startDate)
+          review.startDate = moment(review.startDate).format('YYYYMMDD');
+        if (review.endDate)
+          review.endDate = moment(review.endDate).format('YYYYMMDD');
       }
 
       if (options.offset === 1) {
@@ -101,9 +112,25 @@ function ReviewList() {
     }, 200);
   });
 
-  const onClickReviewItem = (review) => {
-    console.log(review);
+  const onClickReviewItem = (e, review) => {
+    if (e.target.closest('.review__list__item__favorite')) {
+      // favorite 클릭시
+      e.preventDefault();
+      return false;
+    }
     setReviewDetail(review);
+  };
+
+  const handleToggleFavorite = (reviewId, zzimYn) => {
+    let findIndex = _.findIndex(items, { reviewId });
+    let copyItems = [...items];
+    if (findIndex != -1) {
+      copyItems[findIndex] = {
+        ...copyItems[findIndex],
+        zzimYn: zzimYn ? 'Y' : 'N',
+      };
+      setItems(copyItems);
+    }
   };
 
   return (
@@ -116,7 +143,8 @@ function ReviewList() {
               <ReviewListItem
                 key={idx}
                 review={review}
-                onClickReviewItem={onClickReviewItem}
+                onClickReviewItem={(e) => onClickReviewItem(e, review)}
+                onToggleFavorite={handleToggleFavorite}
                 ref={lastItem ? setTarget : null}
               />
             );
