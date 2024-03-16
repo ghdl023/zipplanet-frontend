@@ -210,11 +210,9 @@ function ReviewDetail() {
         </div>
         <div
           className="review__detail__main__footer"
-          style={{ background: userId ? '#FF5C00' : '#fff' }}
+          style={{ background: userId ? '#FF5C00' : '#d2d2d2' }}
         >
-          {userId && (
-            <button onClick={handleClickReport}>허위리뷰 신고하기</button>
-          )}
+          <button onClick={handleClickReport}>허위리뷰 신고하기</button>
         </div>
       </div>
     </div>

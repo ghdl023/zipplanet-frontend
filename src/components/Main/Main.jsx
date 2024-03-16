@@ -92,6 +92,11 @@ function Main() {
     }
   };
 
+  const getTexts = (size) => {
+    // 한 클러스터 객체가 포함하는 마커의 개수에 따라 다른 텍스트 값을 표시합니다
+    return `${size}개`;
+  };
+
   return (
     <>
       <Content>
@@ -110,12 +115,6 @@ function Main() {
           maxLevel={1}
           minLevel={6}
           ref={mapRef}
-          onClick={(_, mouseEvent) => {
-            // const latlng = mouseEvent.latLng;
-            // console.log(
-            //   `클릭한 위치의 위도는 ${latlng.getLat()} 이고, 경도는 ${latlng.getLng()} 입니다`,
-            // );
-          }}
         >
           <MarkerClusterer
             averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
@@ -124,6 +123,50 @@ function Main() {
             onCreate={(clusterer) => {
               setClusterer(clusterer);
             }}
+            calculator={[10, 30, 50]} // 클러스터의 크기 구분 값, 각 사이값마다 설정된 text나 style이 적용된다
+            texts={getTexts} // texts는 ['삐약', '꼬꼬', '꼬끼오', '치멘'] 이렇게 배열로도 설정할 수 있다
+            styles={[
+              {
+                width: '40px',
+                height: '40px',
+                background: 'rgba(255, 153, 0, 0.8)',
+                borderRadius: '20px',
+                color: '#000',
+                textAlign: 'center',
+                fontWeight: 'bold',
+                lineHeight: '41px',
+              },
+              {
+                width: '50px',
+                height: '50px',
+                background: 'rgba(255, 153, 0, 0.9)',
+                borderRadius: '25px',
+                color: '#000',
+                textAlign: 'center',
+                fontWeight: 'bold',
+                lineHeight: '51px',
+              },
+              {
+                width: '60px',
+                height: '60px',
+                background: 'rgba(255, 153, 0, .8)',
+                borderRadius: '30px',
+                color: '#000',
+                textAlign: 'center',
+                fontWeight: 'bold',
+                lineHeight: '61px',
+              },
+              {
+                width: '70px',
+                height: '70px',
+                background: 'rgba(255, 153, 0, .8)',
+                borderRadius: '35px',
+                color: '#000',
+                textAlign: 'center',
+                fontWeight: 'bold',
+                lineHeight: '71px',
+              },
+            ]}
           >
             {positions.map((pos, index) => (
               <MapMarker
