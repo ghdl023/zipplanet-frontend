@@ -490,21 +490,37 @@ function UpdateAddressGuDongList(props) {
         '중구',
         '중랑구'];
 
+
     const onClickGu = (e)=>{
         props.setGu(e.target.value);
+        props.setDong('전체');
+        props.setOnList(false);
+    }
+    const onClickDong = (e)=>{
+        props.setDong(e.target.value);
         props.setOnList(false);
     }
 
+
     return (
-        <div className="gudong__list__popup">
-            {guList.map((guList, index) => {
+        <div className="gudong__list__popup" >
+            {props.guDongCheck ? 
+            guList.map((guList, index) => {
                 return (
                     <input type="button"
                     key={index}
                     value={guList}
                     onClick={onClickGu} />
                 );
-            })}
+            }) : 
+            list[props.gu].map((list, index) => {
+                return (
+                    <input type="button"
+                    key={index}
+                    value={list}
+                    onClick={onClickDong} />
+                );
+            }) }
         </div>
     );
 }

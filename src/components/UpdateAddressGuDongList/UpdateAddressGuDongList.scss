@@ -1,7 +1,7 @@
 .gudong__list__popup {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    align-content: flex-start;
     animation: fadein 0.4s;
     height: 300px;
     overflow-y: scroll;
