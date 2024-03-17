@@ -9,6 +9,7 @@ import { searchMyReveiw } from "../../apis/api/review";
 import { userInfoState } from "../../recoil/userInfoState";
 import './MyPageReview.scss';
 import PaginationButton from "../PaginationButton";
+import { PencilSquare, Trash3 } from "react-bootstrap-icons";
 
 function MyPageReview() {
     const [modalOpen, setModalOpen] = useRecoilState(modalState);
@@ -34,17 +35,26 @@ function MyPageReview() {
         setReviewDetail(review);
         navigate(import.meta.env.VITE_BASE_URL);
     }
+
+    const onClickUpdate = (review) => {
+        console.log(review);
+        setReviewUpdate(review);
+        setModalOpen({
+            ...modalOpen,
+            reviewCreateModalOpen: true,
+        })
+    }
+
     const getList = async () => {
         const getReviewList = await searchMyReveiw({
             userId: parseInt(userInfo.userId)
         });
         setReviewList(getReviewList['data']);
         setPageCount(Math.ceil(reviewList.length / 5));
-        console.log(pageCount);
     }
     useEffect(() => {
         getList();
-    }, [])
+    })
 
     return (
         <div className="review__container">
@@ -52,11 +62,21 @@ function MyPageReview() {
             <div className="review__list">
                 {reviewList != '' ? reviewList.filter((review) => reviewList.indexOf(review) >= (5 * pageNo - 5) && reviewList.indexOf(review) < (5 * pageNo)).map((review, index) => {
                     return (
-                        <ReviewListItem
-                            key={index}
-                            onClickReviewItem={onClickReviewItem}
-                            review={review}
-                        />
+                        <div className="review__item">
+                            <ReviewListItem
+                                key={index}
+                                onClickReviewItem={onClickReviewItem}
+                                review={review}
+                            />
+                            <div className="myReview__icon__box">
+                                <div className="myReview__icon__item" onClick={onClickUpdate}> 
+                                    <PencilSquare size={20} />
+                                </div>
+                                <div className="myReview__icon__item">
+                                    <Trash3 size={20} />
+                                </div>
+                            </div>
+                        </div>
                     );
                 }) : ''}
             </div>
