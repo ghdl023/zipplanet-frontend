@@ -16,7 +16,7 @@ const { Content } = Layout;
 
 function Main() {
   const [loading, error] = useKakaoLoader({
-    appkey: import.meta.env.VITE_KAKAO_MAP_API_KEY, // 발급 받은 APPKEY
+    appkey: '4f917b9ae6ba88a7e65e04d42430cde0', // 발급 받은 APPKEY
     libraries: ['clusterer', 'services'],
     // ...options, // 추가 옵션
   });
