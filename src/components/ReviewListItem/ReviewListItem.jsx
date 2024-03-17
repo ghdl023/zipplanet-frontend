@@ -1,6 +1,7 @@
 import { useRef, useState, forwardRef, useEffect } from 'react';
 import { Heart, HeartFill, StarFill } from 'react-bootstrap-icons';
 import { useRecoilValue } from 'recoil';
+import _ from 'lodash';
 import { updateZzimYn } from '../../apis/api/review';
 import { userInfoState } from '../../recoil/userInfoState';
 import './ReviewListItem.scss';
@@ -22,15 +23,26 @@ const ReviewListItem = forwardRef(
       setFavorite((prev) => !prev);
       favoriteRef.current = !favoriteRef.current;
 
+      const zzimYn = favoriteRef.current ? 'Y' : 'N';
       await updateZzimYn({
         // 찜상태 업데이트
         userId,
         reviewId,
-        zzimYn: favoriteRef.current ? 'Y' : 'N',
+        zzimYn,
       });
 
       if (onToggleFavorite) {
         onToggleFavorite(reviewId, favoriteRef.current); // 리뷰목록 찜상태 업데이트 해주기
+      }
+
+      if (localStorage.getItem('watched')) {
+        // 최근 본리뷰 업데이트
+        const watched = JSON.parse(localStorage.getItem('watched'));
+        const findIndex = _.findIndex(watched, { reviewId });
+        if (findIndex != -1) {
+          watched[findIndex].zzimYn = zzimYn;
+          localStorage.setItem('watched', JSON.stringify(watched));
+        }
       }
     };
 

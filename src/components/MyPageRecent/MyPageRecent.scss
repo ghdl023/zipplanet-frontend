@@ -1,0 +1,33 @@
+.mypage__recent__header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 50px;
+
+    h3 {
+    }
+
+    p {
+        color: rgb(169, 169, 169);
+    }
+}
+
+.mypage__recent__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 10px;
+}
+
+.mypage__noresult {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size:1.5rem;
+
+    h2{
+        margin-top: 25px;
+        font-size:1.35rem;
+        font-weight: 600;
+    }
+}
