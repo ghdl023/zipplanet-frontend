@@ -4,6 +4,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userInfoState } from '../../recoil/userInfoState';
 import { findPwd, updateUser } from '../../apis/api/user';
 import toast from 'react-hot-toast';
+import RandomNickName from '../RandomNickName';
 
 function UpdateNickname(props) {
     const [bCheck, setBCheck] = useState(true);
@@ -55,7 +56,7 @@ function UpdateNickname(props) {
                     <div className='update__nickname__header'>
                         <label htmlFor='old__nickname'>닉네임</label>
                         <div className='random__nickname'>
-                            <button>랜덤추천</button>
+                            <RandomNickName setNewNickname={setNewNickname} />
                         </div>
                     </div>
                     <div className='input__nickname'>
