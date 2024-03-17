@@ -8,18 +8,20 @@ import './ReviewSearchBar.scss';
 function ReviewSearchBar() {
   const [search, setSearch] = useRecoilState(searchState);
   const [filterOpen, setFilterOpen] = useState(false);
+  const [keyword, setKeyword] = useState('');
 
-  const getReviewList = () => {
+  const onClickEnter = () => {
     console.log('Enter!');
-    window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
-  };
-
-  const handleChangeInput = (e) => {
     setSearch({
       ...search,
       searchType: 'keyword',
-      keyword: e.target.value,
+      keyword,
     });
+    setKeyword('');
+  };
+
+  const handleChangeInput = (e) => {
+    setKeyword(e.target.value);
   };
 
   return (
@@ -32,7 +34,7 @@ function ReviewSearchBar() {
           type="text"
           placeholder="지번 검색"
           onChange={handleChangeInput}
-          onKeyDown={(e) => e.key === 'Enter' && getReviewList()}
+          onKeyDown={(e) => e.key === 'Enter' && onClickEnter()}
         />
       </div>
       <div

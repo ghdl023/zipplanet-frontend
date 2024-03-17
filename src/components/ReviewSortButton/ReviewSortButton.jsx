@@ -1,17 +1,18 @@
 import './ReviewSortButton.scss';
-import { useRecoilValue } from 'recoil';
-import { searchState } from '../../recoil/searchState';
+import { SidebarContext } from '../../contexts/SidebarContext';
 
 function ReviewSortButton({ btn, onClick }) {
-  const searchValue = useRecoilValue(searchState);
-
   return (
-    <button
-      className={`review__sort__button ${btn.value === searchValue.sort ? 'active' : ''}`}
-      onClick={() => onClick(btn.value)}
-    >
-      {btn.label}
-    </button>
+    <SidebarContext.Consumer>
+      {(value) => (
+        <button
+          className={`review__sort__button ${btn.value === value.order ? 'active' : ''}`}
+          onClick={() => onClick(btn.value)}
+        >
+          {btn.label}
+        </button>
+      )}
+    </SidebarContext.Consumer>
   );
 }
 

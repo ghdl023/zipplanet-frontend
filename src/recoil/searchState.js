@@ -10,6 +10,5 @@ export const searchState = atom({
     contractTypeId: '', // 필터설정하기 '거래유형'
     rate: 5, // 필터설정하기 '평점'
     pos: '', // 좌표
-    sort: 'like_Count',
   },
 });

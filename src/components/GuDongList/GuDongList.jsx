@@ -566,7 +566,6 @@ function GuDongList({ gudongType, onClickGudongType }) {
       });
     }
     onClickGudongType('');
-    window.dispatchEvent(new CustomEvent('callSearchReviewEvent', {})); // 리뷰 조회 이벤트 호출
   };
 
   return (

@@ -33,6 +33,7 @@
     "react-star-ratings": "^2.3.0",
     "react-tooltip": "^5.26.3",
     "recoil": "^0.7.7",
+    "recoil-persist": "^5.1.0",
     "sass": "^1.71.1",
     "sort-by": "^1.2.0"
   },
