@@ -37,7 +37,6 @@ function MyPageZzim() {
             userId: parseInt(userInfo.userId)
         });
         setReviewList(getReviewList['data']);
-        setPageCount(Math.ceil(reviewList.length / 5));
     }
     useEffect(() => {
         getList();
