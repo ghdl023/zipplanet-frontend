@@ -20,6 +20,7 @@ const Header = () => {
 
   const logout = () => {
     resetUserInfo();
+    navigate(BASE_URL, { replace: true});
   };
 
   return (

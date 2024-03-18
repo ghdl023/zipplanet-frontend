@@ -6,7 +6,7 @@ const TIMEOUT = 2500;
 // 인증이 필요없는 API인 경우 사용 (ex 로그인)
 const axiosApi = (url, options) => {
   const instance = axios.create({ baseURL: url, ...options });
-  instance.defaults.timeout = TIMEOUT;
+  // instance.defaults.timeout = TIMEOUT;
   instance.interceptors.request.use(onFulfilledRequest, onRejectedRequest);
   instance.interceptors.response.use(onFulfilledResponse, onRejectedResponse);
   return instance;
@@ -20,7 +20,7 @@ const axiosAuthApi = (url, options) => {
     headers: { Authorization: 'Bearer ' + token },
     ...options,
   });
-  instance.defaults.timeout = TIMEOUT;
+  // instance.defaults.timeout = TIMEOUT;
   instance.interceptors.request.use(onFulfilledRequest, onRejectedRequest);
   instance.interceptors.response.use(onFulfilledResponse, onRejectedResponse);
   return instance;

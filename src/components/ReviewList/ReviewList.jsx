@@ -74,7 +74,7 @@ function ReviewList() {
         } else {
           setItems([...items, ...data.reviews]);
         }
-        setOffset(options.offset + options.limit);
+        setOffset(options.offset + options.limit);  
         // console.log(options.offset + options.limit);
         totalCount.current = data.totalCount;
         const _hasNext = data.totalCount > options.offset + options.limit;
