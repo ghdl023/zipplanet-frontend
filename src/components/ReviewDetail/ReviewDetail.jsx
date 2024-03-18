@@ -120,13 +120,22 @@ function ReviewDetail() {
           <ArrowLeft />
         </button>
         <h2>{jibun}</h2>
-        <CopyToClipboard 
-          text={`${window.location.origin}${import.meta.env.VITE_BASE_URL}?id=${reviewId}` }
-          onCopy={() => toast.success("리뷰 링크가 클립보드에 복사되었습니다.")}>
-          <button onClick={onClickShare}>
-            <Share />
-          </button>
-        </CopyToClipboard>
+        <div>
+          <CopyToClipboard 
+            text={`${window.location.origin}${import.meta.env.VITE_BASE_URL}?id=${reviewId}` }
+            onCopy={() => toast.success("리뷰 링크가 클립보드에 복사되었습니다.")}>
+            <button onClick={onClickShare}>
+              <Share />
+            </button>
+          </CopyToClipboard>
+          {userId && (
+              <button onClick={onClickFavorite}>
+                <span className="icon__favorite">
+                  {favorite ? <HeartFill /> : <Heart />}
+                </span>
+              </button>
+            )}
+        </div>
       </div>
       <div className="review__detail__main">
         <div className="review__detail__main__content">
@@ -141,16 +150,7 @@ function ReviewDetail() {
             </Carousel>
           </div>
           <div className="review__detail__main__content__rate__container">
-            {userId && (
-              <div className="icon__container">
-                <span className="icon__favorite" onClick={onClickFavorite}>
-                  {favorite ? <HeartFill /> : <Heart />}
-                </span>
-                <span className="icon__like">
-                  {true ? <HandThumbsUp /> : <HandThumbsUpFill />}
-                </span>
-              </div>
-            )}
+          
             <div className="category__container">
               <div className="category__box">
                 <h3>총 평점</h3>

@@ -8,6 +8,7 @@ function ReviewSortBar() {
     { label: '최신순', value: 'create_Date' },
     { label: '평점순', value: 'total_Rate' },
     { label: '좋아요순', value: 'like_Count' },
+    { label: '조회수순', value: 'view_Count' },
   ];
   const { setOrder } = useContext(SidebarContext);
 
