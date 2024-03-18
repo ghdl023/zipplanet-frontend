@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { searchMyReveiw } from "../../apis/api/review";
 import { userInfoState } from "../../recoil/userInfoState";
 import './MyPageReview.scss';
-import PaginationButton from "../PaginationButton";
 import { PencilSquare, Trash3 } from "react-bootstrap-icons";
 
 function MyPageReview() {
@@ -17,8 +16,7 @@ function MyPageReview() {
     const [reivewUpdate, setReviewUpdate] = useRecoilState(reviewUpdateState);
     const userInfo = useRecoilValue(userInfoState);
     const [reviewList, setReviewList] = useState('');
-    const [pageCount, setPageCount] = useState();
-    const [pageNo, setPageNo] = useState(1);
+    const [showMore, setShowMore] = useState(5);
 
     const navigate = useNavigate();
 
@@ -50,7 +48,6 @@ function MyPageReview() {
             userId: parseInt(userInfo.userId)
         });
         setReviewList(getReviewList['data']);
-        setPageCount(Math.ceil(reviewList.length / 5));
     }
     useEffect(() => {
         getList();
@@ -60,7 +57,7 @@ function MyPageReview() {
         <div className="review__container">
             <div className="review__header">총 {reviewList.length}개의 내역이 있습니다.</div>
             <div className="review__list">
-                {reviewList != '' ? reviewList.filter((review) => reviewList.indexOf(review) >= (5 * pageNo - 5) && reviewList.indexOf(review) < (5 * pageNo)).map((review, index) => {
+            {reviewList != '' ? reviewList.filter((review) => reviewList.indexOf(review) < showMore).map((review, index) => {
                     return (
                         <div className="review__item" key={index}>
                             <ReviewListItem
@@ -80,8 +77,8 @@ function MyPageReview() {
                     );
                 }) : ''}
             </div>
-            <div>
-                <PaginationButton setPageNo={setPageNo} pageNo={pageNo} pageCount={pageCount} />
+            <div className="show__more__box">
+                <button className="show__more__btn" onClick={()=>setShowMore(showMore+10)}>더보기</button>
             </div>
         </div>
     );
