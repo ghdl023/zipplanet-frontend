@@ -96,4 +96,18 @@ export const updateZzimYn = async (params) => {
   } catch (e) {
     console.log(e);
   }
+}
+
+/**
+ * 리뷰 상세 조회
+ * @param {*} params
+ * @returns
+ */
+export const getReviewDetail = async (params) => {
+  try {
+    const { data } = await defaultInstance.get('/api/review/detail', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 };

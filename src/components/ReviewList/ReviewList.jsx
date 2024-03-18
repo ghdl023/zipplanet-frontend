@@ -41,7 +41,7 @@ function ReviewList() {
           ...searchValue,
           sort: order,
         };
-        console.log(params);
+        // console.log(params);
 
         if (options.offset > 1 && options.offset >= totalCount.current) {
           totalCount.current = 0;
@@ -75,7 +75,7 @@ function ReviewList() {
           setItems([...items, ...data.reviews]);
         }
         setOffset(options.offset + options.limit);
-        console.log(options.offset + options.limit);
+        // console.log(options.offset + options.limit);
         totalCount.current = data.totalCount;
         const _hasNext = data.totalCount > options.offset + options.limit;
         setHasNext(_hasNext);

@@ -13,11 +13,11 @@
     position:absolute;
     bottom: 5px;
     right: 35%;
-    background-color: #FF8B11;
-    border: 2px solid #fff;
-    color:#fff;
-    width: 75px;
-    height: 75px;
+    background-color: #FFC80F;
+    // border: 2px solid #000;
+    color:#000;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     display:flex;
     justify-content: center;
@@ -29,6 +29,5 @@
     font-size:2.3rem;
 
     &:hover {
-    background-color: #e98214;
     }
 }

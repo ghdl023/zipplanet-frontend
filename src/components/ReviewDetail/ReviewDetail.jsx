@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import {
   Heart,
@@ -11,12 +11,14 @@ import {
 import { Carousel } from 'react-bootstrap';
 import moment from 'moment';
 import _ from 'lodash';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import toast from 'react-hot-toast';
 import StarRate from '@components/common/StarRate';
 import { reviewDetailState } from '../../recoil/reviewDetailState';
 import { pyungToArea } from '@utils/common';
 import { modalState } from '../../recoil/modalState';
 import { userInfoState } from '../../recoil/userInfoState';
-import { updateZzimYn } from '../../apis/api/review';
+import { getReviewDetail, updateZzimYn } from '../../apis/api/review';
 import { reviewListState } from '../../recoil/reviewListState';
 import './ReviewDetail.scss';
 
@@ -60,6 +62,25 @@ function ReviewDetail() {
 
   const [items, setItems] = useRecoilState(reviewListState);
 
+  const loadReviewDetail = async () => {
+    const res = await getReviewDetail({
+      params: {
+        id: reviewId,
+        uid: userId,
+      }
+    });
+    // console.log(res);
+    if(res.status.toLowerCase() === 'ok' && res.data) {
+      setReviewDetail(res.data);
+    }
+  }
+
+  useEffect(()=>{
+    if(reviewId) {
+      loadReviewDetail();
+    } 
+  }, []);
+
   const handleClickReport = () => {
     if (!userId) return;
     setModalOpen({
@@ -99,9 +120,13 @@ function ReviewDetail() {
           <ArrowLeft />
         </button>
         <h2>{jibun}</h2>
-        <button onClick={onClickShare}>
-          <Share />
-        </button>
+        <CopyToClipboard 
+          text={`${window.location.origin}${import.meta.env.VITE_BASE_URL}?id=${reviewId}` }
+          onCopy={() => toast.success("리뷰 링크가 클립보드에 복사되었습니다.")}>
+          <button onClick={onClickShare}>
+            <Share />
+          </button>
+        </CopyToClipboard>
       </div>
       <div className="review__detail__main">
         <div className="review__detail__main__content">
