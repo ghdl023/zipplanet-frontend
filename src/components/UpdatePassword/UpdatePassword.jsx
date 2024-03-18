@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './UpdatePassword.scss';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import {  useRecoilValue } from 'recoil';
 import { userInfoState } from '../../recoil/userInfoState';
 import { findPwd, updateUser } from '../../apis/api/user';
 import toast from 'react-hot-toast';
@@ -11,7 +11,6 @@ function UpdatePassword(props) {
     const [passwordConfirm, setPasswordConfirm] = useState('');
 
     const userInfo = useRecoilValue(userInfoState);
-    const setUserInfo = useRecoilState(userInfoState);
 
     useEffect(() => {
         if (oldPassword != '' && newPassword != '' && passwordConfirm != '') {

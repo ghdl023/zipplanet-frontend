@@ -40,7 +40,7 @@ function MyPageZzim() {
     }
     useEffect(() => {
         getList();
-    })
+    },[])
 
     return (
         <div className="zzim__container">

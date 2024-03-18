@@ -54,7 +54,7 @@ function MyPageReview() {
     }
     useEffect(() => {
         getList();
-    })
+    },[])
 
     return (
         <div className="review__container">
@@ -62,13 +62,13 @@ function MyPageReview() {
             <div className="review__list">
                 {reviewList != '' ? reviewList.filter((review) => reviewList.indexOf(review) >= (5 * pageNo - 5) && reviewList.indexOf(review) < (5 * pageNo)).map((review, index) => {
                     return (
-                        <div className="review__item">
+                        <div className="review__item" key={index}>
                             <ReviewListItem
                                 key={index}
                                 onClickReviewItem={onClickReviewItem}
                                 review={review}
                             />
-                            <div className="myReview__icon__box">
+                            <div className="myReview__icon__box" >
                                 <div className="myReview__icon__item" onClick={onClickUpdate}> 
                                     <PencilSquare size={20} />
                                 </div>
