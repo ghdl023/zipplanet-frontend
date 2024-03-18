@@ -67,18 +67,18 @@ function ReviewDetail() {
       params: {
         id: reviewId,
         uid: userId,
-      }
+      },
     });
     // console.log(res);
-    if(res.status.toLowerCase() === 'ok' && res.data) {
+    if (res.status.toLowerCase() === 'ok' && res.data) {
       setReviewDetail(res.data);
     }
-  }
+  };
 
-  useEffect(()=>{
-    if(reviewId) {
+  useEffect(() => {
+    if (reviewId) {
       loadReviewDetail();
-    } 
+    }
   }, []);
 
   const handleClickReport = () => {
@@ -121,20 +121,23 @@ function ReviewDetail() {
         </button>
         <h2>{jibun}</h2>
         <div>
-          <CopyToClipboard 
-            text={`${window.location.origin}${import.meta.env.VITE_BASE_URL}?id=${reviewId}` }
-            onCopy={() => toast.success("리뷰 링크가 클립보드에 복사되었습니다.")}>
+          <CopyToClipboard
+            text={`${window.location.origin}${import.meta.env.VITE_BASE_URL}?id=${reviewId}`}
+            onCopy={() =>
+              toast.success('리뷰 링크가 클립보드에 복사되었습니다.')
+            }
+          >
             <button onClick={onClickShare}>
               <Share />
             </button>
           </CopyToClipboard>
           {userId && (
-              <button onClick={onClickFavorite}>
-                <span className="icon__favorite">
-                  {favorite ? <HeartFill /> : <Heart />}
-                </span>
-              </button>
-            )}
+            <button onClick={onClickFavorite}>
+              <span className="icon__favorite">
+                {favorite ? <HeartFill /> : <Heart />}
+              </span>
+            </button>
+          )}
         </div>
       </div>
       <div className="review__detail__main">
@@ -150,7 +153,6 @@ function ReviewDetail() {
             </Carousel>
           </div>
           <div className="review__detail__main__content__rate__container">
-          
             <div className="category__container">
               <div className="category__box">
                 <h3>총 평점</h3>
@@ -221,7 +223,13 @@ function ReviewDetail() {
               </div>
               <div className="info__main__item">
                 <h2>계약유형</h2>
-                <span>{contractTypeId}</span>
+                <span>
+                  {contractTypeId
+                    ? contractTypeId === '1'
+                      ? '월세'
+                      : '전세'
+                    : contractTypeId}
+                </span>
               </div>
               <div className="info__main__item">
                 <h2>입주기간</h2>
