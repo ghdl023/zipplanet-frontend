@@ -20,6 +20,7 @@ import { modalState } from '../../recoil/modalState';
 import { userInfoState } from '../../recoil/userInfoState';
 import { getReviewDetail, updateZzimYn } from '../../apis/api/review';
 import { reviewListState } from '../../recoil/reviewListState';
+import { getRandomThumbnailImage } from '../../utils/common';
 import './ReviewDetail.scss';
 
 function ReviewDetail() {
@@ -51,10 +52,10 @@ function ReviewDetail() {
   const { userId } = userInfoValue;
   // 테스트 이미지 데이터
   const images = [
-    'https://img.freepik.com/free-photo/minimalist-interior-3d-rendering_52683-131548.jpg?size=626&ext=jpg&ga=GA1.1.1292351815.1709942400&semt=ais',
-    'https://lh3.googleusercontent.com/proxy/uc2QvnuFeATrNhByoFUkVyZlydGe4l5CSU6kkJ1QfDVGyTWGTnTXZsVOhQ4MqAhLlj1z_w83nxgszk9MdsX9qcQrY3c0sbcsH6Z1IE4cA81O6SilcmZpCmLRQ4AJDW7hFkA0hxbYBh3xx-DK6bMeh37R85dr0w',
-    'https://www.zipdeco.co.kr/upload/2017/11/28/EDITOR_201711281009336180_w2Qe4',
-    'https://www.qplace.kr/content/images/2022/10/No.2227------------------70------------------------------19.jpeg',
+    getRandomThumbnailImage(),
+    getRandomThumbnailImage(),
+    getRandomThumbnailImage(),
+    getRandomThumbnailImage(),
   ];
 
   const [favorite, setFavorite] = useState(zzimYn === 'Y');
