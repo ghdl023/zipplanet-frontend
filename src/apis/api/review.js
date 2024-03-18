@@ -118,3 +118,13 @@ export const getReviewDetail = async (params) => {
     console.log(e);
   }
 };
+
+
+export const searchMyReveiw = async (params) => {
+  try {
+    const { data } = await defaultInstance.post('/api/review/searchMyReview', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}

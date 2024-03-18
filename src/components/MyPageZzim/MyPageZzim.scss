@@ -1,0 +1,50 @@
+.zzim__container {
+    width: 100%;
+    animation: fadein 0.4s;
+    @keyframes fadein {
+
+        /* 효과를 동작시간 동안 0 ~ 1까지 */
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+.zzim__list {
+    display: flex;
+    flex-wrap: wrap;
+    
+
+    .review__list__item {
+        width: 20%;
+        margin-top: 25px;
+    }
+
+    
+}
+
+.show__more__box {
+    display: flex;
+    justify-content: center;
+    margin: 50px 30px 30px 30px;
+
+    button {
+        width: 150px;
+        text-align: center;
+        height: 55px;
+        border: 1px solid #F3F4F6;
+        border-radius: 15px;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        font-size: 13px;
+        background-color: #FF8B11;
+        transition-duration: 0.3s;
+    }
+    button:hover {
+        background-color: #ff8c1179;
+    }
+}

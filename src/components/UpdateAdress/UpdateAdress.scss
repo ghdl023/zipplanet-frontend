@@ -1,0 +1,63 @@
+.update__address__container {
+    margin: 30px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+
+    .update__address__form {
+        display: flex;
+        flex-direction: column;
+
+        .new__address {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+
+            .input__address {
+                margin: 15px 0px 0px 15px;
+                
+                input {
+                    width: 130px;
+                    text-align: center;
+                    height: 55px;
+                    border-radius: 10px;
+                    border: 1px solid #F3F4F6; 
+                    margin: 0px 10px 10px 0px;
+                    color: rgb(114, 114, 114);
+                    font-weight: bold;
+                    font-size: 13px;
+                    background-color: white;
+                    transition-duration: 0.3s;
+                }
+            }
+        }
+
+        .update__submit__btn {
+            display: flex;
+            justify-content: center;
+
+            button {
+                width: 140px;
+                height: 60px;
+                text-align: center;
+                border: 1px solid rgb(243, 244, 246);
+                margin: 0px 15px 15px 0px;
+                color: rgb(114, 114, 114);
+                font-weight: bold;
+                transition-duration: 0.3s;
+            }
+
+            :disabled {
+                background-color: rgb(211, 211, 211) !important;
+                color: rgba(114, 114, 114, 0.253) !important;
+            }
+
+            :hover {
+                background-color: rgb(241, 241, 241);
+                transition-duration: 0.3s;
+            }
+
+        }
+    }
+}

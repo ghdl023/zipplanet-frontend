@@ -55,3 +55,35 @@ export const findPwd = async (parmas) => {
     console.log(e);
   }
 };
+
+export const updateUser = async (params) => {
+  try {
+    const {data} = await defaultInstance.post('api/user/updateUser', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+
+// export const getHome = () => {
+//   return request({ url: 'home' });
+// };
+
+// //get요청
+
+// export const getUserInfo = (userID) => {
+//   return request({ url: `gerUserInfo/${userID}` });
+// };
+
+// //post요청
+// export const saveUserInfo = () => {
+//   request({
+//     method: 'POST',
+//     url: '/user/12345',
+//     data: {
+//       firstName: 'Fred',
+//       lastName: 'Flintstone',
+//     },
+//   });
+// };
