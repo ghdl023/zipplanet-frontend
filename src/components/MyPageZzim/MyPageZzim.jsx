@@ -44,7 +44,7 @@ function MyPageZzim() {
 
     return (
         <div className="zzim__container">
-            <div className="zzim__header">총 {reviewList.length}개의 내역이 있습니다.</div>
+            {reviewList != '' ?<div className="zzim__header">총 {reviewList.length}개의 내역이 있습니다.</div> : ''}
             <div className="zzim__list">
                 {reviewList != '' ? reviewList.filter((review) => reviewList.indexOf(review) < showMore).map((review, index) => {
                     return (
@@ -54,11 +54,13 @@ function MyPageZzim() {
                             review={review}
                         />
                     );
-                }) : ''}
+                }) : <div className="review__list__noresult">
+                <h3>😅 찜한 리뷰가 없습니다.</h3>
+              </div>}
             </div>
-            <div className="show__more__box">
-                <button className="show__more__btn" onClick={()=>setShowMore(showMore+10)}>더보기</button>
-            </div>
+            {reviewList != '' ? <div className="show__more__box">
+                <button className="show__more__btn" onClick={() => setShowMore(showMore + 10)}>더보기</button>
+            </div> : ''}
         </div>
     );
 }

@@ -17,7 +17,17 @@
 .zzim__list {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 20px;
     
+    .review__list__noresult {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+    }
 
     .review__list__item {
         width: 20%;

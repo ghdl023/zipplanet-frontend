@@ -20,6 +20,17 @@
     margin-top: 20px;
     flex-wrap: wrap;
 
+    .review__list__noresult {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+    }
+
+    
     .review__item {
         width: 20%;
         position: relative;
@@ -41,10 +52,12 @@
 
 .myReview__icon__item {
     margin-right: 7px;
+
     * {
         transition-duration: 0.3s;
         color: white;
     }
+
     :hover {
         * {
             color: #FF8B11;
@@ -70,6 +83,7 @@
         background-color: #FF8B11;
         transition-duration: 0.3s;
     }
+
     button:hover {
         background-color: #ff8c1179;
     }

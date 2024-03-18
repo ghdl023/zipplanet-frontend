@@ -51,13 +51,13 @@ function MyPageReview() {
     }
     useEffect(() => {
         getList();
-    },[])
+    }, [])
 
     return (
         <div className="review__container">
-            <div className="review__header">총 {reviewList.length}개의 내역이 있습니다.</div>
+            {reviewList != '' ? <div className="review__header">총 {reviewList.length}개의 내역이 있습니다.</div> : ''}
             <div className="review__list">
-            {reviewList != '' ? reviewList.filter((review) => reviewList.indexOf(review) < showMore).map((review, index) => {
+                {reviewList != '' ? reviewList.filter((review) => reviewList.indexOf(review) < showMore).map((review, index) => {
                     return (
                         <div className="review__item" key={index}>
                             <ReviewListItem
@@ -66,7 +66,7 @@ function MyPageReview() {
                                 review={review}
                             />
                             <div className="myReview__icon__box" >
-                                <div className="myReview__icon__item" onClick={onClickUpdate}> 
+                                <div className="myReview__icon__item" onClick={onClickUpdate}>
                                     <PencilSquare size={20} />
                                 </div>
                                 <div className="myReview__icon__item">
@@ -75,11 +75,13 @@ function MyPageReview() {
                             </div>
                         </div>
                     );
-                }) : ''}
+                }) : <div className="review__list__noresult">
+                <h3>😅 작성한 리뷰가 없습니다.</h3>
+              </div>}
             </div>
-            <div className="show__more__box">
-                <button className="show__more__btn" onClick={()=>setShowMore(showMore+10)}>더보기</button>
-            </div>
+            {reviewList != '' ? <div className="show__more__box">
+                <button className="show__more__btn" onClick={() => setShowMore(showMore + 10)}>더보기</button>
+            </div> : ''}
         </div>
     );
 }
