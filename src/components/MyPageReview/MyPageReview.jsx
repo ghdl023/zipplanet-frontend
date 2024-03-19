@@ -18,7 +18,6 @@ function MyPageReview() {
     const userInfo = useRecoilValue(userInfoState);
     const [reviewList, setReviewList] = useState('');
     const [showMore, setShowMore] = useState(5);
-    const [effectContorller, setEffectContorller] = useState(1);
 
     const navigate = useNavigate();
 
@@ -33,7 +32,7 @@ function MyPageReview() {
             ...modalOpen,
             reviewCreateModalOpen: true,
         })
-        setEffectContorller(effectContorller+1); // useEffect 무한루핑 방지
+        
     }
     const onClickDelete = async (review) => {
         const result = await deleteReview({
@@ -45,7 +44,8 @@ function MyPageReview() {
             return;
         }
         toast.success('리뷰가 삭제되었습니다.');
-        setEffectContorller(effectContorller+1); // useEffect 무한루핑 방지
+        
+        getList();
     }
 
     const getList = async () => {
@@ -55,9 +55,9 @@ function MyPageReview() {
         setReviewList(getReviewList['data']);
     }
     useEffect(() => {
+        console.log("effect");
         getList();
-    },[effectContorller]) //리뷰 삭제시 바로 반영되도록 하고 싶은데 reviewList를 종속성 배열 요소에 포함시키면 무한 루핑됨
-
+    },[])
     return (
         <div className="review__container">
             {reviewList != '' ? <div className="review__header">총 {reviewList.length}개의 작성한 리뷰가 있습니다.</div> : ''}
