@@ -2,6 +2,7 @@ import { ArrowRightCircleFill, PersonCircle } from 'react-bootstrap-icons';
 import './AccountWrapper.scss';
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../recoil/userInfoState';
+import DeleteUser from '../DeleteUser/DeleteUser';
 
 function AccountWrapper(props) {
     const accountInfo = useRecoilValue(userInfoState);
@@ -40,7 +41,7 @@ function AccountWrapper(props) {
                 <ArrowRightCircleFill size={18} onClick={()=>modalOpen(4)}/>
             </div>
             <div className="account__footer">
-                <button>회원탈퇴</button>
+                <button onClick={()=>modalOpen(5)}>회원탈퇴</button>
             </div>
         </div>
     );
