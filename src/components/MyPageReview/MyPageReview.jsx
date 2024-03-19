@@ -67,7 +67,7 @@ function MyPageReview() {
                         <div className="review__item" key={index}>
                             <ReviewListItem
                                 key={index}
-                                onClickReviewItem={()=>onClickReviewItem()}
+                                onClickReviewItem={()=>onClickReviewItem(review)}
                                 review={review}
                             />
                             <div className="myReview__icon__box" >

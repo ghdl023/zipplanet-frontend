@@ -42,7 +42,7 @@ function MyPageZzim() {
                     return (
                         <ReviewListItem
                             key={index}
-                            onClickReviewItem={onClickReviewItem}
+                            onClickReviewItem={()=>onClickReviewItem(review)}
                             review={review}
                         />
                     );
