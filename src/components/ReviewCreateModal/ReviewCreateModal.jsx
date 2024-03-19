@@ -71,6 +71,8 @@ function ReviewCreateModal() {
   const refStartDate = useRef(null);
   const refEndDate = useRef(null);
 
+  const requestParams = useRef({});
+
   const changeRating = (newRating, name) => {
     setInputValues({
       ...inputValues,
@@ -143,7 +145,7 @@ function ReviewCreateModal() {
 
     const callApi = isCreate ? createReview : updateReview;
     const res = await callApi({
-      ...inputValues,
+      ...requestParams.current,
       userId,
     });
     // console.log(res);
@@ -153,7 +155,7 @@ function ReviewCreateModal() {
       window.dispatchEvent(new CustomEvent('callSelectAllPos', {})); // 좌표 조회
       closeModal();
     } else {
-      toast.error(`리뷰 ${TITLE}을 실패했습니다.`);
+      toast.error(res.message || `리뷰 ${TITLE}을 실패했습니다.`);
     }
   };
 
@@ -173,6 +175,7 @@ function ReviewCreateModal() {
   const checkValidation = () => {
     console.log(inputValues);
     // console.log(images);
+    requestParams.current = { ... inputValues };
     const {
       totalRate,
       transRate,
@@ -188,7 +191,7 @@ function ReviewCreateModal() {
       roomOption,
       startDate,
       endDate,
-    } = inputValues;
+    } = requestParams.current;
 
     const modalBody = document.getElementsByClassName('modal__content__body');
     if (totalRate === 0) {
@@ -253,10 +256,15 @@ function ReviewCreateModal() {
         refStartDate.current.focus();
         return false;
       } else {
+        const newDate = `${yyyymmdd.slice(0, 4)}-${yyyymmdd.slice(4, 6)}-${yyyymmdd.slice(6)}`;
         setInputValues({
           ...inputValues,
-          startDate: `${yyyymmdd.slice(0, 4)}-${yyyymmdd.slice(4, 6)}-${yyyymmdd.slice(6)}`,
+          startDate: newDate
         });
+        requestParams.current = {
+          ...requestParams.current,
+          startDate: newDate
+        }
       }
     }
 
@@ -267,10 +275,15 @@ function ReviewCreateModal() {
         refEndDate.current.focus();
         return false;
       } else {
+        const newDate = `${yyyymmdd.slice(0, 4)}-${yyyymmdd.slice(4, 6)}-${yyyymmdd.slice(6)}`;
         setInputValues({
           ...inputValues,
-          endDate: `${yyyymmdd.slice(0, 4)}-${yyyymmdd.slice(4, 6)}-${yyyymmdd.slice(6)}`,
+          endDate: newDate
         });
+        requestParams.current = {
+          ...requestParams.current,
+          startDate: newDate
+        }
       }
     }
     return true;
