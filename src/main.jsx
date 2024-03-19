@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@styles/reset.css';
 import '@styles/tooltip.css';
 import 'react-tooltip/dist/react-tooltip.css';
+import './styles/fonts/font.css';
 
 const router = createBrowserRouter([
   {
