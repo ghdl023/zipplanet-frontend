@@ -47,6 +47,8 @@ const ReviewListItem = forwardRef(
       }
     };
 
+    const image = getRandomThumbnailImage();
+
     return (
       <div className="review__list__item" onClick={onClickReviewItem} ref={ref}>
         {userId && (
@@ -59,7 +61,7 @@ const ReviewListItem = forwardRef(
           </div>
         )}
         <div className="review__list__item__thumb">
-          <img src={getRandomThumbnailImage()} />
+          <img src={image} alt={image}/>
         </div>
         <div className="review__list__item__content">
           <h5>{review.jibun}</h5>
@@ -72,7 +74,7 @@ const ReviewListItem = forwardRef(
           </div>
           <div className="review__list__item__footer__rate">
             <span>
-              <StarFill className="star-icon" /> {review.totalRate.toFixed(1)}
+              <StarFill className="star-icon" /> {review.totalRate ? (<span>{review.totalRate.toFixed(1)}</span>) : <span>0.0</span>}
             </span>
           </div>
         </div>

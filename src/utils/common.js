@@ -19,13 +19,13 @@ export const debounceFunction = (callback, delay) => {
 };
 
 export const getRandomThumbnailImage = () => {
-  return images[Math.floor(Math.random() * images.length + 1)];
+  const maxLen = 38;
+  return `https://ghdl023.github.io${import.meta.env.VITE_BASE_URL}images/thumbnail/${Math.floor(Math.random() * maxLen)}.jpg`;
 };
 
 const images = [
   'https://d2v80xjmx68n4w.cloudfront.net/gigs/fQod41663730361.jpg',
   'https://previews.123rf.com/images/zhudifeng/zhudifeng1507/zhudifeng150700144/41952353-%EA%B3%A0%EA%B8%89-%EC%8B%9D%EC%82%AC-%EC%8B%A4%EB%82%B4-%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4.jpg',
-  'https://lh3.googleusercontent.com/proxy/iQvFXmJpE-QjqmPgfFGPnQTVLi0q7zlcRtP4Seq6sSjPbLKe6YeHkdEglw40aOY9eBoI4TQpn5snPKEI3YUDdhUSo2psve9EPlbT9n63GWXY5uSqMb0rWzfo6kJdYs9bePTlmnqUDN7KPFMs-n5hTbsUYGWavSPFLhVS',
   'https://dalldesign.com/wp-content/uploads/2019/09/%EC%8B%A4%EB%82%B4%ED%88%AC%EC%8B%9C%EB%8F%84-33.jpg',
   'https://images.homify.com/v1468337281/p/photo/image/1580766/iStock_000020192462_Large.jpg',
   'https://d2v80xjmx68n4w.cloudfront.net/gigs/iXpAe1662169042.jpg',
@@ -52,7 +52,6 @@ const images = [
   'https://wimg.mk.co.kr/meet/neds/2016/05/image_readtop_2016_342215_14630376072468515.jpg',
   'https://contents-cdn.viewus.co.kr/image/2023/05/CP-2023-0023/image-0b7a32f8-c868-4391-bed8-93fc8a60a06a.jpeg',
   'https://www.homed.co.kr/images/homed_story/33/hs33_main1.png',
-  'https://lh3.googleusercontent.com/proxy/2WE76w6bUIhkPU4nD9QZwjknMfezRwc4cwgFwfWrcsoupXh6vazjgTIermAulhsrvv4CJIcfGnLQvTJ0s_Xiwc8bie12uS1mxIfEgu6GLFwdetq1geF_VgL_fEIGNplL6rF_zdx5mLU',
   'https://www.lotteresort.com/static/upload/images/20220221/001d1b56-4a4b-48fd-bb40-39b292225274.jpg',
   'https://thumb.photo-ac.com/64/64c7ded452e2160d983a6794f4d35dba_t.jpeg',
   'https://www.homed.co.kr/images/homed_story/19/1-%EC%9B%8C%EB%9D%BC%EB%B0%B8-%ED%99%88%EC%8A%A4%ED%83%80%EC%9D%BC%EB%A7%81.jpg',
