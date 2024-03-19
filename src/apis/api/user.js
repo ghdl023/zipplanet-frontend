@@ -65,6 +65,20 @@ export const updateUser = async (params) => {
   }
 };
 
+/**
+ * 회원 탈퇴
+ * @param {*} params
+ * @returns
+ */
+export const deleteUser = async (params) => {
+  try {
+    const {data} = await defaultInstance.post('api/user/deleteUser', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 
 // export const getHome = () => {
 //   return request({ url: 'home' });

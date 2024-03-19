@@ -3,6 +3,7 @@ import UpdateNickname from '../UpdateNickname';
 import UpdatePhone from '../UpdatePhone';
 import UpdateAdress from '../UpdateAdress';
 import './MyPageModalBody.scss';
+import DeleteUser from '../DeleteUser/DeleteUser';
 
 function MyPageModalBody(props) {
 
@@ -15,7 +16,9 @@ function MyPageModalBody(props) {
             props.modalNo === 3 ?
             <UpdatePhone setModalControl={props.setModalControl}/> :
             props.modalNo === 4 ?
-            <UpdateAdress setModalControl={props.setModalControl}/> : ''}
+            <UpdateAdress setModalControl={props.setModalControl}/> :
+            props.modalNo === 5 ?
+            <DeleteUser setModalControl={props.setModalControl}/> : ''}
         </div>
     );
 }
