@@ -128,3 +128,17 @@ export const searchMyReveiw = async (params) => {
     console.log(e);
   }
 }
+
+/**
+ * 신고 내역 조회
+ * @param {*} params
+ * @returns
+ */
+export const searchMyReport = async (params) => {
+  try {
+    const {data} = await defaultInstance.post('/api/review/searchMyReport', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
