@@ -16,6 +16,7 @@ import { pyungToArea } from '@utils/common';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { reviewUpdateState } from '../../recoil/reviewUpdateState';
 import { modalState } from '../../recoil/modalState';
+import { userInfoState } from '../../recoil/userInfoState';
 import './ReviewCreateModal.scss';
 
 function ReviewCreateModal() {
@@ -58,6 +59,7 @@ function ReviewCreateModal() {
   const [images, setImages] = useState([]);
   const [bChecked, setChecked] = useState(false);
   const [jibunErrMsg, setJibunErrMsg] = useState('');
+  const { userId } = useRecoilValue(userInfoState);
 
   const refTitle = useRef(null);
   const refDescription = useRef(null);
@@ -128,7 +130,7 @@ function ReviewCreateModal() {
             );
           }
         });
-      } catch(e){
+      } catch (e) {
         console.error(e);
       }
     }
@@ -142,6 +144,7 @@ function ReviewCreateModal() {
     const callApi = isCreate ? createReview : updateReview;
     const res = await callApi({
       ...inputValues,
+      userId,
     });
     // console.log(res);
 
@@ -189,23 +192,23 @@ function ReviewCreateModal() {
 
     const modalBody = document.getElementsByClassName('modal__content__body');
     if (totalRate === 0) {
-      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
+      if (modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('총 평점을 선택해주세요.');
       return false;
     } else if (transRate === 0) {
-      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
+      if (modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('교통점수를 선택해주세요.');
       return false;
     } else if (manageRate === 0) {
-      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
+      if (modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('관리점수를 선택해주세요.');
       return false;
     } else if (infraRate === 0) {
-      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
+      if (modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('주변환경점수를 선택해주세요.');
       return false;
     } else if (lifeRate === 0) {
-      if(modalBody.length > 0) modalBody[0].scrollTop = 0;
+      if (modalBody.length > 0) modalBody[0].scrollTop = 0;
       toast.error('거주환경점수를 선택해주세요.');
       return false;
     } else if (title === null || title === '') {
@@ -506,7 +509,7 @@ function ReviewCreateModal() {
                     name="floorsCount"
                     value={inputValues.floorsCount}
                     onChange={handleChange}
-                    placeholder="1"
+                    placeholder=""
                     maxLength={2}
                     ref={refFloorsCount}
                   />{' '}
@@ -643,8 +646,8 @@ function ReviewCreateModal() {
                   }}
                 />{' '}
                 <label htmlFor="agreeYn">
-                  리뷰 {TITLE} 규정을 확인하였으며,입력한
-                  정보는 실제 정보와 다름이 없습니다.
+                  리뷰 {TITLE} 규정을 확인하였으며,입력한 정보는 실제 정보와
+                  다름이 없습니다.
                 </label>
               </span>
             </div>

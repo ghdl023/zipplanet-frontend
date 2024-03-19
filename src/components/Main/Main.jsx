@@ -59,6 +59,14 @@ function Main() {
     // console.log(search);
   };
 
+  const onCliickMarker = (pos) => {
+    setSearch({
+      ...searchValue,
+      searchType: 'pos',
+      pos: `${pos.lat},${pos.lng}`,
+    });
+  };
+
   useEffect(() => {
     loadPositions();
     setTimeout(() => {
@@ -175,7 +183,7 @@ function Main() {
                   lat: pos.lat,
                   lng: pos.lng,
                 }}
-                // onClick={() => onCliickMarker(pos)}
+                onClick={() => onCliickMarker(pos)}
               ></MapMarker>
             ))}
           </MarkerClusterer>

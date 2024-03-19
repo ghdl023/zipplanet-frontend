@@ -20,6 +20,7 @@ import { modalState } from '../../recoil/modalState';
 import { userInfoState } from '../../recoil/userInfoState';
 import { getReviewDetail, updateZzimYn } from '../../apis/api/review';
 import { reviewListState } from '../../recoil/reviewListState';
+import { getRandomThumbnailImage } from '../../utils/common';
 import './ReviewDetail.scss';
 
 function ReviewDetail() {
@@ -51,10 +52,10 @@ function ReviewDetail() {
   const { userId } = userInfoValue;
   // 테스트 이미지 데이터
   const images = [
-    'https://img.freepik.com/free-photo/minimalist-interior-3d-rendering_52683-131548.jpg?size=626&ext=jpg&ga=GA1.1.1292351815.1709942400&semt=ais',
-    'https://lh3.googleusercontent.com/proxy/uc2QvnuFeATrNhByoFUkVyZlydGe4l5CSU6kkJ1QfDVGyTWGTnTXZsVOhQ4MqAhLlj1z_w83nxgszk9MdsX9qcQrY3c0sbcsH6Z1IE4cA81O6SilcmZpCmLRQ4AJDW7hFkA0hxbYBh3xx-DK6bMeh37R85dr0w',
-    'https://www.zipdeco.co.kr/upload/2017/11/28/EDITOR_201711281009336180_w2Qe4',
-    'https://www.qplace.kr/content/images/2022/10/No.2227------------------70------------------------------19.jpeg',
+    getRandomThumbnailImage(),
+    getRandomThumbnailImage(),
+    getRandomThumbnailImage(),
+    getRandomThumbnailImage(),
   ];
 
   const [favorite, setFavorite] = useState(zzimYn === 'Y');
@@ -67,18 +68,18 @@ function ReviewDetail() {
       params: {
         id: reviewId,
         uid: userId,
-      }
+      },
     });
     // console.log(res);
-    if(res.status.toLowerCase() === 'ok' && res.data) {
+    if (res.status.toLowerCase() === 'ok' && res.data) {
       setReviewDetail(res.data);
     }
-  }
+  };
 
-  useEffect(()=>{
-    if(reviewId) {
+  useEffect(() => {
+    if (reviewId) {
       loadReviewDetail();
-    } 
+    }
   }, []);
 
   const handleClickReport = () => {
@@ -120,13 +121,25 @@ function ReviewDetail() {
           <ArrowLeft />
         </button>
         <h2>{jibun}</h2>
-        <CopyToClipboard 
-          text={`${window.location.origin}${import.meta.env.VITE_BASE_URL}?id=${reviewId}` }
-          onCopy={() => toast.success("리뷰 링크가 클립보드에 복사되었습니다.")}>
-          <button onClick={onClickShare}>
-            <Share />
-          </button>
-        </CopyToClipboard>
+        <div>
+          <CopyToClipboard
+            text={`${window.location.origin}${import.meta.env.VITE_BASE_URL}?id=${reviewId}`}
+            onCopy={() =>
+              toast.success('리뷰 링크가 클립보드에 복사되었습니다.')
+            }
+          >
+            <button onClick={onClickShare}>
+              <Share />
+            </button>
+          </CopyToClipboard>
+          {userId && (
+            <button onClick={onClickFavorite}>
+              <span className="icon__favorite">
+                {favorite ? <HeartFill /> : <Heart />}
+              </span>
+            </button>
+          )}
+        </div>
       </div>
       <div className="review__detail__main">
         <div className="review__detail__main__content">
@@ -141,16 +154,6 @@ function ReviewDetail() {
             </Carousel>
           </div>
           <div className="review__detail__main__content__rate__container">
-            {userId && (
-              <div className="icon__container">
-                <span className="icon__favorite" onClick={onClickFavorite}>
-                  {favorite ? <HeartFill /> : <Heart />}
-                </span>
-                <span className="icon__like">
-                  {true ? <HandThumbsUp /> : <HandThumbsUpFill />}
-                </span>
-              </div>
-            )}
             <div className="category__container">
               <div className="category__box">
                 <h3>총 평점</h3>
@@ -221,7 +224,13 @@ function ReviewDetail() {
               </div>
               <div className="info__main__item">
                 <h2>계약유형</h2>
-                <span>{contractTypeId}</span>
+                <span>
+                  {contractTypeId
+                    ? contractTypeId === '1'
+                      ? '월세'
+                      : '전세'
+                    : contractTypeId}
+                </span>
               </div>
               <div className="info__main__item">
                 <h2>입주기간</h2>
