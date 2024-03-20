@@ -1,0 +1,105 @@
+.report__container {
+
+    width: 100%;
+    animation: fadein 0.4s;
+
+    @keyframes fadein {
+
+        /* 효과를 동작시간 동안 0 ~ 1까지 */
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+.report__list__noresult {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: rgb(169, 169, 169);
+    }
+}
+.report__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.report__item {
+    margin: 0.5%;
+    margin-top: 20px;
+    position: relative;
+    width: 19%;
+}
+
+
+
+.report__contents__box {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.534);
+    z-index: 999;
+    top: 0%;
+    left: 0%;
+    flex-direction: column;
+    align-items: center;
+    transition-duration: 0.2s;
+    >* {
+        margin-top: 20px;
+        color: white;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+    table {
+        width: 85%;
+
+        tr {
+            height: 30px;
+        }
+    }
+
+    .report__num {
+        background-color: black;
+        height: 30px;
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+    }
+}
+.report__contents__box:hover {
+    background-color: rgba(24, 24, 24, 0.534);
+    transition-duration: 0.2s;
+}
+.show__more__box {
+    display: flex;
+    justify-content: center;
+    margin: 50px 30px 30px 30px;
+
+    button {
+        width: 150px;
+        text-align: center;
+        height: 55px;
+        border: 1px solid #F3F4F6;
+        border-radius: 15px;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        font-size: 13px;
+        background-color: #FF8B11;
+        transition-duration: 0.3s;
+    }
+
+    button:hover {
+        background-color: #ff8c1179;
+    }
+}
