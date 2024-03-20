@@ -1,6 +1,11 @@
+.zzim__header {
+    font-size: 0.8rem;
+    margin-bottom: 50px;
+}
 .zzim__container {
     width: 100%;
     animation: fadein 0.4s;
+
     @keyframes fadein {
 
         /* 효과를 동작시간 동안 0 ~ 1까지 */
@@ -17,24 +22,26 @@
 .zzim__list {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
-    
     .review__list__noresult {
         width: 100%;
         display: flex;
         justify-content: center;
-        h3 {
-            font-size: 1.3rem;
+
+        h2 {
+            margin-top: 25px;
+            font-size: 1.35rem;
             font-weight: 600;
         }
     }
 
     .review__list__item {
-        width: 20%;
-        margin-top: 25px;
+        margin-left: 0.5%;
+        margin-right: 0.5%;
+        position: relative;
+        width: 19%;
     }
 
-    
+
 }
 
 .show__more__box {
@@ -54,6 +61,7 @@
         background-color: #FF8B11;
         transition-duration: 0.3s;
     }
+
     button:hover {
         background-color: #ff8c1179;
     }

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { comebackUser, findPwd, signUp } from '../../apis/api/user';
 import './RegisterForm.scss';
 import toast from 'react-hot-toast';
@@ -11,7 +11,8 @@ function RegisterForm() {
     const BASE_URL = import.meta.env.VITE_BASE_URL;
     const signUpRef = useRef([]);
     const [modalControl, setModalControl] = useState(false);
-    const [comebackPwd, setCombackPwd] = useState('');
+    const [comebackPwd, setComebackPwd] = useState('');
+    const [bCheck, setBCheck] = useState(true);
     const [comebackInfo, setComebackInfo] = useState({});
     const modalNo = 7;
     const [userInput, setUserInput] = useState({
@@ -22,6 +23,14 @@ function RegisterForm() {
     });
 
     const { username, password, passwordConfirm, phone } = userInput;
+
+    useEffect(() => {
+        if (comebackPwd != '') {
+            setBCheck(false);
+        } else {
+            setBCheck(true);
+        }
+    })
 
     const onClick = async () => {
         if (userInput.username === '') {
@@ -81,7 +90,6 @@ function RegisterForm() {
         }
         if(comebackPwd != result['data']){
             toast.error('패스워드가 일치하지 않습니다.');
-            console.log(result['data']);
             return;
         }
         const comeback = await comebackUser(comebackInfo.username);
@@ -152,12 +160,12 @@ function RegisterForm() {
                     <h4>계정을 복구하려면 탈퇴한 계정의 패스워드를 입력해주십시오.</h4>
                     <br></br>
                     <div>
-                        <input type="password" name='new__phone' onChange={(e)=>setCombackPwd(e.target.value)} placeholder='패스워드 입력' />
+                        <input type="password" name='new__phone' onChange={(e)=>setComebackPwd(e.target.value)} placeholder='패스워드 입력' />
                     </div>
                 </div>
                 <div className='update__submit__btn'>
                     <button type='button' onClick={() => setModalControl(false)}>취소</button>
-                    <button type="button" onClick={() => onClickComeback()}>계정복구</button>
+                    <button type="button" disabled={bCheck} onClick={() => onClickComeback()}>계정복구</button>
                 </div>
             </div>
         </div>

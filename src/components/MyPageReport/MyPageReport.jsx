@@ -68,7 +68,7 @@ function MyPageReport() {
                         </div>
                     );
                 }) : <div className="report__list__noresult">
-                    <h3>🚨 부적절한 리뷰를 신고해주시면 빠르게 조치하겠습니다.</h3>
+                    <h2>🚨 부적절한 리뷰를 신고해주시면 빠르게 조치하겠습니다.</h2>
                 </div>}
             </div>
             {reviewList.length > showMore ? <div className="show__more__box">
