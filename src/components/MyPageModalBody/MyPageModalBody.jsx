@@ -23,7 +23,8 @@ function MyPageModalBody(props) {
             props.modalNo === 6 ?
             <DeleteMyReview setModalControl={props.setModalControl} 
                             review={props.review}
-                            onClickDelete={props.onClickDelete}/> : ''}
+                            onClickDelete={props.onClickDelete}/> : 
+            props.modalNo === 7 ? props.children : ''}
         </div>
     );
 }

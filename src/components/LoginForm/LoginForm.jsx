@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { login } from '../../apis/api/user';
 import {  useSetRecoilState } from 'recoil';
 import { userInfoState } from '../../recoil/userInfoState';
@@ -12,10 +12,20 @@ function LoginFrom() {
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+  const loginRef = useRef([]);
   const setUserInfo = useSetRecoilState(userInfoState);
 
   const onClickLogin = async () => {
+    if (id == ''){
+      toast.error('아이디를 입력해주세요.');
+      loginRef.current[0].focus();
+      return;
+    }
+    if (pwd == ''){
+      toast.error('패스워드를 입력해주세요.');
+      loginRef.current[1].focus();
+      return;
+    }
     console.log(id);
     console.log(pwd);
     const result = await login({
@@ -45,6 +55,7 @@ function LoginFrom() {
                 name="user_id"
                 type="text"
                 value={id}
+                ref={(el) => loginRef.current[0] = el}
                 onChange={(e) => setId(e.target.value)}
                 placeholder="아이디"
               />
@@ -54,6 +65,7 @@ function LoginFrom() {
                 name="password"
                 type="password"
                 value={pwd}
+                ref={(el) => loginRef.current[1] = el}
                 onChange={(e) => setPwd(e.target.value)}
                 placeholder="비밀번호"
               />

@@ -41,13 +41,14 @@ function UpdatePhone(props) {
         toast.success('휴대폰번호가 성공적으로 변경되었습니다.');
         setUserInfo({
             ...userInfo,
-            phone: newPhone
+            phone: newPhone.replace(/[^0-9]/g, '')
         })
         props.setModalControl(false);
     }
 
     const onChangeInput = (e) => {
-        setNewPhone(e.target.value.replace(/[^0-9]/g, ""));
+        setNewPhone(e.target.value.replace(/[^0-9]/g, '')
+        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
     }
 
     return (
@@ -58,7 +59,7 @@ function UpdatePhone(props) {
                 <div className='new__phone'>
                     <label htmlFor='new__phone'>휴대폰번호</label>
                     <div>
-                        <input type="text" name='new__phone' value={newPhone} onChange={onChangeInput} maxLength={11} placeholder='휴대폰번호를 입력해주세요.(- 제외)' />
+                        <input type="text" name='new__phone' value={newPhone} onChange={onChangeInput} maxLength={13} placeholder='휴대폰번호를 입력해주세요.(- 제외)' />
                     </div>
                 </div>
                 <div className='update__submit__btn'>

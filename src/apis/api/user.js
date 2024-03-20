@@ -80,13 +80,27 @@ export const deleteUser = async (params) => {
 }
 
 /**
- * 회원 탈퇴
+ * 닉네임 중복 조히
  * @param {*} params
  * @returns
  */
 export const searchNickname = async () => {
   try {
     const {data} = await defaultInstance.get('api/user/randomNickname');
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+/**
+ * 계정 복구
+ * @param {*} params
+ * @returns
+ */
+export const comebackUser = async (params) => {
+  try {
+    const {data} = await defaultInstance.post('api/user/comebackUser', params);
     return data;
   } catch (e) {
     console.log(e);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './FindPwdForm.scss';
 import { useNavigate } from 'react-router';
 import { findPwd } from '../../apis/api/user';
@@ -9,19 +9,30 @@ function FindPwdForm() {
     const [phone, setPhone] = useState('');
     const navigate = useNavigate();
     const BASE_URL = import.meta.env.VITE_BASE_URL;
+    const findPwdRef = useRef([]);
 
     const onChangeInput = (e) => {
-        const validInputValue = e.target.value.replace(/[^0-9]/g, "");
+        const validInputValue = e.target.value.replace(/[^0-9]/g, '')
+        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
         setPhone(validInputValue);
     }
 
     const onClickFindPwd = async () => {
-        console.log(username+phone);
+        if (username === ''){
+            toast.error('아이디를 입력해주세요.');
+            findPwdRef.current[0].focus();
+            return;
+        }
+        if (phone === ''){
+            toast.error('휴대폰번호를 입력해주세요.');
+            findPwdRef.current[1].focus();
+            return;
+        }
+        
         const result = await findPwd({
             username: username,
             phone: phone
         });
-        console.log(result);
         if (result['data'] != null){
             navigate(`${BASE_URL}findPwdResult`, { state: { result } })
         } else {
@@ -39,10 +50,20 @@ function FindPwdForm() {
                 <div className="login__body">
                     <div className='login__form'>
                         <div>
-                            <input name="username" type="text" onChange={(e)=>setUsername(e.target.value)} placeholder="아이디" />
+                            <input name="username" 
+                                type="text" 
+                                ref={(el) => findPwdRef.current[0] = el}
+                                onChange={(e)=>setUsername(e.target.value)} 
+                                placeholder="아이디" />
                         </div>
                         <div>
-                            <input name="phone" type="text" value={phone} onChange={onChangeInput} maxLength={11} placeholder="휴대폰번호(-제외)" />
+                            <input name="phone" 
+                                type="text" 
+                                value={phone} 
+                                ref={(el) => findPwdRef.current[1] = el}
+                                onChange={onChangeInput} 
+                                maxLength={13} 
+                                placeholder="휴대폰번호(-제외)" />
                         </div>
                         <button onClick={onClickFindPwd}>비밀번호 찾기</button>
                     </div>

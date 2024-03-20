@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './FindIdForm.scss';
 import { findId } from '../../apis/api/user';
 import { useNavigate } from 'react-router';
@@ -9,14 +9,19 @@ function FindIdForm() {
     const [phone, setPhone] = useState('');
     const navigate = useNavigate();
     const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+    const phoneRef = useRef();
     const onChangeInput = (e) => {
-        const validInputValue = e.target.value.replace(/[^0-9]/g, "");
+        const validInputValue = e.target.value.replace(/[^0-9]/g, '')
+        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
         setPhone(validInputValue);
     }
 
     const onClickFindId = async () => {
-        console.log(phone);
+        if (phone === ''){
+            toast.error('휴대폰번호를 입력하지 않았습니다.');
+            phoneRef.current.focus();
+            return false;
+        }
         const result = await findId({
             phone: phone
         });
@@ -39,7 +44,13 @@ function FindIdForm() {
                 <div className="login__body">
                     <div className='login__form'>
                         <div>
-                            <input name="phone" type="text" value={phone} onChange={onChangeInput} maxLength={11} placeholder="휴대폰번호(-제외)" />
+                            <input name="phone" 
+                                type="text" 
+                                value={phone} 
+                                ref={phoneRef}
+                                onChange={onChangeInput} 
+                                maxLength={13} 
+                                placeholder="휴대폰번호(-제외)" />
                         </div>
                         <button onClick={onClickFindId}>아이디 찾기</button>
                     </div>
