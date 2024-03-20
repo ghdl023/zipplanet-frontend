@@ -22,7 +22,9 @@ export const search = async (params) => {
   const userInfo = localStorage.getItem("userInfo");
   if(userInfo) {
     const parsedUserInfo = JSON.parse(userInfo);
-    params.userId = parsedUserInfo.userInfo.userId;
+    if(parsedUserInfo && parsedUserInfo.userInfo) {
+      params.userId = parsedUserInfo.userInfo.userId;
+    }
   }
   // console.log(params)
 
