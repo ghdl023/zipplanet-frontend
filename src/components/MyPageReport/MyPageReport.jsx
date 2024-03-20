@@ -25,7 +25,9 @@ function MyPageReport() {
 
     const getList = async () => {
         const getReviewList = await searchMyReport({
-            userId: parseInt(userInfo.userId)
+            params: {
+            userId: userInfo.userId
+            }
         });
         setReviewList(getReviewList['data']);
     }

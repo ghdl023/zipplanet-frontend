@@ -136,7 +136,7 @@ export const searchMyReveiw = async (params) => {
  */
 export const searchMyReport = async (params) => {
   try {
-    const {data} = await defaultInstance.post('/api/review/searchMyReport', params);
+    const {data} = await defaultInstance.get('/api/review/searchMyReport', params);
     return data;
   } catch (e) {
     console.log(e);
