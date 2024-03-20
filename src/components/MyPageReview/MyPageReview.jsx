@@ -50,7 +50,9 @@ function MyPageReview() {
 
     const getList = async () => {
         const getReviewList = await searchMyReveiw({
-            userId: parseInt(userInfo.userId)
+            params:{
+            userId: userInfo.userId
+            }
         });
         setReviewList(getReviewList['data']);
     }

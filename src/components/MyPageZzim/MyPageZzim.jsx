@@ -26,7 +26,9 @@ function MyPageZzim() {
     }
     const getList = async () => {
         const getReviewList = await searchMyZzim({
-            userId: parseInt(userInfo.userId)
+            params:{
+            userId: userInfo.userId
+            }
         });
         setReviewList(getReviewList['data']);
     }

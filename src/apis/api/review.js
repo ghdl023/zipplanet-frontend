@@ -126,7 +126,7 @@ export const getReviewDetail = async (params) => {
  */
 export const searchMyReveiw = async (params) => {
   try {
-    const { data } = await defaultInstance.post('/api/review/searchMyReview', params);
+    const { data } = await defaultInstance.get('/api/review/searchMyReview', params);
     return data;
   } catch (e) {
     console.log(e);
@@ -140,7 +140,7 @@ export const searchMyReveiw = async (params) => {
  */
 export const searchMyZzim = async (params) => {
   try {
-    const {data} = await defaultInstance.post('/api/review/searchMyZzim', params);
+    const {data} = await defaultInstance.get('/api/review/searchMyZzim', params);
     return data;
   } catch (e) {
     console.log(e);
