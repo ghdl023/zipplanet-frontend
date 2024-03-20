@@ -5,7 +5,7 @@ import { modalState } from "../../recoil/modalState";
 import { reviewUpdateState } from "../../recoil/reviewUpdateState";
 import { reviewDetailState } from "../../recoil/reviewDetailState";
 import { useEffect, useState } from "react";
-import { searchMyReveiw } from "../../apis/api/review";
+import { searchMyZzim } from "../../apis/api/review";
 import { userInfoState } from "../../recoil/userInfoState";
 import './MyPageZzim.scss';
 
@@ -21,20 +21,14 @@ function MyPageZzim() {
 
     const onClickReviewItem = (review) => {
         console.log(review)
-        // 리뷰 수정시
-        // setReviewUpdate(review);
-        // setModalOpen({
-        //     ...modalOpen,
-        //     reviewCreateModalOpen: true,
-        // })
-
-        // 리뷰 상세 조회시
         setReviewDetail(review);
         navigate(import.meta.env.VITE_BASE_URL);
     }
     const getList = async () => {
-        const getReviewList = await searchMyReveiw({
-            userId: parseInt(userInfo.userId)
+        const getReviewList = await searchMyZzim({
+            params:{
+            userId: userInfo.userId
+            }
         });
         setReviewList(getReviewList['data']);
     }
@@ -44,21 +38,23 @@ function MyPageZzim() {
 
     return (
         <div className="zzim__container">
-            <div className="zzim__header">총 {reviewList.length}개의 내역이 있습니다.</div>
+            {reviewList != '' ?<div className="zzim__header">총 {reviewList.length}개의 찜한 리뷰가 있습니다.</div> : ''}
             <div className="zzim__list">
                 {reviewList != '' ? reviewList.filter((review) => reviewList.indexOf(review) < showMore).map((review, index) => {
                     return (
                         <ReviewListItem
                             key={index}
-                            onClickReviewItem={onClickReviewItem}
+                            onClickReviewItem={()=>onClickReviewItem(review)}
                             review={review}
                         />
                     );
-                }) : ''}
+                }) : <div className="review__list__noresult">
+                <h3>😅 찜한 리뷰가 없습니다.</h3>
+              </div>}
             </div>
-            <div className="show__more__box">
-                <button className="show__more__btn" onClick={()=>setShowMore(showMore+10)}>더보기</button>
-            </div>
+            {reviewList.length > showMore ? <div className="show__more__box">
+                <button className="show__more__btn" onClick={() => setShowMore(showMore + 10)}>더보기</button>
+            </div> : ''}
         </div>
     );
 }

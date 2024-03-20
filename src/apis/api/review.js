@@ -119,10 +119,42 @@ export const getReviewDetail = async (params) => {
   }
 };
 
-
+/**
+ * 마이페이지 내 리뷰 조회
+ * @param {*} params
+ * @returns
+ */
 export const searchMyReveiw = async (params) => {
   try {
-    const { data } = await defaultInstance.post('/api/review/searchMyReview', params);
+    const { data } = await defaultInstance.get('/api/review/searchMyReview', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+/**
+ * 마이페이지 찜 목록 조회
+ * @param {*} params
+ * @returns
+ */
+export const searchMyZzim = async (params) => {
+  try {
+    const {data} = await defaultInstance.get('/api/review/searchMyZzim', params);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+/**
+ * 리뷰 삭제
+ * @param {*} params
+ * @returns
+ */
+export const deleteReview = async (params) => {
+  try {
+    const {data} = await defaultInstance.post('/api/review/delete', params);
     return data;
   } catch (e) {
     console.log(e);
