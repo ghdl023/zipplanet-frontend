@@ -79,6 +79,19 @@ export const deleteUser = async (params) => {
   }
 }
 
+/**
+ * 회원 탈퇴
+ * @param {*} params
+ * @returns
+ */
+export const searchNickname = async () => {
+  try {
+    const {data} = await defaultInstance.get('api/user/randomNickname');
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 // export const getHome = () => {
 //   return request({ url: 'home' });
