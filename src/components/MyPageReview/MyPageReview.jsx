@@ -10,6 +10,8 @@ import { userInfoState } from "../../recoil/userInfoState";
 import './MyPageReview.scss';
 import { PencilSquare, Trash3 } from "react-bootstrap-icons";
 import toast from "react-hot-toast";
+import MyPageModal from "../MyPageModal/MyPageModal";
+import MyPageModalBody from "../MyPageModalBody";
 
 function MyPageReview() {
     const [modalOpen, setModalOpen] = useRecoilState(modalState);
@@ -18,6 +20,9 @@ function MyPageReview() {
     const userInfo = useRecoilValue(userInfoState);
     const [reviewList, setReviewList] = useState('');
     const [showMore, setShowMore] = useState(5);
+    const [modalNo, setModalNo] = useState();
+    const [modalControl, setModalControl] = useState(false);
+    
 
     const navigate = useNavigate();
 
@@ -32,7 +37,7 @@ function MyPageReview() {
             ...modalOpen,
             reviewCreateModalOpen: true,
         })
-        
+
     }
     const onClickDelete = async (review) => {
         const result = await deleteReview({
@@ -44,8 +49,12 @@ function MyPageReview() {
             return;
         }
         toast.success('리뷰가 삭제되었습니다.');
-        
+
         getList();
+    }
+    const checkModal = (num) => {
+        setModalControl(true);
+        setModalNo(num);
     }
 
     const getList = async () => {
@@ -59,7 +68,7 @@ function MyPageReview() {
     useEffect(() => {
         console.log("effect");
         getList();
-    },[])
+    }, [])
     return (
         <div className="review__container">
             {reviewList != '' ? <div className="review__header">총 {reviewList.length}개의 작성한 리뷰가 있습니다.</div> : ''}
@@ -69,22 +78,25 @@ function MyPageReview() {
                         <div className="review__item" key={index}>
                             <ReviewListItem
                                 key={index}
-                                onClickReviewItem={()=>onClickReviewItem(review)}
+                                onClickReviewItem={() => onClickReviewItem(review)}
                                 review={review}
                             />
                             <div className="myReview__icon__box" >
-                                <div className="myReview__icon__item" onClick={()=>onClickUpdate(review)}>
+                                <div className="myReview__icon__item" onClick={() => onClickUpdate(review)}>
                                     <PencilSquare size={20} />
                                 </div>
-                                <div className="myReview__icon__item" onClick={()=>onClickDelete(review)}>
+                                <div className="myReview__icon__item" onClick={() => checkModal(6)}>
                                     <Trash3 size={20} />
                                 </div>
+                                {modalControl && <MyPageModal setModalControl={setModalControl}>
+                                        <MyPageModalBody modalNo={modalNo} setModalControl={setModalControl} review={review} onClickDelete={onClickDelete} />
+                                    </MyPageModal>}
                             </div>
                         </div>
                     );
                 }) : <div className="review__list__noresult">
-                <h3>😅 작성한 리뷰가 없습니다.</h3>
-              </div>}
+                    <h3>😅 작성한 리뷰가 없습니다.</h3>
+                </div>}
             </div>
             {reviewList.length > showMore ? <div className="show__more__box">
                 <button className="show__more__btn" onClick={() => setShowMore(showMore + 10)}>더보기</button>

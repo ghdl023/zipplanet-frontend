@@ -4,6 +4,7 @@ import UpdatePhone from '../UpdatePhone';
 import UpdateAdress from '../UpdateAdress';
 import './MyPageModalBody.scss';
 import DeleteUser from '../DeleteUser/DeleteUser';
+import DeleteMyReview from '../DeleteMyReview';
 
 function MyPageModalBody(props) {
 
@@ -18,7 +19,11 @@ function MyPageModalBody(props) {
             props.modalNo === 4 ?
             <UpdateAdress setModalControl={props.setModalControl}/> :
             props.modalNo === 5 ?
-            <DeleteUser setModalControl={props.setModalControl}/> : ''}
+            <DeleteUser setModalControl={props.setModalControl}/> : 
+            props.modalNo === 6 ?
+            <DeleteMyReview setModalControl={props.setModalControl} 
+                            review={props.review}
+                            onClickDelete={props.onClickDelete}/> : ''}
         </div>
     );
 }
