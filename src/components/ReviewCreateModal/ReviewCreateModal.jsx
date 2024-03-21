@@ -1,4 +1,5 @@
-import { useContext, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   Award,
   House,
@@ -17,13 +18,15 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { reviewUpdateState } from '../../recoil/reviewUpdateState';
 import { modalState } from '../../recoil/modalState';
 import { userInfoState } from '../../recoil/userInfoState';
+import { isValidDate } from '../../utils/common';
 import './ReviewCreateModal.scss';
 
 function ReviewCreateModal() {
   const reviewUpdateValue = useRecoilValue(reviewUpdateState);
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
+  const location = useLocation();
   const [inputValues, setInputValues] = useState(
-    reviewUpdateState.reviewId === ''
+    location.pathname == import.meta.env.VITE_BASE_URL
       ? {
           reviewId: '',
           userId: '',
@@ -146,7 +149,7 @@ function ReviewCreateModal() {
     const callApi = isCreate ? createReview : updateReview;
     const res = await callApi({
       ...requestParams.current,
-      userId,
+      userId: userId,
     });
     // console.log(res);
 
@@ -175,7 +178,7 @@ function ReviewCreateModal() {
   const checkValidation = () => {
     console.log(inputValues);
     // console.log(images);
-    requestParams.current = { ... inputValues };
+    requestParams.current = { ...inputValues };
     const {
       totalRate,
       transRate,
@@ -244,46 +247,23 @@ function ReviewCreateModal() {
       return false;
     }
 
-    const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gim;
     if (startDate === null || startDate === '') {
       toast.error('입주시작일을 입력해주세요.');
       refStartDate.current.focus();
       return false;
     } else {
-      let yyyymmdd = startDate.replace(reg, '');
-      if (yyyymmdd.length !== 8) {
+      if (!isValidDate(startDate)) {
         toast.error('YYYY-MM-DD 형식으로 입력해주세요.');
         refStartDate.current.focus();
         return false;
-      } else {
-        const newDate = `${yyyymmdd.slice(0, 4)}-${yyyymmdd.slice(4, 6)}-${yyyymmdd.slice(6)}`;
-        setInputValues({
-          ...inputValues,
-          startDate: newDate
-        });
-        requestParams.current = {
-          ...requestParams.current,
-          startDate: newDate
-        }
       }
     }
 
     if (endDate !== null && endDate !== '') {
-      let yyyymmdd = endDate.replace(reg, '');
-      if (yyyymmdd.length !== 8) {
+      if (!isValidDate(endDate)) {
         toast.error('YYYY-MM-DD 형식으로 입력해주세요.');
         refEndDate.current.focus();
         return false;
-      } else {
-        const newDate = `${yyyymmdd.slice(0, 4)}-${yyyymmdd.slice(4, 6)}-${yyyymmdd.slice(6)}`;
-        setInputValues({
-          ...inputValues,
-          endDate: newDate
-        });
-        requestParams.current = {
-          ...requestParams.current,
-          startDate: newDate
-        }
       }
     }
     return true;
@@ -425,14 +405,14 @@ function ReviewCreateModal() {
                     type="text"
                     name="title"
                     value={inputValues.title}
-                    placeholder="리스트에 노출되는 문구입니다. 40자 이내로 입력해주세요."
-                    maxLength={40}
+                    placeholder="리스트에 노출되는 문구입니다. 30자 이내로 입력해주세요."
+                    maxLength={30}
                     onChange={handleChange}
                     ref={refTitle}
                   />
                   <br />
                   <div className="input__length__container">
-                    {inputValues.title.length}/40
+                    {inputValues.title.length}/30
                   </div>
                 </div>
               </div>
