@@ -30,6 +30,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        transform: skew(-0.05deg) !important;
 
         h1 {
             font-size: 1.6rem;
@@ -60,6 +61,7 @@
             margin-top: 40px;
             font-size: 20px;
             width:100%;
+            transform: skew(-0.05deg) !important;
             div:focus-within {
                 background: rgba(255, 145, 0, 0.075);
                 transition-duration: 0.2s;
@@ -96,6 +98,7 @@
                 color: white;
                 transition-duration: 0.3s;
                 font-size: 1rem;
+                transform: skew(-0.05deg) !important;
             }
 
             button:hover {
@@ -106,12 +109,14 @@
 
         .search__nav {
             margin-top: 40px;
+            transform: skew(-0.05deg) !important;
             a {
                 margin: 0px 20px 0px 20px;
                 font-size: 0.88rem;
                 // font-weight: bold;
                 color: rgb(143, 143, 143);
                 transition-duration: 0.3s;
+                
             }
         
             a:hover {

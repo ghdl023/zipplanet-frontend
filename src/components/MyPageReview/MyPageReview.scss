@@ -1,12 +1,13 @@
 .review__header {
     font-size: 0.8rem;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+    transform: skew(-0.05deg) !important;
+
 }
 
 .review__container {
     width: 100%;
     animation: fadein 0.4s;
-
     @keyframes fadein {
 
         /* 효과를 동작시간 동안 0 ~ 1까지 */
@@ -33,12 +34,14 @@
             margin-top: 25px;
             font-size: 1.35rem;
             font-weight: 600;
+            
         }
     }
 
 
     .review__item {
         width: 19%;
+        margin-top: 10px;
         margin-left: 0.5%;
         margin-right: 0.5%;
         position: relative;

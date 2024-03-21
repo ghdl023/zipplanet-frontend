@@ -63,7 +63,7 @@ function UpdatePassword(props) {
                 <div className='new__password'>
                     <label htmlFor='new__password'>새로운 비밀번호</label>
                     <div>
-                        <input type="password" name='new__password' value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='8자리 이상 영문, 숫자, 특수문자 포함' />
+                        <input type="password" name='new__password' value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='새로운 비밀번호' />
                     </div>
                     <div>
                         <input type="password" name='new__password__check' value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} placeholder='비밀번호 확인' />

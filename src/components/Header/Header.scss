@@ -34,6 +34,8 @@ header {
     nav {
         display: flex;
         font-size:15px;
+        transform: skew(-0.05deg) !important;
+
         ul {
             display: flex;
             li{

@@ -13,11 +13,11 @@ function DeleteMyReview(props) {
             <hr/>
             <div className='update__phone__form'>
                 <div className='new__phone'>
-                    삭제 버튼을 누르면 해당 '{props.review.title}' 리뷰가 삭제됩니다.
+                    삭제 버튼을 누르면 '{props.review.title}' 리뷰가 삭제됩니다.
                 </div>
                 <div className='update__submit__btn'>
                     <button type='button' onClick={() => props.setModalControl(false)}>취소</button>
-                    <button type="button" onClick={onClickDelete}>삭제</button>
+                    <button type="button" onClick={() => onClickDelete()}>삭제</button>
                 </div>
             </div>
         </div>

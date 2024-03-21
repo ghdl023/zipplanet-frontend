@@ -22,7 +22,8 @@ function MyPageReview() {
     const [showMore, setShowMore] = useState(5);
     const [modalNo, setModalNo] = useState();
     const [modalControl, setModalControl] = useState(false);
-    
+    const [delReview, setDelReview] = useState();
+
 
     const navigate = useNavigate();
 
@@ -52,21 +53,21 @@ function MyPageReview() {
 
         getList();
     }
-    const checkModal = (num) => {
+    const checkModal = (num ,review) => {
         setModalControl(true);
         setModalNo(num);
+        setDelReview(review);
     }
 
     const getList = async () => {
         const getReviewList = await searchMyReveiw({
-            params:{
-            userId: userInfo.userId
+            params: {
+                userId: userInfo.userId
             }
         });
         setReviewList(getReviewList['data']);
     }
     useEffect(() => {
-        console.log("effect");
         getList();
     }, [])
     return (
@@ -85,18 +86,18 @@ function MyPageReview() {
                                 <div className="myReview__icon__item" onClick={() => onClickUpdate(review)}>
                                     <PencilSquare size={20} />
                                 </div>
-                                <div className="myReview__icon__item" onClick={() => checkModal(6)}>
+                                <div className="myReview__icon__item" onClick={() => checkModal(6, review)}>
                                     <Trash3 size={20} />
                                 </div>
-                                {modalControl && <MyPageModal setModalControl={setModalControl}>
-                                        <MyPageModalBody modalNo={modalNo} setModalControl={setModalControl} review={review} onClickDelete={onClickDelete} />
-                                    </MyPageModal>}
                             </div>
                         </div>
                     );
                 }) : <div className="review__list__noresult">
                     <h2>😅 작성한 리뷰가 없습니다.</h2>
                 </div>}
+                {modalControl && <MyPageModal setModalControl={setModalControl}>
+                    <MyPageModalBody modalNo={modalNo} setModalControl={setModalControl} review={delReview} onClickDelete={onClickDelete} />
+                </MyPageModal>}
             </div>
             {reviewList.length > showMore ? <div className="show__more__box">
                 <button className="show__more__btn" onClick={() => setShowMore(showMore + 10)}>더보기</button>
@@ -105,23 +106,3 @@ function MyPageReview() {
     );
 }
 export default MyPageReview;
-
-// reviewId: 10009,
-// userId: 10000,
-// totalRate: 5,
-// transRate: 4,
-// manageRate: 3,
-// infraRate: 2,
-// lifeRate: 1,
-// title: '제목',
-// description: '내용',
-// jibun: '주소',
-// pos: '37.4985356558395,127.032615766508',
-// floorsCount: '10',
-// pyungCount: '5',
-// roomInfo: 'ㅇㅇㅇㅇㅇ',
-// roomOption: 'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ',
-// contractTypeId: '2',
-// startDate: '2024-10-05',
-// endDate: '2024-12-31',
-// images: [],

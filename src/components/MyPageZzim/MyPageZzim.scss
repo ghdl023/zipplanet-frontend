@@ -1,9 +1,10 @@
 .zzim__header {
     font-size: 0.8rem;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 .zzim__container {
     width: 100%;
+    transform: skew(-0.05deg) !important;
     animation: fadein 0.4s;
 
     @keyframes fadein {
@@ -35,6 +36,7 @@
     }
 
     .review__list__item {
+        margin-top: 10px;
         margin-left: 0.5%;
         margin-right: 0.5%;
         position: relative;
