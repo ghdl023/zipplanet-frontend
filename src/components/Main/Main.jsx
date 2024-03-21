@@ -15,6 +15,11 @@ import './Main.scss';
 const { Content } = Layout;
 
 function Main() {
+  const [center, setCenter] = useState({
+    lat: '37.49843289280568',
+    lng: '127.0254842133858',
+  });
+  const [level, setLevel] = useState(5);
   const [loading, error] = useKakaoLoader({
     appkey: import.meta.env.VITE_KAKAO_MAP_API_KEY, // 발급 받은 APPKEY
     libraries: ['clusterer', 'services'],
@@ -26,11 +31,6 @@ function Main() {
   const mapRef = useRef(null);
   const [positions, setPositions] = useState([]);
   const [clusterer, setClusterer] = useState(null);
-
-  const CENTER = {
-    LAT: '37.49843289280568',
-    LNG: '127.0254842133858',
-  };
 
   const loadPositions = async () => {
     const res = await selectAllPos();
@@ -51,6 +51,7 @@ function Main() {
   };
 
   const onClickCluster = async (lat, lng) => {
+    console.log(`${lat},${lng}`);
     setSearch({
       ...searchValue,
       searchType: 'pos',
@@ -60,6 +61,7 @@ function Main() {
   };
 
   const onCliickMarker = (pos) => {
+    console.log(`${pos.lat},${pos.lng}`);
     setSearch({
       ...searchValue,
       searchType: 'pos',
@@ -85,8 +87,20 @@ function Main() {
   }, [clusterer]);
 
   useEventListeners('callSelectAllPos', (event) => {
-    // console.log('callSelectAllPos called!');
+    console.log('callSelectAllPos called!');
+    const { detail } = event;
     loadPositions();
+
+    if (detail) {
+      const latlng = detail.split(',');
+      if (latlng.length == 2) {
+        setCenter({
+          lat: latlng[0],
+          lng: latlng[1],
+        });
+        setLevel(2);
+      }
+    }
   });
 
   const relayout = () => {
@@ -111,15 +125,16 @@ function Main() {
         <Map // 지도를 표시할 Container
           center={{
             // 지도의 중심좌표
-            lat: CENTER.LAT,
-            lng: CENTER.LNG,
+            lat: center.lat,
+            lng: center.lng,
           }}
+          isPanto={true}
           style={{
             // 지도의 크기
             width: '100%',
             height: '100%',
           }}
-          level={5} // 지도의 확대 레벨
+          level={level} // 지도의 확대 레벨
           maxLevel={1}
           minLevel={6}
           ref={mapRef}
