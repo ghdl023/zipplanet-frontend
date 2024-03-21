@@ -176,7 +176,6 @@ function ReviewCreateModal() {
   };
 
   const checkValidation = () => {
-    console.log(inputValues);
     // console.log(images);
     requestParams.current = { ...inputValues };
     const {
