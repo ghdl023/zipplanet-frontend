@@ -95,7 +95,7 @@ function MyPageReview() {
                         </div>
                     );
                 }) : <div className="review__list__noresult">
-                    <h3>😅 작성한 리뷰가 없습니다.</h3>
+                    <h2>😅 작성한 리뷰가 없습니다.</h2>
                 </div>}
             </div>
             {reviewList.length > showMore ? <div className="show__more__box">

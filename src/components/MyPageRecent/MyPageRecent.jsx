@@ -23,7 +23,7 @@ function MyPageRecent() {
   }, []);
 
   return (
-    <div>
+    <div className='mypage__recent__main'>
       {watched.length > 0 ? (
         <>
           <div className="mypage__recent__header">
@@ -34,12 +34,15 @@ function MyPageRecent() {
           </div>
           <div className="mypage__recent__container">
             {watched.reverse().map((review, index) => (
-              <ReviewListItem
-                key={index}
-                review={review}
-                onClickReviewItem={(e) => onClickReviewItem(e, review)}
-              />
+              <div className='mypage__recent__item'>
+                <ReviewListItem
+                  key={index}
+                  review={review}
+                  onClickReviewItem={(e) => onClickReviewItem(e, review)}
+                />
+              </div>
             ))}
+
           </div>
         </>
       ) : (
