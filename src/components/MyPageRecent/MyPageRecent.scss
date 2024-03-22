@@ -1,5 +1,6 @@
 .mypage__recent__main {
     width: 100%;
+    transform: skew(-0.05deg) !important;
     animation: fadein 0.4s;
 
     @keyframes fadein {
@@ -19,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.8rem;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 
     h3 {}
 
@@ -33,6 +34,7 @@
     flex-wrap: wrap;
 
     .mypage__recent__item {
+        margin-top: 10px;
         margin-left: 0.5%;
         margin-right: 0.5%;
         position: relative;

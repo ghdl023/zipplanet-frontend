@@ -99,6 +99,7 @@ function RegisterForm() {
         }
         toast.success('계정이 정상적으로 복구되었습니다.');
         setModalControl(false);
+        navigate(`${BASE_URL}login`);
     }
 
     return (
@@ -154,11 +155,12 @@ function RegisterForm() {
             <hr/>
             <div className='update__phone__form'>
                 <div className='new__phone'>
-                    <label htmlFor='new__phone'>휴대폰번호 {phone}로 탈퇴한 내역이 있습니다.<br></br>
+                    <label htmlFor='new__phone'>해당 휴대폰번호로 탈퇴한 내역이 있습니다.<br></br>
                     </label>
                     <br></br>
-                    <h4>계정을 복구하려면 탈퇴한 계정의 패스워드를 입력해주십시오.</h4>
+                    <b>계정을 복구하려면 탈퇴한 계정의 패스워드를 입력해주십시오.</b>
                     <br></br>
+                    <div className='account__info'>탈퇴계정 정보 : {comebackInfo.username} / {phone}</div>
                     <div>
                         <input type="password" name='new__phone' onChange={(e)=>setComebackPwd(e.target.value)} placeholder='패스워드 입력' />
                     </div>

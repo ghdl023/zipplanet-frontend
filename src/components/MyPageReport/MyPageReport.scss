@@ -1,11 +1,12 @@
 .report__header {
     font-size: 0.8rem;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 .report__container {
 
     width: 100%;
     animation: fadein 0.4s;
+    transform: skew(-0.05deg) !important;
 
     @keyframes fadein {
 
@@ -38,6 +39,7 @@
 .report__item {
     margin-left: 0.5%;
     margin-right: 0.5%;
+    margin-top: 10px;
     position: relative;
     width: 19%;
 }

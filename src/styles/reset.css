@@ -31,7 +31,6 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
-	transform: skew(-0.05deg) !important;
 }
 ol, ul {
 	list-style: none;
