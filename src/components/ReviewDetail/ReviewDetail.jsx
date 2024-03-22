@@ -71,9 +71,18 @@ function ReviewDetail() {
       },
     });
     // console.log(res);
-    if (res.status.toLowerCase() === 'ok' && res.data) {
+    if (res.status.toLowerCase() === 'ok') {
       setReviewDetail(res.data);
-    }
+
+      if(res.data === null) { // 삭제된 리뷰id를 타고 들어온 경우 최근본리뷰 제거해주기
+        const watched = localStorage.getItem("watched");
+        if(watched) {
+          const parsed = JSON.parse(watched);
+          const filtered = _.filter(parsed, it => it.reviewId != reviewId);
+          localStorage.setItem("watched", JSON.stringify(filtered));
+        }
+      }
+    } 
   };
 
   useEffect(() => {
