@@ -191,7 +191,7 @@ function Main() {
               },
             ]}
           >
-            {positions.map((pos, index) => (
+            { positions && positions.length > 0 && positions.map((pos, index) => (
               <MapMarker
                 key={`${pos.lat},${pos.lng}` + index}
                 position={{

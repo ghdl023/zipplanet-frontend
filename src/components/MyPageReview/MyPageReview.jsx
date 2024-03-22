@@ -24,34 +24,34 @@ function MyPageReview() {
     const [modalControl, setModalControl] = useState(false);
     const [delReview, setDelReview] = useState();
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const onClickReviewItem = (review) => {
-    setReviewDetail(review);
-    navigate(import.meta.env.VITE_BASE_URL);
-  };
+    const onClickReviewItem = (review) => {
+        setReviewDetail(review);
+        navigate(import.meta.env.VITE_BASE_URL);
+    };
 
-  const onClickUpdate = (review) => {
-    setReviewUpdate(review);
-    setModalOpen({
-      ...modalOpen,
-      reviewCreateModalOpen: true,
-    });
-  };
-  const onClickDelete = async (review) => {
-    const result = await deleteReview({
-      userId: parseInt(userInfo.userId),
-      reviewId: parseInt(review.reviewId),
-    });
-    if (result == 0) {
-      toast.error('리뷰 삭제 실패');
-      return;
-    }
-    toast.success('리뷰가 삭제되었습니다.');
+    const onClickUpdate = (review) => {
+        setReviewUpdate(review);
+        setModalOpen({
+            ...modalOpen,
+            reviewCreateModalOpen: true,
+        });
+    };
+    const onClickDelete = async (review) => {
+        const result = await deleteReview({
+            userId: parseInt(userInfo.userId),
+            reviewId: parseInt(review.reviewId),
+        });
+        if (result == 0) {
+            toast.error('리뷰 삭제 실패');
+            return;
+        }
+        toast.success('리뷰가 삭제되었습니다.');
 
         getList();
     }
-    const checkModal = (num ,review) => {
+    const checkModal = (num, review) => {
         setModalControl(true);
         setModalNo(num);
         setDelReview(review);
@@ -101,10 +101,6 @@ function MyPageReview() {
                 <button className="show__more__btn" onClick={() => setShowMore(showMore + 10)}>더보기</button>
             </div> : ''}
         </div>
-      ) : (
-        ''
-      )}
-    </div>
-  );
+    )
 }
 export default MyPageReview;

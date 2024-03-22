@@ -11,7 +11,7 @@ function DeleteUser(props) {
     const userInfo = useRecoilValue(userInfoState);
     const onClickDelete = async () => {
         const result = await deleteUser(userInfo.username);
-        console.log(result['data']);
+        // console.log(result['data']);
         if (result['data'] == 0) {
             toast.error(result);
             return false;
@@ -23,15 +23,15 @@ function DeleteUser(props) {
 
     return (
         <div className='update__phone__container'>
-            <div>정말 삭제하시겠습니까?</div>
+            <div>정말 탈퇴하시겠습니까?</div>
             <hr/>
             <div className='update__phone__form'>
                 <div className='new__phone'>
-                    제발...ㅠ
+                    탈퇴 후에도 탈퇴하기 전 계정의 휴대폰 번호로 계정을 복구할 수 있습니다.
                 </div>
                 <div className='update__submit__btn'>
                     <button type='button' onClick={() => props.setModalControl(false)}>취소</button>
-                    <button type="button" onClick={onClickDelete}>삭제</button>
+                    <button type="button" onClick={onClickDelete}>탈퇴</button>
                 </div>
             </div>
         </div>
