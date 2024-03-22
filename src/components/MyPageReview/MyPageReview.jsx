@@ -1,17 +1,17 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import { useNavigate } from "react-router-dom";
-import ReviewListItem from "../ReviewListItem";
-import { modalState } from "../../recoil/modalState";
-import { reviewUpdateState } from "../../recoil/reviewUpdateState";
-import { reviewDetailState } from "../../recoil/reviewDetailState";
-import { useEffect, useState } from "react";
-import { deleteReview, searchMyReveiw } from "../../apis/api/review";
-import { userInfoState } from "../../recoil/userInfoState";
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+import ReviewListItem from '../ReviewListItem';
+import { modalState } from '../../recoil/modalState';
+import { reviewUpdateState } from '../../recoil/reviewUpdateState';
+import { reviewDetailState } from '../../recoil/reviewDetailState';
+import { useEffect, useState } from 'react';
+import { deleteReview, searchMyReveiw } from '../../apis/api/review';
+import { userInfoState } from '../../recoil/userInfoState';
 import './MyPageReview.scss';
-import { PencilSquare, Trash3 } from "react-bootstrap-icons";
-import toast from "react-hot-toast";
-import MyPageModal from "../MyPageModal/MyPageModal";
-import MyPageModalBody from "../MyPageModalBody";
+import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
+import toast from 'react-hot-toast';
+import MyPageModal from '../MyPageModal/MyPageModal';
+import MyPageModalBody from '../MyPageModalBody';
 
 function MyPageReview() {
     const [modalOpen, setModalOpen] = useRecoilState(modalState);
@@ -24,32 +24,30 @@ function MyPageReview() {
     const [modalControl, setModalControl] = useState(false);
     const [delReview, setDelReview] = useState();
 
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const onClickReviewItem = (review) => {
+    setReviewDetail(review);
+    navigate(import.meta.env.VITE_BASE_URL);
+  };
 
-    const onClickReviewItem = (review) => {
-        setReviewDetail(review);
-        navigate(import.meta.env.VITE_BASE_URL);
+  const onClickUpdate = (review) => {
+    setReviewUpdate(review);
+    setModalOpen({
+      ...modalOpen,
+      reviewCreateModalOpen: true,
+    });
+  };
+  const onClickDelete = async (review) => {
+    const result = await deleteReview({
+      userId: parseInt(userInfo.userId),
+      reviewId: parseInt(review.reviewId),
+    });
+    if (result == 0) {
+      toast.error('리뷰 삭제 실패');
+      return;
     }
-
-    const onClickUpdate = (review) => {
-        setReviewUpdate(review);
-        setModalOpen({
-            ...modalOpen,
-            reviewCreateModalOpen: true,
-        })
-
-    }
-    const onClickDelete = async (review) => {
-        const result = await deleteReview({
-            userId: parseInt(userInfo.userId),
-            reviewId: parseInt(review.reviewId)
-        })
-        if (result == 0) {
-            toast.error('리뷰 삭제 실패');
-            return;
-        }
-        toast.success('리뷰가 삭제되었습니다.');
+    toast.success('리뷰가 삭제되었습니다.');
 
         getList();
     }
@@ -103,6 +101,10 @@ function MyPageReview() {
                 <button className="show__more__btn" onClick={() => setShowMore(showMore + 10)}>더보기</button>
             </div> : ''}
         </div>
-    );
+      ) : (
+        ''
+      )}
+    </div>
+  );
 }
 export default MyPageReview;

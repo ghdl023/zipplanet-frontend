@@ -22,3 +22,26 @@ export const getRandomThumbnailImage = () => {
   const maxLen = 12;
   return `https://ghdl023.github.io${import.meta.env.VITE_BASE_URL}images/thumbnail/${Math.floor(Math.random() * maxLen)}.jpg`;
 };
+
+export function isValidDate(dateString) {
+  // yyyy-mm-dd 형식의 정규표현식
+  var pattern = /^\d{4}-\d{2}-\d{2}$/;
+
+  if (!pattern.test(dateString)) {
+    return false;
+  }
+
+  var date = new Date(dateString);
+  if (date == 'Invalid Date') {
+    return false;
+  }
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+
+  // 월과 일이 유효한 범위인지 확인
+  if (month < 1 || month > 12 || day < 1 || day > 31) {
+    return false;
+  }
+
+  return true;
+}

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import _ from 'lodash';
 import ReviewListItem from '../../components/ReviewListItem/ReviewListItem';
-import './MyPageRecent.scss';
 import { useSetRecoilState } from 'recoil';
 import { reviewDetailState } from '../../recoil/reviewDetailState';
+import './MyPageRecent.scss';
 
 function MyPageRecent() {
   const [watched, setWatched] = useState([]);
@@ -18,12 +19,14 @@ function MyPageRecent() {
   useEffect(() => {
     const watched = localStorage.getItem('watched');
     if (watched) {
-      setWatched(JSON.parse(watched));
+      const filtered = _.filter(JSON.parse(watched), (it) => it.title); // 필수값인 제목이 있는것만 정상적인 리뷰로 보고 초기화함.
+      setWatched(filtered);
+      localStorage.setItem('watched', JSON.stringify(filtered));
     }
   }, []);
 
   return (
-    <div className='mypage__recent__main'>
+    <div className="mypage__recent__main">
       {watched.length > 0 ? (
         <>
           <div className="mypage__recent__header">
@@ -34,15 +37,13 @@ function MyPageRecent() {
           </div>
           <div className="mypage__recent__container">
             {watched.reverse().map((review, index) => (
-              <div className='mypage__recent__item'>
+              <div className="mypage__recent__item" key={index}>
                 <ReviewListItem
-                  key={index}
                   review={review}
                   onClickReviewItem={(e) => onClickReviewItem(e, review)}
                 />
               </div>
             ))}
-
           </div>
         </>
       ) : (
