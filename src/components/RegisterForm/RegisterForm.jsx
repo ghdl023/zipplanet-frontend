@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import MyPageModal from '../MyPageModal/MyPageModal';
 import MyPageModalBody from '../MyPageModalBody';
+import { Eye, EyeSlash } from 'react-bootstrap-icons';
 
 function RegisterForm() {
     const navigate = useNavigate();
@@ -20,6 +21,10 @@ function RegisterForm() {
         password: '',
         passwordConfirm: '',
         phone: '',
+    });
+    const [view, setView] = useState({
+        pwd: true,
+        pwdCon: true
     });
 
     const { username, password, passwordConfirm, phone } = userInput;
@@ -76,7 +81,7 @@ function RegisterForm() {
         setUserInput({
             ...userInput,
             [e.target.name]: e.target.name === 'phone' ? e.target.value.replace(/[^0-9]/g, '')
-            .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`) : e.target.value,
+                .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`) : e.target.value,
         });
     }
     const onClickComeback = async () => {
@@ -84,11 +89,11 @@ function RegisterForm() {
             username: comebackInfo.username,
             phone: comebackInfo.phone
         });
-        if (result['data'] === null || result['data'] === ''){
+        if (result['data'] === null || result['data'] === '') {
             toast.error(result['message']);
             return;
         }
-        if(comebackPwd != result['data']){
+        if (comebackPwd != result['data']) {
             toast.error('패스워드가 일치하지 않습니다.');
             return;
         }
@@ -111,7 +116,7 @@ function RegisterForm() {
                 </div>
                 <div className="login__body">
                     <div className='login__form'>
-                        <div>
+                        <div className='login__form__input'>
                             <input name="username"
                                 type="text"
                                 value={username}
@@ -119,25 +124,35 @@ function RegisterForm() {
                                 onChange={(e) => onChangeInput(e)}
                                 placeholder="아이디" />
                         </div>
-                        <div>
+                        <div className='login__form__input'>
                             <input name="password"
-                                type="password"
+                                type={view.pwd? 'password':'text'}
                                 value={password}
                                 ref={(el) => signUpRef.current[1] = el}
                                 onChange={(e) => onChangeInput(e)}
                                 placeholder="비밀번호" />
+                                <div className='password__view__icon'
+                                onMouseDown={() => setView({ ...view, pwd: false })}
+                                onMouseUp={() => setView({ ...view, pwd: true })}>
+                                {view.pwd ? <EyeSlash size={20} /> : <Eye size={20} />}
+                            </div>
                         </div>
-                        <div>
+                        <div className='login__form__input'>
                             <input name="passwordConfirm"
-                                type="password"
+                                type={view.pwdCon? 'password':'text'}
                                 value={passwordConfirm}
                                 ref={(el) => signUpRef.current[2] = el}
                                 onChange={(e) => onChangeInput(e)}
                                 placeholder="비밀번호 확인" />
+                                <div className='password__view__icon'
+                                onMouseDown={() => setView({ ...view, pwdCon: false })}
+                                onMouseUp={() => setView({ ...view, pwdCon: true })}>
+                                {view.pwdCon ? <EyeSlash size={20} /> : <Eye size={20} />}
+                            </div>
                         </div>
-                        <div>
+                        <div className='login__form__input'>
                             <input name="phone"
-                                type="text"
+                                type='text'
                                 value={phone}
                                 ref={(el) => signUpRef.current[3] = el}
                                 onChange={(e) => onChangeInput(e)}
@@ -150,27 +165,27 @@ function RegisterForm() {
             </div>
             {modalControl && <MyPageModal setModalControl={setModalControl}>
                 <MyPageModalBody modalNo={modalNo} setModalControl={setModalControl}>
-                <div className='update__phone__container'>
-            <div>탈퇴한 계정 복구</div>
-            <hr/>
-            <div className='update__phone__form'>
-                <div className='new__phone'>
-                    <label htmlFor='new__phone'>해당 휴대폰번호로 탈퇴한 내역이 있습니다.<br></br>
-                    </label>
-                    <br></br>
-                    <b>계정을 복구하려면 탈퇴한 계정의 패스워드를 입력해주십시오.</b>
-                    <br></br>
-                    <div className='account__info'>탈퇴계정 정보 : {comebackInfo.username} / {phone}</div>
-                    <div>
-                        <input type="password" name='new__phone' onChange={(e)=>setComebackPwd(e.target.value)} placeholder='패스워드 입력' />
+                    <div className='update__phone__container'>
+                        <div>탈퇴한 계정 복구</div>
+                        <hr />
+                        <div className='update__phone__form'>
+                            <div className='new__phone'>
+                                <label htmlFor='new__phone'>해당 휴대폰번호로 탈퇴한 내역이 있습니다.<br></br>
+                                </label>
+                                <br></br>
+                                <b>계정을 복구하려면 탈퇴한 계정의 패스워드를 입력해주십시오.</b>
+                                <br></br>
+                                <div className='account__info'>탈퇴계정 정보 : {comebackInfo.username} / {phone}</div>
+                                <div>
+                                    <input type="password" name='new__phone' onChange={(e) => setComebackPwd(e.target.value)} placeholder='패스워드 입력' />
+                                </div>
+                            </div>
+                            <div className='update__submit__btn'>
+                                <button type='button' onClick={() => setModalControl(false)}>취소</button>
+                                <button type="button" disabled={bCheck} onClick={() => onClickComeback()}>계정복구</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className='update__submit__btn'>
-                    <button type='button' onClick={() => setModalControl(false)}>취소</button>
-                    <button type="button" disabled={bCheck} onClick={() => onClickComeback()}>계정복구</button>
-                </div>
-            </div>
-        </div>
                 </MyPageModalBody>
             </MyPageModal>}
         </div>
