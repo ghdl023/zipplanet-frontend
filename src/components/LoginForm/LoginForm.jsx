@@ -50,7 +50,7 @@ function LoginFrom() {
         </div>
         <div className="login__body">
           <div className="login__form">
-            <div>
+            <div className='login__form__input'>
               <input
                 name="user_id"
                 type="text"
@@ -60,7 +60,7 @@ function LoginFrom() {
                 placeholder="아이디"
               />
             </div>
-            <div>
+            <div className='login__form__input'>
               <input
                 name="password"
                 type="password"

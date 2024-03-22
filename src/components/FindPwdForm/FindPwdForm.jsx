@@ -49,14 +49,14 @@ function FindPwdForm() {
                 </div>
                 <div className="login__body">
                     <div className='login__form'>
-                        <div>
+                        <div className='login__form__input'>
                             <input name="username" 
                                 type="text" 
                                 ref={(el) => findPwdRef.current[0] = el}
                                 onChange={(e)=>setUsername(e.target.value)} 
                                 placeholder="아이디" />
                         </div>
-                        <div>
+                        <div className='login__form__input'>
                             <input name="phone" 
                                 type="text" 
                                 value={phone} 

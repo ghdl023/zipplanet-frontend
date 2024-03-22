@@ -4,11 +4,17 @@ import {  useRecoilValue } from 'recoil';
 import { userInfoState } from '../../recoil/userInfoState';
 import { findPwd, updateUser } from '../../apis/api/user';
 import toast from 'react-hot-toast';
+import { Eye, EyeSlash } from 'react-bootstrap-icons';
 function UpdatePassword(props) {
     const [bCheck, setBCheck] = useState(true);
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [view, setView] = useState({
+        oldPwd:true,
+        newPwd:true,
+        pwdCon:true
+    });
 
     const userInfo = useRecoilValue(userInfoState);
 
@@ -56,17 +62,32 @@ function UpdatePassword(props) {
             <div className='update__password__form'>
                 <div className='old__password'>
                     <label htmlFor='old__password'>현재 비밀번호</label>
-                    <div>
-                        <input type="password" name='old__password' value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} placeholder='현재 비밀번호' />
+                    <div className='password__item'>
+                        <input type={view.oldPwd? 'password':'text'} name='old__password' value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} placeholder='현재 비밀번호' />
+                        <div className='password__view__icon'
+                            onMouseDown={()=>setView({...view, oldPwd:false})}
+                            onMouseUp={()=>setView({...view, oldPwd:true})}>
+                            {view.oldPwd? <EyeSlash size={20}/> : <Eye size={20}/>}
+                        </div>
                     </div>
                 </div>
                 <div className='new__password'>
                     <label htmlFor='new__password'>새로운 비밀번호</label>
-                    <div>
-                        <input type="password" name='new__password' value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='새로운 비밀번호' />
+                    <div className='password__item'>
+                        <input type={view.newPwd? 'password':'text'} name='new__password' value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='새로운 비밀번호' />
+                        <div className='password__view__icon'
+                            onMouseDown={()=>setView({...view, newPwd:false})}
+                            onMouseUp={()=>setView({...view, newPwd:true})}>
+                            {view.newPwd? <EyeSlash size={20}/> : <Eye size={20}/>}
+                        </div>
                     </div>
-                    <div>
-                        <input type="password" name='new__password__check' value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} placeholder='비밀번호 확인' />
+                    <div className='password__item'>
+                        <input type={view.pwdCon? 'password':'text'} name='new__password__check' value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} placeholder='비밀번호 확인' />
+                        <div className='password__view__icon'
+                            onMouseDown={()=>setView({...view, pwdCon:false})}
+                            onMouseUp={()=>setView({...view, pwdCon:true})}>
+                            {view.pwdCon? <EyeSlash size={20}/> : <Eye size={20}/>}
+                        </div>
                     </div>
                 </div>
                 <div className='update__submit__btn'>

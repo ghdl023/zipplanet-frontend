@@ -32,7 +32,7 @@ function AccountWrapper(props) {
             </div>
             <div className='account__item'>
                 <div className='account__item__label'>휴대폰번호</div>
-                <div>{accountInfo.phone}</div>
+                <div>{accountInfo.phone.substr(0,3)+"-"+accountInfo.phone.substr(3,4)+"-"+accountInfo.phone.substr(7)}</div>
                 <ArrowRightCircleFill size={18} onClick={()=>modalOpen(3)}/>
             </div>
             <div className='account__item'>

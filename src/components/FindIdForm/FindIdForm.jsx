@@ -43,7 +43,7 @@ function FindIdForm() {
                 </div>
                 <div className="login__body">
                     <div className='login__form'>
-                        <div>
+                        <div className='login__form__input'>
                             <input name="phone" 
                                 type="text" 
                                 value={phone} 

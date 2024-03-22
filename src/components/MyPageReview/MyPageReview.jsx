@@ -67,7 +67,7 @@ function MyPageReview() {
     }
     useEffect(() => {
         getList();
-    }, [])
+    }, [modalOpen.reviewCreateModalOpen])
     return (
         <div className="review__container">
             {reviewList != '' ? <div className="review__header">총 {reviewList.length}개의 작성한 리뷰가 있습니다.</div> : ''}
