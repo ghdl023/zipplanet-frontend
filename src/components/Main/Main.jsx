@@ -86,13 +86,31 @@ function Main() {
     }
   }, [clusterer]);
 
+  // 리뷰 생성시 재조회
   useEventListeners('callSelectAllPos', (event) => {
-    console.log('callSelectAllPos called!');
+    // console.log('callSelectAllPos called!');
     const { detail } = event;
     loadPositions();
 
     if (detail) {
-      const latlng = detail.split(',');
+      changeMapCenter(detail);
+    }
+  });
+
+  // 리뷰 상세 화면 진입시 맵 센터 변경
+  useEventListeners('callChangeMapCenter', (event) => {
+    //
+    // console.log('callChangeMapCenter called!');
+    const { detail } = event;
+
+    if (detail) {
+      changeMapCenter(detail);
+    }
+  });
+
+  const changeMapCenter = (pos) => {
+    if (pos) {
+      const latlng = pos.split(',');
       if (latlng.length == 2) {
         setCenter({
           lat: latlng[0],
@@ -101,16 +119,11 @@ function Main() {
         setLevel(2);
       }
     }
-  });
+  };
 
   const relayout = () => {
     if (mapRef.current) {
       mapRef.current.relayout();
-      // center 정렬이안된다..
-      // mapRef.current.center({
-      //   lat: CENTER_LAT,
-      //   lng: CENTER_LNG,
-      // });
     }
   };
 
@@ -191,16 +204,18 @@ function Main() {
               },
             ]}
           >
-            { positions && positions.length > 0 && positions.map((pos, index) => (
-              <MapMarker
-                key={`${pos.lat},${pos.lng}` + index}
-                position={{
-                  lat: pos.lat,
-                  lng: pos.lng,
-                }}
-                onClick={() => onCliickMarker(pos)}
-              ></MapMarker>
-            ))}
+            {positions &&
+              positions.length > 0 &&
+              positions.map((pos, index) => (
+                <MapMarker
+                  key={`${pos.lat},${pos.lng}` + index}
+                  position={{
+                    lat: pos.lat,
+                    lng: pos.lng,
+                  }}
+                  onClick={() => onCliickMarker(pos)}
+                ></MapMarker>
+              ))}
           </MarkerClusterer>
         </Map>
       </Content>
