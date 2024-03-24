@@ -1,28 +1,15 @@
 import { defaultInstance } from '../core';
 
-// export async function getReviews({
-//   order = 'createdAt',
-//   offset = 0,
-//   limit = 6,
-// }) {
-//   const query = `order=${order}&offset=${offset}&limit=${limit}`;
-//   const response = await fetch(
-//     `https://learn.codeit.kr/api/film-reviews?${query}`,
-//   );
-//   const body = await response.json();
-//   return body;
-// }
-
 /**
  * 리뷰 목록 조회
  * @param {*} params
  * @returns
  */
 export const search = async (params) => {
-  const userInfo = localStorage.getItem("userInfo");
-  if(userInfo) {
+  const userInfo = localStorage.getItem('userInfo');
+  if (userInfo) {
     const parsedUserInfo = JSON.parse(userInfo);
-    if(parsedUserInfo && parsedUserInfo.userInfo) {
+    if (parsedUserInfo && parsedUserInfo.userInfo) {
       params.userId = parsedUserInfo.userInfo.userId;
     }
   }
@@ -105,7 +92,7 @@ export const updateZzimYn = async (params) => {
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 /**
  * 리뷰 상세 조회
@@ -128,12 +115,15 @@ export const getReviewDetail = async (params) => {
  */
 export const searchMyReveiw = async (params) => {
   try {
-    const { data } = await defaultInstance.get('/api/review/searchMyReview', params);
+    const { data } = await defaultInstance.get(
+      '/api/review/searchMyReview',
+      params,
+    );
     return data;
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 /**
  * 마이페이지 찜 목록 조회
@@ -142,12 +132,15 @@ export const searchMyReveiw = async (params) => {
  */
 export const searchMyZzim = async (params) => {
   try {
-    const {data} = await defaultInstance.get('/api/review/searchMyZzim', params);
+    const { data } = await defaultInstance.get(
+      '/api/review/searchMyZzim',
+      params,
+    );
     return data;
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 /**
  * 리뷰 삭제
@@ -156,12 +149,12 @@ export const searchMyZzim = async (params) => {
  */
 export const deleteReview = async (params) => {
   try {
-    const {data} = await defaultInstance.post('/api/review/delete', params);
+    const { data } = await defaultInstance.post('/api/review/delete', params);
     return data;
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 /**
  * 신고 내역 조회
@@ -170,9 +163,12 @@ export const deleteReview = async (params) => {
  */
 export const searchMyReport = async (params) => {
   try {
-    const {data} = await defaultInstance.get('/api/review/searchMyReport', params);
+    const { data } = await defaultInstance.get(
+      '/api/review/searchMyReport',
+      params,
+    );
     return data;
   } catch (e) {
     console.log(e);
   }
-}
+};
