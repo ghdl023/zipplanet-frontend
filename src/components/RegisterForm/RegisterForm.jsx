@@ -101,7 +101,9 @@ function RegisterForm() {
             toast.error('패스워드가 일치하지 않습니다.');
             return;
         }
-        const comeback = await comebackUser(comebackInfo.username);
+        const comeback = await comebackUser({
+            username : comebackInfo.username
+        });
         if (comeback['data'] === 0) {
             toast.error(comeback['message']);
             return;

@@ -10,7 +10,9 @@ function DeleteUser(props) {
     const BASE_URL = import.meta.env.VITE_BASE_URL;
     const userInfo = useRecoilValue(userInfoState);
     const onClickDelete = async () => {
-        const result = await deleteUser(userInfo.username);
+        const result = await deleteUser({
+            username : userInfo.username
+        });
         // console.log(result['data']);
         if (result['data'] == 0) {
             toast.error(result);
