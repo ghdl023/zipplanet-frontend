@@ -85,7 +85,7 @@ function FindPwdForm() {
             <div className="login__box">
                 <div className="login__header">
                     <h1>비밀번호 찾기</h1>
-                    <h4>가입 시 입력한 이메일을 통해<br></br>간편하게 비밀번호를 찾을 수 있어요!</h4>
+                    <h4>가입 시 입력한 이메일 인증을 통해<br></br>간편하게 비밀번호를 찾을 수 있어요!</h4>
                 </div>
                 <div className="login__body">
                     <div className='login__form'>
@@ -112,7 +112,7 @@ function FindPwdForm() {
             {modalControl && <MyPageModal setModalControl={setModalControl}>
                 <MyPageModalBody modalNo={7} setModalControl={setModalControl}>
                     <div className='update__phone__container'>
-                        <div>탈퇴한 계정 복구</div>
+                        <div>이메일 인증</div>
                         <hr />
                         <div className='update__phone__form'>
                             <div className='new__phone'>
