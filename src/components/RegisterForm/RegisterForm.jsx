@@ -42,6 +42,10 @@ function RegisterForm() {
             toast.error('아이디를 입력하지 않았습니다.');
             signUpRef.current[0].focus();
             return false;
+        } else if (!userInput.username.includes('@')) {
+            toast.error('아이디 형식이 올바르지 않습니다.');
+            signUpRef.current[0].focus();
+            return false;
         } else if (userInput.password === '') {
             toast.error('비밀번호를 입력하지 않았습니다.');
             signUpRef.current[1].focus();
@@ -122,7 +126,7 @@ function RegisterForm() {
                                 value={username}
                                 ref={(el) => signUpRef.current[0] = el}
                                 onChange={(e) => onChangeInput(e)}
-                                placeholder="아이디" />
+                                placeholder="아이디(이메일 형식)" />
                         </div>
                         <div className='login__form__input'>
                             <input name="password"
