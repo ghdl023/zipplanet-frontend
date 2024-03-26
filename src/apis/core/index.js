@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = '/zipplanet-proxy'; // vite.config.js proxy
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
 const TIMEOUT = 2500;
 
 // 인증이 필요없는 API인 경우 사용 (ex 로그인)

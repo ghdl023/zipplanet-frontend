@@ -20,10 +20,9 @@ export default ({ mode }) => {
       ],
     },
     server: {
-      proxy: {
+      proxy: { // server.proxy는 localhost 개발환경에서만 동작함..
         "/zipplanet-proxy": {
           target: "http://152.67.208.142:8080",
-          // target: 'http://localhost:8080',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/zipplanet-proxy/, ""),
         },
