@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_SERVER_URL;
+const BASE_URL = 'http://152.67.208.142:8080/'; // import.meta.env.VITE_SERVER_URL;
 const TIMEOUT = 2500;
 
 // 인증이 필요없는 API인 경우 사용 (ex 로그인)
