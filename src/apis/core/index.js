@@ -9,7 +9,7 @@ const axiosApi = (url, options) => {
   // instance.defaults.timeout = TIMEOUT;
   instance.interceptors.request.use(onFulfilledRequest, onRejectedRequest);
   instance.interceptors.response.use(onFulfilledResponse, onRejectedResponse);
-  // instance.defaults.withCredentials = true; // not working -> solved: vite.config.js proxy
+  instance.defaults.withCredentials = true; // not working -> solved: vite.config.js proxy
   return instance;
 };
 
@@ -24,7 +24,7 @@ const axiosAuthApi = (url, options) => {
   // instance.defaults.timeout = TIMEOUT;
   instance.interceptors.request.use(onFulfilledRequest, onRejectedRequest);
   instance.interceptors.response.use(onFulfilledResponse, onRejectedResponse);
-  // instance.defaults.withCredentials = true; // not working -> solved: vite.config.js proxy
+  instance.defaults.withCredentials = true; // not working -> solved: vite.config.js proxy
   return instance;
 };
 
