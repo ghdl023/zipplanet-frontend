@@ -19,5 +19,15 @@ export default ({ mode }) => {
         { find: '@utils', replacement: '/src/utils' },
       ],
     },
+    server: {
+      proxy: {
+        "/zipplanet-proxy": {
+          target: "http://152.67.208.142:8080",
+          // target: 'http://localhost:8080',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/zipplanet-proxy/, ""),
+        },
+      },
+    },
   });
 };

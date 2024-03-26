@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = '/zipplanet-proxy'; // vite.config.js proxy
 const TIMEOUT = 2500;
 
 // 인증이 필요없는 API인 경우 사용 (ex 로그인)
@@ -9,6 +9,7 @@ const axiosApi = (url, options) => {
   // instance.defaults.timeout = TIMEOUT;
   instance.interceptors.request.use(onFulfilledRequest, onRejectedRequest);
   instance.interceptors.response.use(onFulfilledResponse, onRejectedResponse);
+  // instance.defaults.withCredentials = true; // not working -> solved: vite.config.js proxy
   return instance;
 };
 
@@ -23,6 +24,7 @@ const axiosAuthApi = (url, options) => {
   // instance.defaults.timeout = TIMEOUT;
   instance.interceptors.request.use(onFulfilledRequest, onRejectedRequest);
   instance.interceptors.response.use(onFulfilledResponse, onRejectedResponse);
+  // instance.defaults.withCredentials = true; // not working -> solved: vite.config.js proxy
   return instance;
 };
 
