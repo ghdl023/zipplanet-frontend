@@ -24,7 +24,10 @@ export default ({ mode }) => {
         "/zipplanet-proxy": {
           target: "http://zipplanet.duckdns.org:8080",
           changeOrigin: true,
+          
           rewrite: (path) => path.replace(/^\/zipplanet-proxy/, ""),
+          secure: false,      
+          ws: true,
         },
       },
     },

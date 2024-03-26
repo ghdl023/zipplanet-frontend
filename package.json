@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://ghdl023.github.com/zipplanet-frontend/",
-  "proxy": "https://zipplanet.duckdns.org:8080",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
