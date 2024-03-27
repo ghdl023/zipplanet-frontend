@@ -21,14 +21,14 @@ export default ({ mode }) => {
     },
     server: {
       proxy: { // server.proxy는 localhost 개발환경에서만 동작함..
-        "/zipplanet-proxy": {
-          // target: "http://zipplanet.duckdns.org:8080", 
-          target: "http://localhost:8080",
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/zipplanet-proxy/, ""),
-          secure: false,      
-          ws: true,
-        },
+        // "/zipplanet-proxy": {
+        //   target: "http://zipplanet.duckdns.org:8080", 
+        //   target: "http://localhost:8080",
+        //   changeOrigin: true,
+        //   rewrite: (path) => path.replace(/^\/zipplanet-proxy/, ""),
+        //   secure: false,      
+        //   ws: true,
+        // },
       },
     },
   });
