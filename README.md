@@ -2,7 +2,7 @@
 
 > 집 정보와 좋은 리뷰를 한번에 찾아 볼 수 있는 플랫폼입니다.
 
-- [팀 프로젝트 문서 (노션)] (https://www.notion.so/d6a79d46b2f24d8cbe7fc137fcaeca35?pvs=4)
+- [팀 프로젝트 Notion] (https://www.notion.so/d6a79d46b2f24d8cbe7fc137fcaeca35?pvs=4)
 
 ## 주요 기능 소개
 
@@ -31,7 +31,7 @@
 
 ## 팀원 소개
 
-자세한 소개 문서 (노션)
+[팀 프로젝트 Notion] (https://www.notion.so/1241527edf9240a691cccf9c280efa91?pvs=4)
 
 - 김건위 (Front-end & Back-end)
 - 박혜성 (Front-end & Back-end)
@@ -40,20 +40,11 @@
 
 ### Frontend
 
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
-<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
-<img src="https://camo.githubusercontent.com/cbd019489dcca72d1fef0ce9e36d725d26108c90ca2f9cb181003c1478146e29/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f766974652d3634364346463f7374796c653d666f722d7468652d6261646765266c6f676f3d76697465266c6f676f436f6c6f723d7768697465">
-<img src="https://camo.githubusercontent.com/76142df874f13e3cbf5219894f07b4d7c2a908edffe5868fbde475c0a56e32bb/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5265636f696c2d3030373545423f7374796c653d666f722d7468652d6261646765">
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"><img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"><img src="https://camo.githubusercontent.com/cbd019489dcca72d1fef0ce9e36d725d26108c90ca2f9cb181003c1478146e29/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f766974652d3634364346463f7374796c653d666f722d7468652d6261646765266c6f676f3d76697465266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/76142df874f13e3cbf5219894f07b4d7c2a908edffe5868fbde475c0a56e32bb/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5265636f696c2d3030373545423f7374796c653d666f722d7468652d6261646765">
 
 ### Backend
 
-<img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/>
-<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
-<img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">
-<img src="https://img.shields.io/badge/mybatis-000000?style=for-the-badge&logo=mybatis&logoColor=black">
-<img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
+<img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/><img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"><img src="https://img.shields.io/badge/mybatis-000000?style=for-the-badge&logo=mybatis&logoColor=black"><img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
 
 ### Infrastructure
 
@@ -61,5 +52,4 @@
 
 ### Collaboration tool
 
-<img src="https://camo.githubusercontent.com/8d433710b84192cd318b602aadcf296eed6c443fea42c2f06fba2ce65a49a412/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4769742d4630353033323f7374796c653d666f722d7468652d6261646765266c6f676f3d476974266c6f676f436f6c6f723d7768697465">
-<img src="https://camo.githubusercontent.com/58b52a76b018c2ff2c079b2ebd024caa3bde71fc94b8e4d92eec8f95c277d86a/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e6f74696f6e2d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d6e6f74696f6e266c6f676f436f6c6f723d7768697465"/>
+<img src="https://camo.githubusercontent.com/8d433710b84192cd318b602aadcf296eed6c443fea42c2f06fba2ce65a49a412/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4769742d4630353033323f7374796c653d666f722d7468652d6261646765266c6f676f3d476974266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/58b52a76b018c2ff2c079b2ebd024caa3bde71fc94b8e4d92eec8f95c277d86a/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e6f74696f6e2d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d6e6f74696f6e266c6f676f436f6c6f723d7768697465"/>
