@@ -2,7 +2,7 @@
 
 > 집 정보와 좋은 리뷰를 한번에 찾아 볼 수 있는 플랫폼입니다.
 
-- [팀 프로젝트 Notion] (https://www.notion.so/d6a79d46b2f24d8cbe7fc137fcaeca35?pvs=4)
+- [팀 프로젝트 Notion](https://www.notion.so/d6a79d46b2f24d8cbe7fc137fcaeca35?pvs=4)
 
 ## 주요 기능 소개
 
@@ -31,7 +31,7 @@
 
 ## 팀원 소개
 
-[팀 프로젝트 Notion] (https://www.notion.so/1241527edf9240a691cccf9c280efa91?pvs=4)
+[팀 프로젝트 Notion](https://www.notion.so/1241527edf9240a691cccf9c280efa91?pvs=4)
 
 - 김건위 (Front-end & Back-end)
 - 박혜성 (Front-end & Back-end)
