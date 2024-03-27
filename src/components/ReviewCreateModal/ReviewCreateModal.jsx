@@ -57,7 +57,7 @@ function ReviewCreateModal() {
             : reviewUpdateValue.endDate,
         },
   );
-  const isCreate = !inputValues.reviewId;
+          const isCreate = !inputValues.reviewId;
   const TITLE = isCreate ? '생성' : '수정';
   const [images, setImages] = useState([]);
   const [bChecked, setChecked] = useState(false);
@@ -579,7 +579,7 @@ function ReviewCreateModal() {
                 </h4>
                 <div>
                   <button
-                    className={`${inputValues.contractTypeId === '1' ? 'active' : ''}`}
+                    className={`${Number(inputValues.contractTypeId) == 1 ? 'active' : ''}`}
                     name="contractTypeId"
                     value="1"
                     onClick={handleChange}
@@ -587,7 +587,7 @@ function ReviewCreateModal() {
                     월세
                   </button>
                   <button
-                    className={`${inputValues.contractTypeId === '2' ? 'active' : ''}`}
+                    className={`${Number(inputValues.contractTypeId) == 2 ? 'active' : ''}`}
                     name="contractTypeId"
                     value="2"
                     onClick={handleChange}
