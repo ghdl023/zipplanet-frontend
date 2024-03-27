@@ -43,11 +43,6 @@ function FindPwdForm() {
             findPwdRef.current[1].focus();
             return;
         }
-
-        // const result = await findPwd({
-        //     username: username,
-        //     phone: phone
-        // });
         const result = await findId({
             phone: phone
         });
@@ -62,7 +57,7 @@ function FindPwdForm() {
                 toast.error('유저 정보를 찾을 수 없습니다.');
                 return;
             }
-            // navigate(`${BASE_URL}findPwdResult`, { state: { result } })
+
         } else {
             toast.error('유저 정보를 찾을 수 없습니다.');
         }
@@ -123,7 +118,7 @@ function FindPwdForm() {
                                 <br></br>
                                 <div className='account__info'></div>
                                 <div>
-                                    <input type="number" name='new__phone' value={inputCertiNum} onChange={(e)=>setInputCertiNum(e.target.value)} maxLength={6} placeholder='인증번호 6자리 입력' />
+                                    <input type="text" name='new__phone' value={inputCertiNum} onChange={(e)=>setInputCertiNum(e.target.value.replace(/[^0-9]/g, ''))} maxLength={6} placeholder='인증번호 6자리 입력' />
                                 </div>
                             </div>
                             <div className='update__submit__btn'>
